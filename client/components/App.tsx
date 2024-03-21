@@ -1,15 +1,18 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import { useSpams } from '../hooks/useSpams'
 
 function App() {
-  const { data } = useFruits()
+  const { data } = useSpams()
+  console.log(data)
 
   return (
     <>
       <div className="app">
         <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
+          Fullstack Boilerplate - with Spams!
         </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+        <ul>
+          {data && data.map((spam) => <li key={spam.id}>{spam.name}</li>)}
+        </ul>
       </div>
     </>
   )

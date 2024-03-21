@@ -4,24 +4,24 @@ import {
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getFruits } from '../apis/fruits.ts'
+import { getAllSpams } from '../apis/apiClient'
 
-export function useFruits() {
-  const query = useQuery({ queryKey: ['fruits'], queryFn: getFruits })
+export function useSpams() {
+  const query = useQuery({ queryKey: ['spams'], queryFn: getAllSpams })
   return {
     ...query,
-    // Extra queries go here e.g. addFruit: useAddFruit()
+    // Extra queries go here
   }
 }
 
-export function useFruitsMutation<TData = unknown, TVariables = unknown>(
-  mutationFn: MutationFunction<TData, TVariables>
+export function useSpamsMutation<TData = unknown, TVariables = unknown>(
+  mutationFn: MutationFunction<TData, TVariables>,
 ) {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits'] })
+      queryClient.invalidateQueries({ queryKey: ['spams'] })
     },
   })
 
