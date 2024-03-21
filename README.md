@@ -1,3 +1,8 @@
+# SPAM Varieties & Snacks
+
+See [here](https://www.spam.com/varieties) for more varieties
+
+
 # Boilerplate: Fullstack with Sass
 
 ## Setup
