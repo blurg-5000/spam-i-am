@@ -1,15 +1,18 @@
 interface Props {
+  selectedCell: null | number
   data: []
+  image: string
 }
 
-function Table({ data }: Props) {
+function Table({ selectedCell, data, image }: Props) {
   const rows = 5
   const columns = 5
 
-  // Fill in the data, if not enough data is provided, use empty strings
-  const filledData = Array.from({ length: rows }, (_, rowIndex) =>
+  const tableData = Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: columns }, (_, colIndex) =>
-      data[rowIndex] ? data[rowIndex][colIndex] || '' : '',
+      selectedCell !== null && rowIndex * columns + colIndex === selectedCell
+        ? image
+        : '',
     ),
   )
 
@@ -25,7 +28,7 @@ function Table({ data }: Props) {
       }}
     >
       <tbody>
-        {filledData.map((row, rowIndex) => (
+        {tableData.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, colIndex) => (
               <td
