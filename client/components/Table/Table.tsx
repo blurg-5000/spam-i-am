@@ -10,6 +10,7 @@ function Table({ selectedCell, data, image }: Props) {
 
   const tableData = Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: columns }, (_, colIndex) =>
+      // TODO: make this logic render in jsx component, either show an image or nothing
       selectedCell !== null && rowIndex * columns + colIndex === selectedCell
         ? image
         : '',
