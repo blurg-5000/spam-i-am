@@ -1,10 +1,10 @@
 interface Props {
   selectedCell: null | number
-  data: []
   image: string
+  whackThatSpam: () => void
 }
 
-function Table({ selectedCell, data, image }: Props) {
+function Table({ selectedCell, image, whackThatSpam }: Props) {
   const rows = 5
   const columns = 5
 
@@ -41,7 +41,15 @@ function Table({ selectedCell, data, image }: Props) {
                   width: 100,
                 }}
               >
-                {cell}
+                {cell == image ? (
+                  <img
+                    src={`${image}`}
+                    alt={'picture of a spam'}
+                    onClick={whackThatSpam}
+                  />
+                ) : (
+                  cell
+                )}
               </td>
             ))}
           </tr>
