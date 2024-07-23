@@ -5,6 +5,7 @@ function Header() {
     { title: 'About', link: './about' },
     { title: 'Games', link: './games' },
     { title: 'Quiz', link: './quiz' },
+    { title: 'Rate That Spam!', link: './rate-spam' },
   ]
 
   return (
@@ -17,7 +18,7 @@ function Header() {
         />
         <ul className="flex items-center space-x-3">
           {menuItems.map((item) => (
-            <li className="text-spamBlue p-3">
+            <li className="text-spamBlue font-heading font-heading-bold text-heading-sm p-3">
               <NavLink to={item.link}>{item.title}</NavLink>
             </li>
           ))}
