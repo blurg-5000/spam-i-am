@@ -1,15 +1,15 @@
 import { Outlet } from 'react-router-dom'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
 
 export default function Layout() {
   return (
     <>
-      <header>
-        <h1>Fullstack Boilerplate - with Spams!</h1>
-      </header>
+      <Header />
       <main>
         <Outlet />
       </main>
-      <footer></footer>
+      <Footer />
     </>
   )
 }

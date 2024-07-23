@@ -1,3 +1,16 @@
 import { createRoutesFromElements, Route } from 'react-router-dom'
 import App from './App.tsx'
-export default createRoutesFromElements(<Route index element={<App />} />)
+import About from './Pages/About.tsx'
+import Games from './Pages/Games.tsx'
+import Quiz from './Pages/Quiz.tsx'
+import RateSpam from './Pages/RateSpam.tsx'
+import Home from './Pages/Home.tsx'
+export default createRoutesFromElements(
+  <Route path="/" element={<App />}>
+    <Route index element={<Home />} />
+    <Route path="about" element={<About />} />
+    <Route path="games" element={<Games />} />
+    <Route path="quiz" element={<Quiz />} />
+    <Route path="rate-spam" element={<RateSpam />} />
+  </Route>,
+)
