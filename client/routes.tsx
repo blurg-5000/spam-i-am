@@ -3,10 +3,12 @@ import App from './App.tsx'
 import About from './Pages/About.tsx'
 import Games from './Pages/Games.tsx'
 import Quiz from './Pages/Quiz.tsx'
+import RateSpam from './Pages/RateSpam.tsx'
 export default createRoutesFromElements(
   <Route path="/" element={<App />}>
     <Route path="about" element={<About />} />
     <Route path="games" element={<Games />} />
     <Route path="quiz" element={<Quiz />} />
+    <Route path="rate-spam" element={<RateSpam />} />
   </Route>,
 )
