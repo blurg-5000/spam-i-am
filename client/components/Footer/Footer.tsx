@@ -30,7 +30,11 @@ function Footer() {
                 />
               )}
               <li key={item.title}>
-                <a href={item.link} className="text-white hover:underline">
+                <a
+                  href={item.link}
+                  className="hover:text-spamYellow text-white"
+                  target="_blank"
+                >
                   {item.title}
                 </a>
               </li>
