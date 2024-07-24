@@ -20,25 +20,27 @@ interface Player {
 }
 
 function SpamJump() {
-  let [playerLocation, setPlayerLocation] = useState(50)
-
-  const player = {
-    x: playerLocation,
+  const initialPlayerState: Player = {
+    x: 50,
     y: 200,
     x_v: 0,
     y_v: 0,
-    jump: true,
+    jump: false,
     height: 20,
     width: 20,
   }
+  const [player, setPlayer] = useState<Player>(initialPlayerState)
+  const [keys, setKeys] = useState({ left: false, right: false, jump: false })
+
+  const gravity = 0.6
+  const friction = 0.7
+  const jumpStrength = -10 // Increase jump strength if needed
+  const platforms = createPlatforms(5)
 
   // Function to create platforms
-  // Create an array of platforms
-  const createPlatforms = (count: number): Platform[] => {
+  function createPlatforms(count: number): Platform[] {
     return Array.from({ length: count }, (_, index) => ({
       x: index * 60,
-      // TODO: make these platforms work better re y property changing
-      // y: getRandomNumber(200, 400),
       y: 200,
       width: 50,
       height: 10,
@@ -46,8 +48,6 @@ function SpamJump() {
     }))
   }
 
-  // useRef is kind of like React's version of 'getElementById'.
-  // Note that in the JSX below, our canvas has a ref property which talks to this code.
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -55,14 +55,17 @@ function SpamJump() {
     if (canvas) {
       const context = canvas.getContext('2d')
       if (context) {
-        // Store the context in a ref or state if needed
-        renderCanvas(context, createPlatforms(5))
-        renderPlayer(context, player)
+        const interval = setInterval(() => {
+          updatePlayer()
+          renderCanvas(context, platforms)
+          renderPlayer(context, player)
+        }, 1000 / 60) // 60 FPS
+
+        return () => clearInterval(interval) // Cleanup on unmount
       }
     }
-  }, [playerLocation])
+  }, [player, keys])
 
-  //render canvas and platforms
   function renderCanvas(ctx: CanvasRenderingContext2D, platforms: Platform[]) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     ctx.fillStyle = '#F0F8FF'
@@ -73,20 +76,97 @@ function SpamJump() {
     })
   }
 
-  // render the player
   function renderPlayer(ctx: CanvasRenderingContext2D, player: Player) {
     ctx.fillStyle = '#F08080'
-    ctx.fillRect(player.x - 20, player.y - 20, player.width, player.height)
+    ctx.fillRect(
+      player.x,
+      player.y - player.height,
+      player.width,
+      player.height,
+    )
   }
 
-  function movePlayer(e: React.KeyboardEvent<HTMLCanvasElement>) {
-    console.log(e.key)
+  function updatePlayer() {
+    setPlayer((prevPlayer) => {
+      let newX = prevPlayer.x
+      let newY = prevPlayer.y
+      let newX_v = prevPlayer.x_v
+      let newY_v = prevPlayer.y_v
+      let newJump = prevPlayer.jump
+
+      if (!newJump) {
+        newX_v *= friction
+      } else {
+        newY_v += gravity
+      }
+
+      if (keys.left) {
+        newX_v = -2.5
+      }
+      if (keys.right) {
+        newX_v = 2.5
+      }
+      if (keys.jump && !newJump) {
+        newY_v = jumpStrength
+        newJump = true
+      }
+
+      newX += newX_v
+      newY += newY_v
+
+      // Reset player if they go outside the canvas bounds
+      if (newX < 0 || newX + prevPlayer.width > 500 || newY > 270) {
+        return { ...initialPlayerState }
+      }
+
+      let onPlatform = false
+      platforms.forEach((platform) => {
+        if (
+          platform.x < newX + prevPlayer.width &&
+          newX < platform.x + platform.width &&
+          platform.y < newY &&
+          newY < platform.y + platform.height
+        ) {
+          onPlatform = true
+          newY = platform.y // Place player on top of the platform
+          newY_v = 0 // Reset vertical velocity
+        }
+      })
+
+      newJump = !onPlatform
+
+      return {
+        ...prevPlayer,
+        x: newX,
+        y: newY,
+        x_v: newX_v,
+        y_v: newY_v,
+        jump: newJump,
+      }
+    })
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLCanvasElement>) {
     if (e.key === 'ArrowLeft') {
-      setPlayerLocation((player.x -= 8.5))
+      setKeys((prev) => ({ ...prev, left: true }))
     }
-    // If the right key is pressed, move the player to the right
     if (e.key === 'ArrowRight') {
-      setPlayerLocation((player.x += 8.5))
+      setKeys((prev) => ({ ...prev, right: true }))
+    }
+    if (e.key === 'ArrowUp') {
+      setKeys((prev) => ({ ...prev, jump: true }))
+    }
+  }
+
+  function handleKeyUp(e: React.KeyboardEvent<HTMLCanvasElement>) {
+    if (e.key === 'ArrowLeft') {
+      setKeys((prev) => ({ ...prev, left: false }))
+    }
+    if (e.key === 'ArrowRight') {
+      setKeys((prev) => ({ ...prev, right: false }))
+    }
+    if (e.key === 'ArrowUp') {
+      setKeys((prev) => ({ ...prev, jump: false }))
     }
   }
 
@@ -97,9 +177,11 @@ function SpamJump() {
         height={270}
         width={500}
         tabIndex={0}
-        onKeyDown={(e) => movePlayer(e)}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
       ></canvas>
     </section>
   )
 }
+
 export default SpamJump
