@@ -193,7 +193,11 @@ function SpamJump() {
   return (
     <section className="flex items-center justify-center p-20">
       {isWon ? (
-        <YouWinPage isReset={isReset} setIsReset={setIsReset} />
+        <YouWinPage
+          isReset={isReset}
+          setIsReset={setIsReset}
+          canvasRef={canvasRef}
+        />
       ) : (
         <canvas
           ref={canvasRef}
