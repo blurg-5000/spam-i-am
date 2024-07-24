@@ -13,6 +13,7 @@ export default {
         'heading-sm': '1.2rem',
         'body-lg': '1.125rem', // Example: 18px
         'body-md': '1rem', // Example: 16px
+        'body-xsm': '0.5rem',
       },
       fontWeight: {
         'heading-regular': 400,
