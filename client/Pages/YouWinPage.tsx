@@ -87,12 +87,16 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
           Congratulations!
         </h1>
         <p className="font-body p-5">
-          You've won a lifetime supply of this spam:{' '}
+          You've won a lifetime supply* of this spam:
         </p>
         <img src={`./images/${spamImages[randomNum]}.png`} />
         <Button>
           <button onClick={resetGame}>Play again</button>
         </Button>
+        <p className="text-body-xsm font-body">
+          Disclaimer: supply varies depending on stock levels. Currently we have
+          zero stocks.
+        </p>
       </section>
     </>
   )
