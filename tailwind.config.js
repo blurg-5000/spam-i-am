@@ -24,6 +24,7 @@ export default {
       colors: {
         spamYellow: '#facc15',
         spamBlue: '#1e3a8a',
+        spamPink: '#f87171',
       },
       keyframes: {
         rotate360: {
