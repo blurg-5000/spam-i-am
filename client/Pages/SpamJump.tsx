@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import getRandomNumber from '../utils/getRandomNumber'
+import YouWinPage from './YouWinPage'
 
 interface Platform {
   x: number
@@ -21,8 +22,8 @@ interface Player {
 
 function SpamJump() {
   const initialPlayerState: Player = {
-    x: 50,
-    y: 200,
+    x: 0,
+    y: 0,
     x_v: 0,
     y_v: 0,
     jump: false,
@@ -31,17 +32,18 @@ function SpamJump() {
   }
   const [player, setPlayer] = useState<Player>(initialPlayerState)
   const [keys, setKeys] = useState({ left: false, right: false, jump: false })
+  const [platforms, setPlatforms] = useState<Platform[]>([])
+  const [isWon, setIsWon] = useState(false)
+  const [isReset, setIsReset] = useState(false)
 
   const gravity = 0.6
   const friction = 0.7
-  const jumpStrength = -10 // Increase jump strength if needed
-  const platforms = createPlatforms(5)
+  const jumpStrength = -10
 
-  // Function to create platforms
   function createPlatforms(count: number): Platform[] {
     return Array.from({ length: count }, (_, index) => ({
-      x: index * 60,
-      y: 200,
+      x: index * 100,
+      y: getRandomNumber(150, 250),
       width: 50,
       height: 10,
       color: 'blue',
@@ -51,22 +53,35 @@ function SpamJump() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    const generatedPlatforms = createPlatforms(5)
+    setPlatforms(generatedPlatforms)
+
+    if (generatedPlatforms.length > 0) {
+      setPlayer((prevPlayer) => ({
+        ...prevPlayer,
+        x: generatedPlatforms[0].x,
+        y: generatedPlatforms[0].y - prevPlayer.height,
+      }))
+    }
+  }, [])
+
+  useEffect(() => {
     const canvas = canvasRef.current
     if (canvas) {
       const context = canvas.getContext('2d')
       if (context) {
         const interval = setInterval(() => {
           updatePlayer()
-          renderCanvas(context, platforms)
+          renderCanvas(context)
           renderPlayer(context, player)
-        }, 1000 / 60) // 60 FPS
+        }, 1000 / 60)
 
-        return () => clearInterval(interval) // Cleanup on unmount
+        return () => clearInterval(interval)
       }
     }
   }, [player, keys])
 
-  function renderCanvas(ctx: CanvasRenderingContext2D, platforms: Platform[]) {
+  function renderCanvas(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     ctx.fillStyle = '#F0F8FF'
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
@@ -78,12 +93,7 @@ function SpamJump() {
 
   function renderPlayer(ctx: CanvasRenderingContext2D, player: Player) {
     ctx.fillStyle = '#F08080'
-    ctx.fillRect(
-      player.x,
-      player.y - player.height,
-      player.width,
-      player.height,
-    )
+    ctx.fillRect(player.x, player.y, player.width, player.height)
   }
 
   function updatePlayer() {
@@ -114,9 +124,10 @@ function SpamJump() {
       newX += newX_v
       newY += newY_v
 
-      // Reset player if they go outside the canvas bounds
-      if (newX < 0 || newX + prevPlayer.width > 500 || newY > 270) {
+      if (newX < 0 || newY > 270) {
         return { ...initialPlayerState }
+      } else if (newX + prevPlayer.width > 500) {
+        setIsWon(true)
       }
 
       let onPlatform = false
@@ -124,12 +135,12 @@ function SpamJump() {
         if (
           platform.x < newX + prevPlayer.width &&
           newX < platform.x + platform.width &&
-          platform.y < newY &&
-          newY < platform.y + platform.height
+          prevPlayer.y + prevPlayer.height <= platform.y &&
+          newY + prevPlayer.height >= platform.y
         ) {
           onPlatform = true
-          newY = platform.y // Place player on top of the platform
-          newY_v = 0 // Reset vertical velocity
+          newY = platform.y - prevPlayer.height
+          newY_v = 0
         }
       })
 
@@ -170,16 +181,29 @@ function SpamJump() {
     }
   }
 
+  useEffect(() => {
+    if (isReset) {
+      setIsReset(false) // Reset the flag after starting a new game
+      setIsWon(false) // Reset the win state
+      setPlayer(initialPlayerState) // Reset player state
+      setPlatforms(createPlatforms(5)) // Reset platforms
+    }
+  }, [isReset])
+
   return (
     <section className="flex items-center justify-center p-20">
-      <canvas
-        ref={canvasRef}
-        height={270}
-        width={500}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-        onKeyUp={handleKeyUp}
-      ></canvas>
+      {isWon ? (
+        <YouWinPage isReset={isReset} setIsReset={setIsReset} />
+      ) : (
+        <canvas
+          ref={canvasRef}
+          height={270}
+          width={500}
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+        ></canvas>
+      )}
     </section>
   )
 }
