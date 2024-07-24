@@ -1,6 +1,6 @@
 export async function up(knex) {
   return knex.schema.createTable('spam', (table) => {
-    table.increments('id')
+    table.increments('id').primary()
     table.string('name')
     table.string('image')
     table.string('description')
