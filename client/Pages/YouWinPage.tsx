@@ -71,7 +71,7 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-center p-5">
+      <section className="flex flex-col items-center justify-center p-2">
         <Confetti
           drawShape={(ctx) => {
             const x = -10 // Adjust these values to center the shape
@@ -83,10 +83,10 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
             drawSpam(ctx, x, y, width, height, radius, color)
           }}
         />
-        <h1 className="font-heading text-heading-lg font-heading-bold text-spamBlue p-5">
+        <h1 className="font-heading text-heading-lg font-heading-bold text-spamBlue pb-2">
           Congratulations!
         </h1>
-        <p className="font-body p-5">
+        <p className="font-body pb-5">
           You've won a lifetime supply* of this spam:
         </p>
         <img src={`./images/${spamImages[randomNum]}.png`} />
