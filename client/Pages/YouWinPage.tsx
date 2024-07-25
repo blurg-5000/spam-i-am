@@ -71,8 +71,9 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-center p-2">
+      <section className="flex flex-col items-center justify-center">
         <Confetti
+          className="flex flex-col items-center justify-center"
           drawShape={(ctx) => {
             const x = -10 // Adjust these values to center the shape
             const y = -10 // Adjust these values to center the shape

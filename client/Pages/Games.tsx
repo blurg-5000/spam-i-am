@@ -15,7 +15,7 @@ function Games() {
 
   return (
     <>
-      <header>
+      <section className="flex flex-col items-center justify-center p-5">
         <h1>Choose a game!</h1>
         <nav>
           {games.map((game) => (
@@ -26,11 +26,12 @@ function Games() {
             </Button>
           ))}
         </nav>
-      </header>
-      <main>
-        {activeGame === 'spamJump' && <SpamJump />}
-        {activeGame === 'whackASpam' && <WhackASpam />}
-      </main>
+
+        <main>
+          {activeGame === 'spamJump' && <SpamJump />}
+          {activeGame === 'whackASpam' && <WhackASpam />}
+        </main>
+      </section>
     </>
   )
 }
