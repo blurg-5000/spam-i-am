@@ -4,12 +4,12 @@ import Footer from '../components/Footer/Footer'
 
 export default function Layout() {
   return (
-    <>
+    <section className="flex h-screen flex-col justify-between">
       <Header />
-      <main>
+      <main className="mb-auto">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </section>
   )
 }
