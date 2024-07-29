@@ -35,6 +35,7 @@ export default {
       },
       animation: {
         rotate360: 'rotate360 1s linear infinite',
+        loading: 'rotate360 1s ease-in-out infinite',
       },
     },
   },
