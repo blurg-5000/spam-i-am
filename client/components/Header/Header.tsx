@@ -1,10 +1,6 @@
 import { NavLink } from 'react-router-dom'
-import LoadingSpinner from '../UI/LoadingSpinner'
-import { useIsFetching } from '@tanstack/react-query'
 
 function Header() {
-  const isFetching = useIsFetching()
-
   const menuItems = [
     { title: 'About', link: './about' },
     { title: 'Games', link: './games' },
