@@ -5,9 +5,19 @@ import playAudio from '../utils/playAudio'
 
 function WhackASpam() {
   const [seletedCell, setSelectedCell] = useState<null | number>(null)
+  const [score, setScore] = useState<number>(0)
 
   useEffect(() => {
     chooseRandomCell()
+
+    const intervalId = setInterval(() => {
+      chooseRandomCell() // Choose a random cell every few seconds
+    }, 1000) // Adjust the interval time (e.g., 2000ms for 2 seconds)
+
+    // Clean up the interval on component unmount
+    return () => {
+      clearInterval(intervalId)
+    }
   }, [])
 
   function chooseRandomCell() {
@@ -18,12 +28,13 @@ function WhackASpam() {
 
   function whackThatSpam() {
     playAudio('./sounds/squish_sound.mp3')
-    chooseRandomCell()
+    setScore(score + 1)
   }
 
   return (
     <div className="flex flex-col items-center justify-center p-10">
       <h1>WHACK A SPAM</h1>
+      <p>Score: {score}</p>
       <Table
         selectedCell={seletedCell}
         image={'./images/14-classic2.png'}
