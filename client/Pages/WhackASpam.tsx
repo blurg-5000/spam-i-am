@@ -46,16 +46,18 @@ function WhackASpam() {
   return (
     <div className="flex flex-col items-center justify-center p-10">
       <h1>WHACK A SPAM</h1>
-      <p>Time left: {formatTimer(timer)}</p>
-      <p>Score: {score}</p>
       {gameOver ? (
         <ScoreCard score={score} />
       ) : (
-        <Table
-          selectedCell={selectedCell}
-          image={'./images/14-classic2.png'}
-          whackThatSpam={whackThatSpam}
-        />
+        <>
+          <p>Time left: {formatTimer(timer)}</p>
+          <p>Score: {score}</p>
+          <Table
+            selectedCell={selectedCell}
+            image={'./images/14-classic2.png'}
+            whackThatSpam={whackThatSpam}
+          />
+        </>
       )}
     </div>
   )
