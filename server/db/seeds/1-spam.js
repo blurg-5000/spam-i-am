@@ -51,7 +51,7 @@ export async function seed(knex) {
     {
       id: 7,
       name: 'SPAM Jalapeno',
-      image: 'spam_jalapeno_text',
+      image: 'spam_jalapeno_text.png',
       description: 'put it in your tacos!',
       flavour_profile: 'avoid combining with the hot & spicy',
     },
@@ -65,31 +65,36 @@ export async function seed(knex) {
     {
       id: 9,
       name: 'SPAM Maple',
-      image: 'spam_maple.png',
+      image: 'spam_maple_text.png',
+      description: 'the canadian SPAM!',
       flavour_profile: 'sweet & salty',
     },
     {
       id: 10,
       name: 'SPAM with Hickory Smoke',
-      image: 'spam_smoked.png',
+      image: 'spam_smoked_text.png',
+      description: 'the ultimate BBQ experience.',
       flavour_profile: 'tastes like the 4th of july',
     },
     {
       id: 11,
       name: 'SPAM with Turkey',
       image: 'spam_turkey_text.png',
+      description: 'SPAM, but not as you know it!',
       flavour_profile: 'tastes like chicken',
     },
     {
       id: 12,
       name: 'SPAM with Teriyaki',
       image: 'spam_teriyaki_text.png',
+      description: 'A Hawaiian favourite!',
       flavour_profile: 'delicious on musubi',
     },
     {
       id: 13,
       name: 'SPAM with Tocino Seasoning',
       image: 'spam_tocino_text.png',
+      description: 'SPAM with even more flavour packed in.',
       flavour_profile: 'spicccyyyyyyyyy',
     },
   ])
