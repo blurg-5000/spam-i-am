@@ -11,8 +11,10 @@ export default {
         'heading-lg': '2.5rem', // Example: 40px
         'heading-md': '1.5rem', // Example: 32px
         'heading-sm': '1.2rem',
+        'body-xl': '2.00rem',
         'body-lg': '1.125rem', // Example: 18px
         'body-md': '1rem', // Example: 16px
+        'body-xsm': '0.5rem',
       },
       fontWeight: {
         'heading-regular': 400,
@@ -24,6 +26,7 @@ export default {
       colors: {
         spamYellow: '#facc15',
         spamBlue: '#1e3a8a',
+        spamPink: '#f87171',
       },
       keyframes: {
         rotate360: {
@@ -33,6 +36,7 @@ export default {
       },
       animation: {
         rotate360: 'rotate360 1s linear infinite',
+        loading: 'rotate360 1s ease-in-out infinite',
       },
     },
   },

@@ -45,6 +45,7 @@ function Table({ selectedCell, image, whackThatSpam }: Props) {
                     src={`${image}`}
                     alt={'picture of a spam'}
                     onClick={whackThatSpam}
+                    role="button"
                   />
                 ) : (
                   cell

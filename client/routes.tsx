@@ -5,8 +5,9 @@ import Games from './Pages/Games.tsx'
 import Quiz from './Pages/Quiz.tsx'
 import RateSpam from './Pages/RateSpam.tsx'
 import Home from './Pages/Home.tsx'
+import ErrorPage from './Pages/ErrorPage.tsx'
 export default createRoutesFromElements(
-  <Route path="/" element={<App />}>
+  <Route path="/" element={<App />} errorElement={<ErrorPage />}>
     <Route index element={<Home />} />
     <Route path="about" element={<About />} />
     <Route path="games" element={<Games />} />

@@ -13,14 +13,14 @@ function Header() {
       <nav className="flex items-center justify-between">
         <NavLink to="/">
           <img
-            src="./images/14-classic2.png"
+            src="./images/classic_spam_transparent.png"
             alt="a beautiful classic can of spam"
-            className="hover:animate-rotate360 duration-400 w-24 transform p-3 transition"
+            className="duration-400 w-24 transform p-3 transition hover:animate-rotate360"
           />
         </NavLink>
         <ul className="flex items-center space-x-3">
           {menuItems.map((item) => (
-            <li className="text-spamBlue font-heading font-heading-bold text-heading-sm p-3">
+            <li className="p-3 font-heading text-heading-sm font-heading-bold text-spamBlue">
               <NavLink to={item.link}>{item.title}</NavLink>
             </li>
           ))}

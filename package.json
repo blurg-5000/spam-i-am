@@ -31,6 +31,7 @@
     "@mui/material": "^5.16.4",
     "express": "^4.17.2",
     "knex": "^2.5.1",
+    "react-confetti": "^6.1.0",
     "sqlite3": "^5.1.6",
     "superagent": "^8.1.2"
   },
