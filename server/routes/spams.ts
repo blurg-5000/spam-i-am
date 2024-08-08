@@ -28,8 +28,6 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// TODO: Add routes for creating, updating and deleting spams
-
 // POST: /api/v1/spams
 router.post('/', async (req, res) => {
   try {
@@ -42,11 +40,11 @@ router.post('/', async (req, res) => {
 })
 
 // PUT: /api/v1/spams/:id
-router.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const spam = await db.updateSpam(Number(id), req.body)
-    res.json({ spam })
+    await db.updateSpam(Number(id), req.body)
+    res.json({id})
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: 'Oops no spam' })
@@ -57,26 +55,28 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const spam = await db.deleteSpam(Number(id))
-    res.json({ spam })
+    await db.deleteSpam(Number(id))
+    res.json({ id })
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
 
-// TODO: Add routes for getting and adding spam ratings 
 
 // GET: /api/v1/spams/ratings
 router.get('/ratings', async (req, res) => {
   try {
     const ratings = await db.getAllRatings()
-    res.json({ ratings })
+    console.log(ratings);
+    
+    res.json(ratings)
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: 'Oops no spams' })
   }
 })
+// Get ALL ratings DOES NOT work :( 
 
 // GET: /api/v1/spams/ratings/:spamId
 router.get('/ratings/:spamId', async (req, res) => {
@@ -90,11 +90,15 @@ router.get('/ratings/:spamId', async (req, res) => {
   }
 })
 
+// Get rating by ID WORKS! :) 
+
 // POST: /api/v1/spams/ratings/:spamId
 router.post('/ratings/:spamId', async (req, res) => {
   try {
     const { rating, userId } = req.body
-    const spamId = req.params
+    const spamId = req.params.spamId
+    console.log(spamId, rating, userId);
+    
     const ratingResponse = await db.addRating(Number(spamId), Number(rating), Number(userId))
     res.status(201).json({ ratingResponse })
   } catch (error) {
@@ -102,5 +106,13 @@ router.post('/ratings/:spamId', async (req, res) => {
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
+
+// Add rating works! But can only add once....  
+// hit url: http://localhost:3000/api/v1/spams/ratings/1 (this is the spamId)
+// Send JSON Body: 
+// {
+//   "userId": 2, 
+//   "rating": 5
+// }
 
 export default router

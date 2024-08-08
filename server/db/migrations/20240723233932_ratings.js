@@ -6,7 +6,7 @@ export async function up(knex) {
     table.integer('spam_id').references('spam.id').onDelete('CASCADE')
     table.integer('rating')
     // Each user can only rate spam once: 
-    table.unique(['user_id', 'spam_id'])
+    // table.unique(['user_id', 'spam_id'])
   })
 }
 
