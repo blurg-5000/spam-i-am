@@ -21,6 +21,9 @@ export async function updateSpam(id: number, spam: Spam, db = connection) {
   return db('spam').where({ id }).update(spam)
 }     
 
+export async function getAllRatings( db = connection) {
+  return db('ratings').select('*')
+}
 export async function getRating(spamId: number, db = connection) {
   return db('ratings').where('id', spamId).avg('rating as average_rating').groupBy('spam_id')
 }
