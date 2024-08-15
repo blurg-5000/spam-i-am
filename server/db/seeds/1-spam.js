@@ -1,5 +1,3 @@
-import { imageListClasses } from '@mui/material'
-
 export async function seed(knex) {
   // Deletes ALL existing entries
   await knex('spam').del()
