@@ -13,7 +13,7 @@ function Header() {
       <nav className="flex items-center justify-between">
         <NavLink to="/">
           <img
-            src="./images/classic_spam_transparent.png"
+            src="/images/classic_spam_transparent.png"
             alt="a beautiful classic can of spam"
             className="duration-400 w-24 transform p-3 transition hover:animate-rotate360"
           />

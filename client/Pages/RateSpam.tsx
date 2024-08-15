@@ -1,13 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllSpams } from '../apis/apiClient'
 import ErrorPage from './ErrorPage'
 import { Link } from 'react-router-dom'
+import { useSpams } from '../hooks/useSpams'
 
 function RateSpam() {
-  const { data, isError } = useQuery({
-    queryKey: ['spams'],
-    queryFn: getAllSpams,
-  })
+  const { data, isError } = useSpams()
+
+  console.log(data)
 
   if (isError) return <ErrorPage />
 
@@ -20,17 +18,18 @@ function RateSpam() {
           </h1>
 
           <div className="grid grid-cols-3 gap-8 p-6">
-            {data.map((spam) => (
-              <Link to={`/rate-spam/${spam.id}/`}>
-                <section className="p-8" key={spam.id}>
-                  <img
-                    src={`./images/hero images/${spam.image}`}
-                    alt={spam.name}
-                    className="w-48"
-                  />
-                </section>
-              </Link>
-            ))}
+            {data &&
+              data.map((spam) => (
+                <Link to={`/rate-spam/${spam.id}/`}>
+                  <section className="p-8" key={spam.id}>
+                    <img
+                      src={`/images/hero_images/${spam.image}`}
+                      alt={spam.name}
+                      className="w-48"
+                    />
+                  </section>
+                </Link>
+              ))}
           </div>
         </div>
       </>

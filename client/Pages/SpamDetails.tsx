@@ -8,18 +8,20 @@ function SpamDetails() {
   const { id } = useParams()
 
   const { data, isError } = useQuery({
-    queryKey: ['spams'],
+    queryKey: ['spam'],
     queryFn: () => getSpamById(Number(id)),
   })
 
   if (isError) return <ErrorPage />
 
+  console.log(data)
+
   if (data)
     return (
-      <section>
+      <div className="flex flex-col items-center justify-center p-8">
         <section className="p-8" key={data.id}>
           <img
-            src={`./images/hero images/${data.image}`}
+            src={`/images/hero_images/${data.image}`}
             alt={data.name}
             className="w-48"
           />
@@ -34,7 +36,7 @@ function SpamDetails() {
           </div>
           <Rating spamId={data.id} />
         </section>
-      </section>
+      </div>
     )
 }
 
