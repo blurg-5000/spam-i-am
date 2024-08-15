@@ -49,3 +49,7 @@ export async function addRating(
     rating: rating,
   })
 }
+
+export async function getAllQuestions(db = connection) {
+  return db('questions').select()
+}
