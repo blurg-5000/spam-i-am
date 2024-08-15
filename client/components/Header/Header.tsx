@@ -20,7 +20,10 @@ function Header() {
         </NavLink>
         <ul className="flex items-center space-x-3">
           {menuItems.map((item) => (
-            <li className="p-3 font-heading text-heading-sm font-heading-bold text-spamBlue">
+            <li
+              key={item.title}
+              className="p-3 font-heading text-heading-sm font-heading-bold text-spamBlue"
+            >
               <NavLink to={item.link}>{item.title}</NavLink>
             </li>
           ))}
