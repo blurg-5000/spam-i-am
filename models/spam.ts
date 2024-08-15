@@ -23,3 +23,11 @@ export interface AvgRating {
 export interface AvgRatingDetails {
   average_rating: number
 }
+
+export interface QuizAnswers {
+  a1: null | string
+  a2: null | string
+  a3: null | string
+  a4: null | string
+  a5: null | string
+}
