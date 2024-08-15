@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { QuizAnswers } from '../../models/spam'
 import QuizStartPage from './QuizStartPage'
-import QuizQuestions from './QuizQuestions'
+import QuizBody from './QuizQuestions'
+import { useQuestions } from '../hooks/useQuestions'
 
 function Quiz() {
   const [start, setStart] = useState(true)
@@ -13,12 +14,24 @@ function Quiz() {
     a4: null,
     a5: null,
   })
-  return (
-    <>
-      {start && <QuizStartPage setStart={setStart} setQuizzes={setQuizzes} />}
-      {quizzes && <QuizQuestions answers={answers} setAnswers={setAnswers} />}
-    </>
-  )
+
+  const { data } = useQuestions()
+
+  console.log(data)
+
+  if (data)
+    return (
+      <>
+        {start && <QuizStartPage setStart={setStart} setQuizzes={setQuizzes} />}
+        {quizzes && (
+          <QuizBody
+            questions={data}
+            answers={answers}
+            setAnswers={setAnswers}
+          />
+        )}
+      </>
+    )
 }
 
 export default Quiz
