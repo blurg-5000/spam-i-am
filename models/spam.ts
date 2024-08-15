@@ -15,3 +15,11 @@ export interface Rating {
   spam_id: number
   rating: number
 }
+
+export interface AvgRating {
+  rating: AvgRatingDetails[]
+}
+
+export interface AvgRatingDetails {
+  average_rating: number
+}
