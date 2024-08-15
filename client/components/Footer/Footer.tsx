@@ -29,10 +29,10 @@ function Footer() {
                   sx={{ borderColor: '#facc15' }}
                 />
               )}
-              <li key={item.title}>
+              <li key={index}>
                 <a
                   href={item.link}
-                  className="hover:text-spamYellow text-white"
+                  className="text-white hover:text-spamYellow"
                   target="_blank"
                 >
                   {item.title}
