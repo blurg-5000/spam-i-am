@@ -8,3 +8,10 @@ export interface Spam {
 export interface SpamData extends Spam {
   id: number
 }
+
+export interface Rating {
+  id: number
+  user_id: number
+  spam_id: number
+  rating: number
+}
