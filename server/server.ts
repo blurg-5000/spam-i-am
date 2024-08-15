@@ -2,12 +2,14 @@ import express from 'express'
 import * as Path from 'node:path'
 
 import spamRoutes from './routes/spams.ts'
+import ratings from './routes/ratings.ts'
 
 const server = express()
 
 server.use(express.json())
 
 server.use('/api/v1/spams', spamRoutes)
+server.use('/api/v1/ratings', ratings)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
