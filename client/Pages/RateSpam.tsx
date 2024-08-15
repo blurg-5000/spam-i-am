@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getAllSpams } from '../apis/apiClient'
 import ErrorPage from './ErrorPage'
-import LoadingSpinner from '../components/UI/LoadingSpinner'
+import { Link } from 'react-router-dom'
 
 function RateSpam() {
   const { data, isError } = useQuery({
@@ -20,23 +20,16 @@ function RateSpam() {
           </h1>
 
           <div className="grid grid-cols-3 gap-8 p-6">
-            {data?.map((spam) => (
-              <section className="p-8" key={spam.id}>
-                <img
-                  src={`./images/hero images/${spam.image}`}
-                  alt={spam.name}
-                  className="w-48"
-                />
-                <div className="font-body text-body-md">
-                  <h2 className="font-body-bold">{spam.name}</h2>
-                  <p>
-                    <strong>Description:</strong> {spam.description}
-                  </p>
-                  <p>
-                    <strong>Flavour profile:</strong> {spam.flavour_profile}
-                  </p>
-                </div>
-              </section>
+            {data.map((spam) => (
+              <Link to={`/rate-spam/${spam.id}/`}>
+                <section className="p-8" key={spam.id}>
+                  <img
+                    src={`./images/hero images/${spam.image}`}
+                    alt={spam.name}
+                    className="w-48"
+                  />
+                </section>
+              </Link>
             ))}
           </div>
         </div>
