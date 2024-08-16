@@ -21,16 +21,16 @@ function RateSpam() {
           <div className="grid grid-cols-3 gap-8 p-6">
             {data &&
               data.map((spam) => (
-                <Link key={spam.id} to={`/rate-spam/${spam.id}/`}>
-                  <section className="p-8">
+                <section key={spam.id} className="p-8">
+                  <Link to={`/rate-spam/${spam.id}/`}>
                     <img
                       src={`/images/hero_images/${spam.image}`}
                       alt={spam.name}
                       className="w-48"
                     />
-                  </section>
+                  </Link>
                   <Ratings />
-                </Link>
+                </section>
               ))}
           </div>
         </div>

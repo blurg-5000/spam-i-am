@@ -4,7 +4,7 @@ import * as db from '../db/spam.ts'
 
 const router = Router()
 
-// GET: /api/v1/spams/ratings
+// GET: /api/v1/ratings
 router.get('/', async (req, res) => {
   try {
     const ratings = await db.getAllRatings()
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-// GET: /api/v1/spams/ratings/:spamId
+// GET: /api/v1/ratings/:spamId
 router.get('/:spamId', async (req, res) => {
   try {
     const { spamId } = req.params
@@ -31,13 +31,13 @@ router.get('/:spamId', async (req, res) => {
 })
 
 // Get rating by ID WORKS! :)
-
-// POST: /api/v1/spams/ratings/:spamId
+// hit url: http://localhost:3000/api/v1/ratings/1 (this is the spamId)
+// POST: /api/v1/ratings/:spamId
 router.post('/:spamId', async (req, res) => {
   try {
     const { rating, userId } = req.body
     const spamId = req.params.spamId
-    console.log(spamId, rating, userId)
+    // console.log(spamId, rating, userId)
 
     const ratingResponse = await db.addRating(
       Number(spamId),
@@ -52,7 +52,7 @@ router.post('/:spamId', async (req, res) => {
 })
 
 // Add rating works! But can only add once....
-// hit url: http://localhost:3000/api/v1/spams/ratings/1 (this is the spamId)
+// hit url: http://localhost:3000/api/v1/ratings/1 (this is the spamId)
 // Send JSON Body:
 // {
 //   "userId": 2,
