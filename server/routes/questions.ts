@@ -7,7 +7,7 @@ const router = Router()
 // GET: /api/v1/questions/
 router.get('/', async (req, res) => {
   try {
-    const questions = await db.getAllQuestions()
+    const questions = await db.getAllQuestionsAndOptions()
 
     res.json(questions)
   } catch (error) {
