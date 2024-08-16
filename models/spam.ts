@@ -41,4 +41,5 @@ export interface QuizQuestions {
 export interface Option {
   image: string
   text: string
+  category: string
 }

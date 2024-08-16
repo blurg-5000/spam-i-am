@@ -4,6 +4,7 @@ export async function up(knex) {
     table.integer('question_id').references('questions.id').notNullable()
     table.string('image').notNullable()
     table.string('text').notNullable()
+    table.string('category').notNullable()
   })
 }
 

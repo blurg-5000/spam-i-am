@@ -19,29 +19,129 @@ export async function seed(knex) {
   // Insert options using the question IDs directly
   await knex('options').insert([
     // Assuming questionIds are returned in the same order
-    { question_id: questionIds[0].id, image: 'img.png', text: 'blah 1' },
-    { question_id: questionIds[0].id, image: 'img.png', text: 'blah 2' },
-    { question_id: questionIds[0].id, image: 'img.png', text: 'blah 3' },
-    { question_id: questionIds[0].id, image: 'img.png', text: 'blah 4' },
+    {
+      question_id: questionIds[0].id,
+      image: 'img.png',
+      text: 'blah 1',
+      category: 'a',
+    },
+    {
+      question_id: questionIds[0].id,
+      image: 'img.png',
+      text: 'blah 2',
+      category: 'b',
+    },
+    {
+      question_id: questionIds[0].id,
+      image: 'img.png',
+      text: 'blah 3',
+      category: 'c',
+    },
+    {
+      question_id: questionIds[0].id,
+      image: 'img.png',
+      text: 'blah 4',
+      category: 'd',
+    },
 
-    { question_id: questionIds[1].id, image: 'img.png', text: 'blah 1' },
-    { question_id: questionIds[1].id, image: 'img.png', text: 'blah 2' },
-    { question_id: questionIds[1].id, image: 'img.png', text: 'blah 3' },
-    { question_id: questionIds[1].id, image: 'img.png', text: 'blah 4' },
+    {
+      question_id: questionIds[1].id,
+      image: 'img.png',
+      text: 'blah 1',
+      category: 'd',
+    },
+    {
+      question_id: questionIds[1].id,
+      image: 'img.png',
+      text: 'blah 2',
+      category: 'c',
+    },
+    {
+      question_id: questionIds[1].id,
+      image: 'img.png',
+      text: 'blah 3',
+      category: 'b',
+    },
+    {
+      question_id: questionIds[1].id,
+      image: 'img.png',
+      text: 'blah 4',
+      category: 'a',
+    },
 
-    { question_id: questionIds[2].id, image: 'img.png', text: 'blah 1' },
-    { question_id: questionIds[2].id, image: 'img.png', text: 'blah 2' },
-    { question_id: questionIds[2].id, image: 'img.png', text: 'blah 3' },
-    { question_id: questionIds[2].id, image: 'img.png', text: 'blah 4' },
+    {
+      question_id: questionIds[2].id,
+      image: 'img.png',
+      text: 'blah 1',
+      category: 'd',
+    },
+    {
+      question_id: questionIds[2].id,
+      image: 'img.png',
+      text: 'blah 2',
+      category: 'b',
+    },
+    {
+      question_id: questionIds[2].id,
+      image: 'img.png',
+      text: 'blah 3',
+      category: 'a',
+    },
+    {
+      question_id: questionIds[2].id,
+      image: 'img.png',
+      text: 'blah 4',
+      category: 'c',
+    },
 
-    { question_id: questionIds[3].id, image: 'img.png', text: 'blah 1' },
-    { question_id: questionIds[3].id, image: 'img.png', text: 'blah 2' },
-    { question_id: questionIds[3].id, image: 'img.png', text: 'blah 3' },
-    { question_id: questionIds[3].id, image: 'img.png', text: 'blah 4' },
+    {
+      question_id: questionIds[3].id,
+      image: 'img.png',
+      text: 'blah 1',
+      category: 'c',
+    },
+    {
+      question_id: questionIds[3].id,
+      image: 'img.png',
+      text: 'blah 2',
+      category: 'a',
+    },
+    {
+      question_id: questionIds[3].id,
+      image: 'img.png',
+      text: 'blah 3',
+      category: 'b',
+    },
+    {
+      question_id: questionIds[3].id,
+      image: 'img.png',
+      text: 'blah 4',
+      category: 'd',
+    },
 
-    { question_id: questionIds[4].id, image: 'img.png', text: 'blah 1' },
-    { question_id: questionIds[4].id, image: 'img.png', text: 'blah 2' },
-    { question_id: questionIds[4].id, image: 'img.png', text: 'blah 3' },
-    { question_id: questionIds[4].id, image: 'img.png', text: 'blah 4' },
+    {
+      question_id: questionIds[4].id,
+      image: 'img.png',
+      text: 'blah 1',
+      category: 'd',
+    },
+    {
+      question_id: questionIds[4].id,
+      image: 'img.png',
+      text: 'blah 2',
+      category: 'c',
+    },
+    {
+      question_id: questionIds[4].id,
+      image: 'img.png',
+      text: 'blah 3',
+      category: 'a',
+    },
+    {
+      question_id: questionIds[4].id,
+      image: 'img.png',
+      text: 'blah 4',
+      category: 'd',
+    },
   ])
 }
