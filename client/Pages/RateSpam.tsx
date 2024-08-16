@@ -1,6 +1,7 @@
 import ErrorPage from './ErrorPage'
 import { Link } from 'react-router-dom'
 import { useSpams } from '../hooks/useSpams'
+import Ratings from '../components/UI/Ratings'
 
 function RateSpam() {
   const { data, isError } = useSpams()
@@ -20,14 +21,15 @@ function RateSpam() {
           <div className="grid grid-cols-3 gap-8 p-6">
             {data &&
               data.map((spam) => (
-                <Link to={`/rate-spam/${spam.id}/`}>
-                  <section className="p-8" key={spam.id}>
+                <Link key={spam.id} to={`/rate-spam/${spam.id}/`}>
+                  <section className="p-8">
                     <img
                       src={`/images/hero_images/${spam.image}`}
                       alt={spam.name}
                       className="w-48"
                     />
                   </section>
+                  <Ratings />
                 </Link>
               ))}
           </div>
