@@ -35,10 +35,10 @@ export interface QuizAnswers {
 export interface QuizQuestions {
   id: number
   question: string
-  option_1: Option
-  option_2: Option
-  option_3: Option
-  option_4: Option
+  options: Option[]
 }
 
-type Option = [string, string]
+export interface Option {
+  image: string
+  text: string
+}
