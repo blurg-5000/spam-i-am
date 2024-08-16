@@ -66,7 +66,7 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
                   onKeyDown={(event) => handleKeyDown(event, option)}
                   className="flex p-10"
                 >
-                  <img src={option.image} alt="" />
+                  <img src={`/images/quiz_options/${option.image}`} alt="" />
                   <p>{option.text}</p>
                 </section>
               </>
