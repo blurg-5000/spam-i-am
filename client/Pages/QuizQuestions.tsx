@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { QuizAnswers, QuizQuestions } from '../../models/spam'
+import { QuizAnswers, QuizQuestions, Option } from '../../models/spam'
 import ResultPage from './ResultPage'
 
 interface Props {
@@ -12,8 +12,8 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   const [counter, setCounter] = useState(0)
   const [showResult, setShowResult] = useState(false)
 
-  function handleAnswerChange(option: [string, string]) {
-    const optionText = option[1]
+  function handleAnswerChange(option: Option) {
+    const optionText = option.text
     const key = `a${counter + 1}` as keyof QuizAnswers
     setAnswers((prev) => ({ ...prev, [key]: optionText }))
     handleNextQuestion()
@@ -34,13 +34,13 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   }
 
   // Function to handle click and keydown events for accessibility
-  function handleClick(option: [string, string]) {
+  function handleClick(option: Option) {
     handleAnswerChange(option)
   }
 
   function handleKeyDown(
     event: React.KeyboardEvent<HTMLElement>,
-    option: [string, string],
+    option: Option,
   ) {
     if (event.key === 'Enter' || event.key === ' ') {
       handleClick(option)
@@ -54,26 +54,18 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
         <section key={questions[counter].id}>
           <h1>{questions[counter].question}</h1>
           <div>
-            {[
-              questions[counter].option_1,
-              questions[counter].option_2,
-              questions[counter].option_3,
-              questions[counter].option_4,
-            ].map((option, index) => (
+            {questions[counter].options.map((option, index) => (
               <>
-                {console.log(option[1])}
                 <section
                   key={`option ${index}`}
                   role="button"
                   tabIndex={0}
-                  onClick={() => handleClick([option[0], option[1]])}
-                  onKeyDown={(event) =>
-                    handleKeyDown(event, [option[0], option[1]])
-                  }
+                  onClick={() => handleClick(option)}
+                  onKeyDown={(event) => handleKeyDown(event, option)}
                   className="flex p-10"
                 >
-                  <img src={option[0]} alt="" />
-                  <p>{option[1]}</p>
+                  <img src={option.image} alt="" />
+                  <p>{option.text}</p>
                 </section>
               </>
             ))}
