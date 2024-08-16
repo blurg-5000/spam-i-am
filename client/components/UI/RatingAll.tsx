@@ -4,7 +4,7 @@ import Rating from '@mui/material/Rating'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useState } from 'react'
-import { useAvgRatingById } from '../../hooks/useRatings'
+import { useAvgRatingById, useGetAllRatings } from '../../hooks/useRatings'
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -15,26 +15,15 @@ const StyledRating = styled(Rating)({
   },
 })
 
-export default function Ratings({ spamId }: { spamId: number }) {
-  const { data } = useAvgRatingById(spamId)
-  const [value, setValue] = useState<number | null>(4)
-  function handleChange(event: any) {
-    // console.log(newValue)
-    console.log(event.target.value)
-    setValue(event.target.value)
-  }
-
-  if (data) {
-    console.log(data)
+export default function RatingAll({ rating, spamId }: any) {
+  if (rating) {
+    console.log('rating for RatingsAll is: ', rating)
 
     return (
       <>
         <StyledRating
           name="customized-color"
-          value={data}
-          onChange={(event) => {
-            handleChange(event)
-          }}
+          value={rating}
           getLabelText={(value: number) =>
             `${value} Heart${value !== 1 ? 's' : ''}`
           }

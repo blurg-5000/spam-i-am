@@ -1,12 +1,17 @@
 import ErrorPage from './ErrorPage'
 import { Link } from 'react-router-dom'
 import { useSpams } from '../hooks/useSpams'
-import Ratings from '../components/UI/Ratings'
+import RatingSingle from '../components/UI/RatingSingle'
+import RatingAll from '../components/UI/RatingAll'
+import { useGetAllRatings } from '../hooks/useRatings'
 
 function RateSpam() {
   const { data, isError } = useSpams()
+  const { data: ratings } = useGetAllRatings()
 
   if (isError) return <ErrorPage />
+
+  if (ratings) console.log('rate-spam-page', ratings)
 
   if (data)
     return (
@@ -29,6 +34,13 @@ function RateSpam() {
                   </Link>
                 </section>
               ))}
+            {ratings?.map((rating) => (
+              <RatingAll
+                rating={rating.rating}
+                spamId={rating.spam_id}
+                key={rating.id}
+              />
+            ))}
           </div>
         </div>
       </>

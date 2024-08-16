@@ -3,7 +3,7 @@ import { getSpamById } from '../apis/apiClient'
 import { useParams } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import Comments from './Comments'
-import Ratings from '../components/UI/Ratings'
+import RatingSingle from '../components/UI/RatingSingle'
 
 function SpamDetails() {
   const { id } = useParams()
@@ -35,7 +35,7 @@ function SpamDetails() {
               <strong>Flavour profile:</strong> {data.flavour_profile}
             </p>
           </div>
-          <Ratings spamId={data.id} />
+          <RatingSingle spamId={data.id} />
           <Comments />
         </section>
       </div>
