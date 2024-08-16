@@ -2,6 +2,8 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
 import { addRating, getAvgRatingById } from '../apis/apiClient'
 
 export function useAvgRatingById(id: number) {
+  console.log(id)
+
   const query = useQuery({
     queryKey: ['avgRating'],
     queryFn: () => getAvgRatingById(id),

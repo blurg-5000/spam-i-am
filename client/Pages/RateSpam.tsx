@@ -6,8 +6,6 @@ import Ratings from '../components/UI/Ratings'
 function RateSpam() {
   const { data, isError } = useSpams()
 
-  console.log(data)
-
   if (isError) return <ErrorPage />
 
   if (data)
@@ -29,7 +27,6 @@ function RateSpam() {
                       className="w-48"
                     />
                   </Link>
-                  <Ratings />
                 </section>
               ))}
           </div>
