@@ -39,7 +39,7 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   }
 
   function handleKeyDown(
-    event: React.KeyboardEvent<HTMLDivElement>,
+    event: React.KeyboardEvent<HTMLElement>,
     option: [string, string],
   ) {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -54,17 +54,28 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
         <section key={questions[counter].id}>
           <h1>{questions[counter].question}</h1>
           <div>
-            {questions[counter].option_1.map((option, index) => (
-              <div
-                key={index}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleClick(option)}
-                onKeyDown={(event) => handleKeyDown(event, option)}
-              >
-                <img src={option[0]} alt="" />
-                <p>{option[1]}</p>
-              </div>
+            {[
+              questions[counter].option_1,
+              questions[counter].option_2,
+              questions[counter].option_3,
+              questions[counter].option_4,
+            ].map((option, index) => (
+              <>
+                {console.log(option[1])}
+                <section
+                  key={`option ${index}`}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleClick([option[0], option[1]])}
+                  onKeyDown={(event) =>
+                    handleKeyDown(event, [option[0], option[1]])
+                  }
+                  className="flex p-10"
+                >
+                  <img src={option[0]} alt="" />
+                  <p>{option[1]}</p>
+                </section>
+              </>
             ))}
           </div>
           <button onClick={handlePreviousQuestion} disabled={counter === 0}>
