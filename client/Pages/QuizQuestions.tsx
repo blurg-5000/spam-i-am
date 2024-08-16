@@ -13,9 +13,11 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   const [showResult, setShowResult] = useState(false)
 
   function handleAnswerChange(option: Option) {
-    const optionText = option.text
+    // we want to record the category the answer is associated with,
+    // so that we can determine the correct personality type for the user (i.e. mostly a's, mostly b's)
+    const optionCategory = option.category
     const key = `a${counter + 1}` as keyof QuizAnswers
-    setAnswers((prev) => ({ ...prev, [key]: optionText }))
+    setAnswers((prev) => ({ ...prev, [key]: optionCategory }))
     handleNextQuestion()
   }
 
