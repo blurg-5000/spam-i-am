@@ -12,12 +12,13 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   const [counter, setCounter] = useState(0)
   const [showResult, setShowResult] = useState(false)
 
-  function handleAnswerChange(option: string) {
-    // Ensure the counter is within the vabuttond range
+  function handleAnswerChange(option: [string, string]) {
+    const optionText = option[1]
     const key = `a${counter + 1}` as keyof QuizAnswers
-    setAnswers((prev) => ({ ...prev, [key]: option }))
+    setAnswers((prev) => ({ ...prev, [key]: optionText }))
     handleNextQuestion()
   }
+
   function handleNextQuestion() {
     if (counter === questions.length - 1) {
       setShowResult(true)
@@ -32,6 +33,20 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
     }
   }
 
+  // Function to handle click and keydown events for accessibility
+  function handleClick(option: [string, string]) {
+    handleAnswerChange(option)
+  }
+
+  function handleKeyDown(
+    event: React.KeyboardEvent<HTMLDivElement>,
+    option: [string, string],
+  ) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick(option)
+    }
+  }
+
   return (
     <div>
       {showResult && <ResultPage answers={answers} />}
@@ -39,26 +54,18 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
         <section key={questions[counter].id}>
           <h1>{questions[counter].question}</h1>
           <div>
-            <button
-              onClick={() => handleAnswerChange(questions[counter].option_1)}
-            >
-              {questions[counter].option_1}
-            </button>
-            <button
-              onClick={() => handleAnswerChange(questions[counter].option_2)}
-            >
-              {questions[counter].option_2}
-            </button>
-            <button
-              onClick={() => handleAnswerChange(questions[counter].option_3)}
-            >
-              {questions[counter].option_3}
-            </button>
-            <button
-              onClick={() => handleAnswerChange(questions[counter].option_4)}
-            >
-              {questions[counter].option_4}
-            </button>
+            {questions[counter].option_1.map((option, index) => (
+              <div
+                key={index}
+                role="button"
+                tabIndex={0}
+                onClick={() => handleClick(option)}
+                onKeyDown={(event) => handleKeyDown(event, option)}
+              >
+                <img src={option[0]} alt="" />
+                <p>{option[1]}</p>
+              </div>
+            ))}
           </div>
           <button onClick={handlePreviousQuestion} disabled={counter === 0}>
             Go back
