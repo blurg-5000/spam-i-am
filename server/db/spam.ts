@@ -59,12 +59,13 @@ export async function getAllQuestionsAndOptions(db = connection) {
         'questions.question',
         'options.image',
         'options.text',
+        'options.category',
       )
       .orderBy('questions.id', 'asc') // Optional: order by question ID
 
     // Transform the result into a more usable format
     const questionsMap = result.reduce((acc, row) => {
-      const { question_id, question, image, text } = row
+      const { question_id, question, image, text, category } = row
 
       if (!acc[question_id]) {
         acc[question_id] = {
@@ -74,8 +75,8 @@ export async function getAllQuestionsAndOptions(db = connection) {
         }
       }
 
-      if (image && text) {
-        acc[question_id].options.push({ image, text })
+      if (image && text && category) {
+        acc[question_id].options.push({ image, text, category })
       }
 
       return acc
