@@ -17,8 +17,6 @@ function Quiz() {
 
   const { data } = useQuestions()
 
-  console.log(data)
-
   if (data)
     return (
       <>
