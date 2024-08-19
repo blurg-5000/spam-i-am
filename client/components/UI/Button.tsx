@@ -2,9 +2,12 @@ import { HtmlHTMLAttributes } from 'react'
 
 type ButtonProps = HtmlHTMLAttributes<HTMLButtonElement>
 
-function Button({ children }: ButtonProps) {
+function Button({ children, ...props }: ButtonProps) {
   return (
-    <button className="bg-spamBlue text-spamYellow hover:bg-spamYellow hover:text-spamBlue m-10 rounded px-4 py-2">
+    <button
+      className="m-10 rounded bg-spamBlue px-4 py-2 text-spamYellow hover:bg-spamYellow hover:text-spamBlue"
+      {...props}
+    >
       {children}
     </button>
   )
