@@ -50,7 +50,7 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center p-5">
       {showResult && <ResultPage answers={answers} />}
       {!showResult && (
         <section key={questions[counter].id}>
