@@ -8,12 +8,12 @@ export default {
         body: ['Quicksand', 'sans-serif'],
       },
       fontSize: {
-        'heading-lg': '2.5rem', // Example: 40px
-        'heading-md': '1.5rem', // Example: 32px
+        'heading-lg': '2.5rem',
+        'heading-md': '1.5rem',
         'heading-sm': '1.2rem',
-        'body-xl': '2.00rem',
-        'body-lg': '1.125rem', // Example: 18px
-        'body-md': '1rem', // Example: 16px
+        'body-xl': '2rem',
+        'body-lg': '1.125rem',
+        'body-md': '1rem',
         'body-xsm': '0.5rem',
       },
       fontWeight: {
@@ -33,12 +33,22 @@ export default {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        infiniteScroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        infiniteScrollBackwards: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
       },
       animation: {
         rotate360: 'rotate360 1s linear infinite',
         loading: 'rotate360 1s ease-in-out infinite',
+        infiniteScroll: 'infiniteScroll 50s linear infinite',
+        infiniteScrollBackwards: 'infiniteScrollBackwards 50s linear infinite',
       },
     },
+    plugins: [],
   },
-  plugins: [],
 }

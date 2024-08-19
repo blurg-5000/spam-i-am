@@ -1,8 +1,18 @@
+import { useState } from 'react'
+import InfiniteBanner from '../components/UI/InfiniteBanner'
+
 function Home() {
+  const [isReversed, setIsReversed] = useState(false)
+
   return (
-    <div className="flex items-center justify-center">
-      <img src="./images/12-spams.jpeg" className="h-fit" />
-    </div>
+    <>
+      <section className="items-center justify-center">
+        <InfiniteBanner isReversed={isReversed} />
+        <InfiniteBanner isReversed={!isReversed} />
+        <InfiniteBanner isReversed={isReversed} />
+        <InfiniteBanner isReversed={!isReversed} />
+      </section>
+    </>
   )
 }
 
