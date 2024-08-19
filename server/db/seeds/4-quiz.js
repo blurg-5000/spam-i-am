@@ -1,8 +1,8 @@
 export async function seed(knex) {
   // Deletes ALL existing entries
-  await knex('questions').del()
   await knex('options').del()
   await knex('results').del()
+  await knex('questions').del()
 
   // Insert questions and get their IDs
   const questionIds = await knex('questions')
@@ -128,7 +128,7 @@ export async function seed(knex) {
     // abyss
     {
       question_id: questionIds[4].id,
-      image: 'psychedelic_kaleidescope.jpg',
+      image: 'psychedelic_kaleidoscope.jpg',
       text: 'A psychedelic kaleidescope',
       category: 'd',
     },
