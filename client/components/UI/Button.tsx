@@ -1,11 +1,18 @@
 import { HtmlHTMLAttributes } from 'react'
 
-type ButtonProps = HtmlHTMLAttributes<HTMLButtonElement>
+type ButtonProps = HtmlHTMLAttributes<HTMLButtonElement> & {
+  disabled?: boolean
+}
 
-function Button({ children, ...props }: ButtonProps) {
+function Button({ children, disabled, ...props }: ButtonProps) {
   return (
     <button
-      className="m-10 rounded bg-spamBlue px-4 py-2 text-spamYellow hover:bg-spamYellow hover:text-spamBlue"
+      className={`m-10 rounded px-4 py-2 ${
+        disabled
+          ? 'cursor-not-allowed bg-gray-400 text-gray-200'
+          : 'bg-spamBlue text-spamYellow hover:bg-spamYellow hover:text-spamBlue'
+      }`}
+      disabled={disabled}
       {...props}
     >
       {children}
