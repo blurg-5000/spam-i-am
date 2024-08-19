@@ -1,5 +1,10 @@
 import request from 'superagent'
-import { AvgRatingDetails, QuizQuestions, SpamData } from '../../models/spam'
+import {
+  AvgRatingDetails,
+  QuizQuestions,
+  QuizResult,
+  SpamData,
+} from '../../models/spam'
 
 const rootUrl = '/api/v1'
 
@@ -22,7 +27,13 @@ export function getAvgRatingById(id: number) {
 }
 
 export function getAllQuestions() {
-  return request.get(`${rootUrl}/questions`).then((res) => {
+  return request.get(`${rootUrl}/quiz`).then((res) => {
     return res.body as QuizQuestions[]
+  })
+}
+
+export function getQuizResult(category: string) {
+  return request.get(`${rootUrl}/quiz/${category}`).then((res) => {
+    return res.body as QuizResult
   })
 }

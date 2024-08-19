@@ -43,3 +43,11 @@ export interface Option {
   text: string
   category: string
 }
+
+export interface QuizResult {
+  id: number
+  category: string
+  name: string
+  image: string
+  info: string
+}
