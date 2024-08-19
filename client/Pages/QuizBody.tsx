@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { QuizAnswers, QuizQuestions, Option } from '../../models/spam'
 import ResultPage from './ResultPage'
+import Button from '../components/UI/Button'
 
 interface Props {
   questions: QuizQuestions[]
@@ -50,12 +51,17 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-5">
+    <div className="flex flex-col items-center justify-center">
       {showResult && <ResultPage answers={answers} />}
       {!showResult && (
-        <section key={questions[counter].id}>
-          <h1>{questions[counter].question}</h1>
-          <div>
+        <section
+          key={questions[counter].id}
+          className="flex flex-col items-center justify-center"
+        >
+          <h1 className="pt-20 font-heading text-heading-lg font-heading-bold text-spamBlue">
+            {questions[counter].question}
+          </h1>
+          <div className="grid grid-cols-2 gap-8 p-6">
             {questions[counter].options.map((option, index) => (
               <>
                 <section
@@ -64,17 +70,23 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
                   tabIndex={0}
                   onClick={() => handleClick(option)}
                   onKeyDown={(event) => handleKeyDown(event, option)}
-                  className="flex p-10"
+                  className="flex flex-col items-center justify-center rounded-md bg-spamBlue p-10"
                 >
-                  <img src={`/images/quiz_options/${option.image}`} alt="" />
-                  <p>{option.text}</p>
+                  <img
+                    src={`/images/quiz_options/${option.image}`}
+                    alt=""
+                    className="h-44 w-44 object-cover"
+                  />
+                  <p className="mt-4 rounded-md bg-spamYellow p-4">
+                    {option.text}
+                  </p>
                 </section>
               </>
             ))}
           </div>
-          <button onClick={handlePreviousQuestion} disabled={counter === 0}>
+          <Button onClick={handlePreviousQuestion} disabled={counter === 0}>
             Go back
-          </button>
+          </Button>
         </section>
       )}
     </div>
