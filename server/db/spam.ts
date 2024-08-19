@@ -88,3 +88,10 @@ export async function getAllQuestionsAndOptions(db = connection) {
     throw error
   }
 }
+
+export async function getQuizResultByCategory(
+  category: string,
+  db = connection,
+) {
+  return db('results').where({ category }).first()
+}
