@@ -3,6 +3,7 @@ import SpamJump from './SpamJump'
 import WhackASpam from './WhackASpam'
 import Button from '../components/UI/Button'
 import prettifyCamelCase from '../utils/prettifyCamelCase'
+import Snake from '../components/Games/Snake'
 
 function Games() {
   // TODO: Add a timer utils for time based games
@@ -12,7 +13,7 @@ function Games() {
 
   const [activeGame, setActiveGame] = useState('')
 
-  const games = ['spamJump', 'whackASpam']
+  const games = ['spamJump', 'whackASpam', 'snake']
 
   return (
     <>
@@ -20,7 +21,7 @@ function Games() {
         <h1>Choose a game!</h1>
         <nav>
           {games.map((game) => (
-            <Button onClick={() => setActiveGame(game)}>
+            <Button key={game} onClick={() => setActiveGame(game)}>
               <button onClick={() => setActiveGame(game)}>
                 {prettifyCamelCase(game)}
               </button>
@@ -31,6 +32,7 @@ function Games() {
         <main>
           {activeGame === 'spamJump' && <SpamJump />}
           {activeGame === 'whackASpam' && <WhackASpam />}
+          {activeGame === 'snake' && <Snake />}
         </main>
       </section>
     </>
