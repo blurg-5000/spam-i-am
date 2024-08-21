@@ -24,8 +24,7 @@ export async function updateSpam(id: number, spam: Spam, db = connection) {
 }
 
 export async function getAllRatings(db = connection): Promise<Rating[]> {
-  console.log('hit the db')
-  return db('ratings').select('*')
+  return db('ratings').select()
 }
 
 export async function getAvgRatingBySpamId(spamId: number, db = connection) {
@@ -33,7 +32,6 @@ export async function getAvgRatingBySpamId(spamId: number, db = connection) {
     .where('spam_id', spamId)
     .avg('rating as average_rating')
     .groupBy('spam_id')
-  // return db('ratings').where('id', spamId).avg('rating as average_rating').groupBy('spam_id')
 }
 
 export async function addRating(
