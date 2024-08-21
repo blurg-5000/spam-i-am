@@ -20,7 +20,6 @@ function RateSpam() {
           <h1 className="pb-4 font-body text-body-lg font-body-bold">
             The SPAM family
           </h1>
-
           <div className="grid grid-cols-3 gap-8 p-6">
             {data &&
               data.map((spam) => (
