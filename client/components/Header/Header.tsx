@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import LoginButton from '../Nav/LoginButton'
 
 function Header() {
   const menuItems = [
@@ -27,6 +28,7 @@ function Header() {
               <NavLink to={item.link}>{item.title}</NavLink>
             </li>
           ))}
+          <LoginButton />
         </ul>
       </nav>
     </header>
