@@ -2,12 +2,12 @@ import { useState } from 'react'
 import SpamJump from '../components/Games/SpamJump'
 import WhackASpam from '../components/Games/WhackASpam'
 import Button from '../components/UI/Button'
-import prettifyCamelCase from '../utils/prettifyCamelCase'
+import Snake from '../components/Games/Snake'
 
 function Games() {
   const [activeGame, setActiveGame] = useState('')
 
-  const games = ['SpamJump', 'WhackASpam']
+  const games = ['Spam Jump', 'Whack-A-Spam', 'Snake']
 
   return (
     <>
@@ -15,15 +15,16 @@ function Games() {
         <h1>Choose a game!</h1>
         <nav>
           {games.map((game) => (
-            <Button onClick={() => setActiveGame(game)}>
+            <Button key={game} onClick={() => setActiveGame(game)}>
               <button onClick={() => setActiveGame(game)}>{game}</button>
             </Button>
           ))}
         </nav>
 
         <main>
-          {activeGame === 'SpamJump' && <SpamJump />}
-          {activeGame === 'WhackASpam' && <WhackASpam />}
+          {activeGame === 'Spam Jump' && <SpamJump />}
+          {activeGame === 'Whack-A-Spam' && <WhackASpam />}
+          {activeGame === 'Snake' && <Snake />}
         </main>
       </section>
     </>
