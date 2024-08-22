@@ -6,7 +6,7 @@ import getRandomNumber from '../../utils/getRandomNumber'
 
 function Snake() {
   const gridSize = 10
-  const speed = 400 // TODO make dynamic - radio buttons?
+  const speed = 300 // TODO make dynamic - radio buttons?
   const numOfObstacles = 3 // TODO make dynamic - radio buttons?
   const nums = new Array(gridSize).fill(0).map((_, i) => i) // used to generate the table programatically
 
@@ -17,6 +17,7 @@ function Snake() {
   const [head, setHead] = useState(initialPosition) // where the snake's head is. Movement in the grid is based on this
   const [snake, setSnake] = useState([initialPosition]) // every segment of the snake
   const [food, setFood] = useState(randomCoords(1, [...snake, ...obstacles])[0])
+  const [score, setScore] = useState(0)
   const [direction, setDirection] = useState('none')
   const [gameState, setGameState] = useState('alive')
 
@@ -28,14 +29,18 @@ function Snake() {
     const intervalId = setInterval(() => {
       if (head) {
         const next = nextPosition() // nextPosition also checks if the snake will go out of bounds
-        const [noggin, ...tail] = snake
+        const [_noggin, ...tail] = snake
         if ([...tail, ...obstacles].includes(next)) {
           // check if snake crashes into obstacle or itself, but can't crash into it's own head
           setGameState('dead')
-        } else if (next && food === next) { //snake gets longer if it eats food
+        } else if (next && food === next) {
+          //snake gets longer if it eats food (expands into new square, and doesn't short the tail)
           setHead(next)
           setSnake([next, ...snake])
-        } else if(next) {
+          setFood(randomCoords(1, [...snake, ...obstacles])[0])
+          setScore(score+1)
+        } else if (next) {
+          // doesn't collide with anything, moves into new square and removes last quare of tail
           setHead(next)
           setSnake([next, ...snake.slice(0, snake.length - 1)])
         }
@@ -79,7 +84,7 @@ function Snake() {
     return () => {
       clearInterval(intervalId)
     }
-  }, [head, direction, snake, obstacles])
+  }, [head, direction, snake, obstacles, food])
 
   function randomCoords(num: number, toBeOmitted: string[] = []): string[] {
     const coords: string[] = []
@@ -131,6 +136,7 @@ function Snake() {
   return (
     <>
       <h1>Snake</h1>
+      <span><h2>Score: </h2><p>{score}</p></span>
       {/* <p>Use Arrow keys to move - Avoid tofu and eat Spam to unlock your home.</p> */}
       {gameState === 'dead' && <h1>You died!</h1>}
       {gameState === 'win' && <h1>You won!</h1>}
