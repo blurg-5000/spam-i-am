@@ -33,7 +33,7 @@ function WhackASpam() {
   }, [timer])
 
   function chooseRandomCell() {
-    let randomCell = getRandomNumber(0, 24) as number
+    let randomCell = getRandomNumber(0, 24)
     console.log(randomCell)
     setSelectedCell(randomCell)
   }
@@ -44,7 +44,7 @@ function WhackASpam() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-10">
+    <div className="flex h-screen flex-col items-center justify-center p-10">
       <h1>WHACK A SPAM</h1>
       {gameOver ? (
         <ScoreCard score={score} />
