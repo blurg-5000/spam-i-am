@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { QuizAnswers } from '../../models/spam'
-import QuizStartPage from './QuizStartPage'
+import QuizStartPage from '../components/Quiz/QuizStartPage'
 import { useQuestions } from '../hooks/useQuestions'
-import QuizBody from './QuizBody'
+import QuizBody from '../components/Quiz/QuizBody'
 
 function Quiz() {
   const [start, setStart] = useState(true)
