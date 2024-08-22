@@ -31,20 +31,21 @@ function Snake() {
       if (head) {
         const next = nextPosition() // nextPosition also checks if the snake will go out of bounds
         const [_noggin, ...tail] = snake
-        if ([...tail, ...obstacles].includes(next)) {
-          // check if snake crashes into obstacle or itself, but can't crash into it's own head
-          setGameState('dead')
-        } else if (next && food === next) {
-          //snake gets longer if it eats food (expands into new square, and doesn't short the tail)
-          setHead(next)
-          setSnake([next, ...snake])
-          setFood(randomCoords(1, [...snake, ...obstacles])[0])
-          setScore(score + 1)
-        } else if (next) {
-          // doesn't collide with anything, moves into new square and removes last quare of tail
-          setHead(next)
-          setSnake([next, ...snake.slice(0, snake.length - 1)])
-        }
+        if (next)
+          if ([...tail, ...obstacles].includes(next)) {
+            // check if snake crashes into obstacle or itself, but can't crash into it's own head
+            setGameState('dead')
+          } else if (next && food === next) {
+            //snake gets longer if it eats food (expands into new square, and doesn't short the tail)
+            setHead(next)
+            setSnake([next, ...snake])
+            setFood(randomCoords(1, [...snake, ...obstacles])[0])
+            setScore(score + 1)
+          } else if (next) {
+            // doesn't collide with anything, moves into new square and removes last quare of tail
+            setHead(next)
+            setSnake([next, ...snake.slice(0, snake.length - 1)])
+          }
       }
     }, speed) //snake speed
 
@@ -149,12 +150,7 @@ function Snake() {
       {gameState === 'dead' && (
         <>
           <h1>You died!</h1>
-          <Button>
-              <button onClick={() => resetGame()}>
-              Play again
-              </button>
-            </Button> 
-
+          <Button onClick={() => resetGame()}>Play again</Button>
         </>
       )}
       {gameState === 'alive' && (
