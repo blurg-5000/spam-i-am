@@ -15,8 +15,6 @@ function SpamDetails() {
 
   if (isError) return <ErrorPage />
 
-  console.log(data)
-
   if (data)
     return (
       <div className="flex flex-col items-center justify-center p-8">

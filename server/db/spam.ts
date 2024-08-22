@@ -10,8 +10,6 @@ export async function getSpam(id: number, db = connection): Promise<Spam> {
 }
 
 export async function createSpam(spam: Spam, db = connection) {
-  console.log(spam)
-
   return db('spam').insert(spam)
 }
 

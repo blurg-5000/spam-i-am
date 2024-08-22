@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 
     res.json(questions)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no questions' })
   }
 })
@@ -23,7 +23,7 @@ router.get('/:category', async (req, res) => {
     const result = await db.getQuizResultByCategory(category)
     res.json(result)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Result could not be fetched' })
   }
 })

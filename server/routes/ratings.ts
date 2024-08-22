@@ -8,12 +8,9 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const ratings = await db.getAllRatings()
-    console.log('hit the route')
-    console.log(ratings)
-
     res.json(ratings)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spams' })
   }
 })
@@ -25,7 +22,7 @@ router.get('/:spamId', async (req, res) => {
     const rating = await db.getAvgRatingBySpamId(Number(spamId))
     res.json({ rating })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
@@ -37,8 +34,6 @@ router.post('/:spamId', async (req, res) => {
   try {
     const { rating, userId } = req.body
     const spamId = req.params.spamId
-    console.log(spamId, rating, userId)
-
     const ratingResponse = await db.addRating(
       Number(spamId),
       Number(rating),
@@ -46,7 +41,7 @@ router.post('/:spamId', async (req, res) => {
     )
     res.status(201).json({ ratingResponse })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })

@@ -15,7 +15,6 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
   }
 
   const randomNum = getRandomNumber(0, 22)
-  console.log(randomNum)
 
   const spamImages = [
     '1-bacon-2',

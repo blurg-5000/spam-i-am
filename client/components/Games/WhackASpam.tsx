@@ -34,7 +34,6 @@ function WhackASpam() {
 
   function chooseRandomCell() {
     let randomCell = getRandomNumber(0, 16)
-    console.log(randomCell)
     setSelectedCell(randomCell)
   }
 

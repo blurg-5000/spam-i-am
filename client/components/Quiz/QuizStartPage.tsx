@@ -7,7 +7,6 @@ interface Props {
 
 function QuizStartPage({ setStart, setQuizzes }: Props) {
   function startGame() {
-    console.log('working')
     setStart(false)
     setQuizzes(true)
   }

@@ -5,8 +5,6 @@ import { useSpams } from '../hooks/useSpams'
 function RateSpam() {
   const { data, isError } = useSpams()
 
-  console.log(data)
-
   if (isError) return <ErrorPage />
 
   if (data)
