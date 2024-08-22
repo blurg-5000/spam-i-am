@@ -1,4 +1,4 @@
-import Button from '../components/UI/Button'
+import Button from '../UI/Button'
 
 interface Props {
   setStart: React.Dispatch<React.SetStateAction<boolean>>
@@ -7,7 +7,6 @@ interface Props {
 
 function QuizStartPage({ setStart, setQuizzes }: Props) {
   function startGame() {
-    console.log('working')
     setStart(false)
     setQuizzes(true)
   }

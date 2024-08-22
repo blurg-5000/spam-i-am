@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import Button from '../components/UI/Button'
-import getRandomNumber from '../utils/getRandomNumber'
+import Button from '../UI/Button'
+import getRandomNumber from '../../utils/getRandomNumber'
 import Confetti from 'react-confetti'
 
 interface Props {
@@ -15,7 +15,6 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
   }
 
   const randomNum = getRandomNumber(0, 22)
-  console.log(randomNum)
 
   const spamImages = [
     '1-bacon-2',
@@ -84,17 +83,17 @@ function YouWinPage({ isReset, setIsReset, canvasRef }: Props) {
             drawSpam(ctx, x, y, width, height, radius, color)
           }}
         />
-        <h1 className="font-heading text-heading-lg font-heading-bold text-spamBlue pb-2">
+        <h1 className="pb-2 font-heading text-heading-lg font-heading-bold text-spamBlue">
           Congratulations!
         </h1>
-        <p className="font-body pb-5">
+        <p className="pb-5 font-body">
           You've won a lifetime supply* of this spam:
         </p>
         <img src={`./images/${spamImages[randomNum]}.png`} />
         <Button>
           <button onClick={resetGame}>Play again</button>
         </Button>
-        <p className="text-body-xsm font-body">
+        <p className="font-body text-body-xsm">
           Disclaimer: supply varies depending on stock levels. Currently we have
           zero stocks.
         </p>

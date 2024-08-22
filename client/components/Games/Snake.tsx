@@ -3,10 +3,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useEffect, useRef, useState } from 'react'
 import getRandomNumber from '../../utils/getRandomNumber'
+import Button from '../UI/Button'
 
 function Snake() {
   const gridSize = 10
-  const speed = 300 // TODO make dynamic - radio buttons?
+  const speed = 200 // TODO make dynamic - radio buttons?
   const numOfObstacles = 3 // TODO make dynamic - radio buttons?
   const nums = new Array(gridSize).fill(0).map((_, i) => i) // used to generate the table programatically
 
@@ -38,7 +39,7 @@ function Snake() {
           setHead(next)
           setSnake([next, ...snake])
           setFood(randomCoords(1, [...snake, ...obstacles])[0])
-          setScore(score+1)
+          setScore(score + 1)
         } else if (next) {
           // doesn't collide with anything, moves into new square and removes last quare of tail
           setHead(next)
@@ -84,7 +85,7 @@ function Snake() {
     return () => {
       clearInterval(intervalId)
     }
-  }, [head, direction, snake, obstacles, food])
+  }, [head, direction, snake, obstacles, food, score])
 
   function randomCoords(num: number, toBeOmitted: string[] = []): string[] {
     const coords: string[] = []
@@ -133,36 +134,50 @@ function Snake() {
     }
   }
 
+  function resetGame(): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
-    <>
-      <h1>Snake</h1>
-      <span><h2>Score: </h2><p>{score}</p></span>
-      {/* <p>Use Arrow keys to move - Avoid tofu and eat Spam to unlock your home.</p> */}
-      {gameState === 'dead' && <h1>You died!</h1>}
-      {gameState === 'win' && <h1>You won!</h1>}
-      {gameState === 'alive' && (
-        <table
-          ref={tableRef}
-          tabIndex={0} // Make the table focusable
-          onKeyDown={handleKeyDown}
-          className="border-4 border-solid border-spamYellow"
-        >
-          {nums.map((row) => (
-            <tr key={row}>
-              {nums.map((column) => {
-                const coord = `${row}${column}`
-                return (
-                  <td
-                    key={coord}
-                    className={`${coord} h-4 w-4 ${snake.includes(coord) ? 'bg-lime-400' : obstacles.includes(coord) ? 'bg-white' : food === coord ? 'bg-spamPink' : 'bg-spamBlue'}`}
-                  ></td>
-                )
-              })}
-            </tr>
-          ))}
-        </table>
+    <div className="flex flex-col items-center justify-center p-10">
+      <p>Score: {score}</p>
+      {gameState === 'dead' && (
+        <>
+          <h1>You died!</h1>
+          {/* <Button>
+              <button onClick={() => resetGame()}>
+              Play again
+              </button>
+            </Button> */}
+        </>
       )}
-    </>
+      {gameState === 'alive' && (
+        <>
+          <p>Use Arrow keys to move</p>
+          <p>Eat spam and avoid tofu</p>
+          <table
+            ref={tableRef}
+            tabIndex={0} // Make the table focusable
+            onKeyDown={handleKeyDown}
+            className="border-4 border-solid border-spamYellow"
+          >
+            {nums.map((row) => (
+              <tr key={row}>
+                {nums.map((column) => {
+                  const coord = `${row}${column}`
+                  return (
+                    <td
+                      key={coord}
+                      className={`${coord} h-4 w-4 ${snake.includes(coord) ? 'bg-lime-400' : obstacles.includes(coord) ? 'bg-white' : food === coord ? 'bg-spamPink' : 'bg-spamBlue'}`}
+                    ></td>
+                  )
+                })}
+              </tr>
+            ))}
+          </table>
+        </>
+      )}
+    </div>
   )
 }
 

@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 
     res.json({ spams })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spams' })
   }
 })
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     const spam = await db.getSpam(Number(id))
     res.json({ spam })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     const spam = await db.createSpam(req.body)
     res.status(201).json({ spam })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
@@ -46,7 +46,7 @@ router.patch('/:id', async (req, res) => {
     await db.updateSpam(Number(id), req.body)
     res.json({ id })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })
@@ -58,7 +58,7 @@ router.delete('/:id', async (req, res) => {
     await db.deleteSpam(Number(id))
     res.json({ id })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
   }
 })

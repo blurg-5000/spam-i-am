@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import Table from '../components/Table/Table'
-import getRandomNumber from '../utils/getRandomNumber'
-import playAudio from '../utils/playAudio'
-import useCountdownTimer from '../utils/useCountdownTimer'
-import formatTimer from '../utils/formatTimer'
-import ScoreCard from '../components/UI/ScoreCard'
+import Table from '../UI/Table'
+import getRandomNumber from '../../utils/getRandomNumber'
+import playAudio from '../../utils/playAudio'
+import useCountdownTimer from '../../utils/useCountdownTimer'
+import formatTimer from '../../utils/formatTimer'
+import ScoreCard from '../UI/ScoreCard'
 
 function WhackASpam() {
   const [selectedCell, setSelectedCell] = useState<null | number>(null)
@@ -33,8 +33,7 @@ function WhackASpam() {
   }, [timer])
 
   function chooseRandomCell() {
-    let randomCell = getRandomNumber(0, 24) as number
-    console.log(randomCell)
+    let randomCell = getRandomNumber(0, 16)
     setSelectedCell(randomCell)
   }
 
@@ -44,7 +43,7 @@ function WhackASpam() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-10">
+    <div className="flex flex-col items-center justify-center">
       <h1>WHACK A SPAM</h1>
       {gameOver ? (
         <ScoreCard score={score} />

@@ -1,7 +1,7 @@
-export default function prettifyCamelCase(string) {
+export default function prettifyCamelCase(string: string) {
   const splitString = string.split(/(?=[A-Z])/)
 
-  let prettyWords = []
+  let prettyWords = [] as string[]
 
   splitString.map((word) => {
     const splitWord = word.split('')

@@ -15,8 +15,6 @@ export async function seed(knex) {
     ])
     .returning('id')
 
-  console.log(questionIds[0].id)
-
   // Insert options using the question IDs directly
   await knex('options').insert([
     // Assuming questionIds are returned in the same order
