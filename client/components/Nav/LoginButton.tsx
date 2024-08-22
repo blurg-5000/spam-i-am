@@ -1,3 +1,4 @@
+import Button from '../UI/Button.tsx'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
 // import { NavGroup, NavButton } from './Styled.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -24,11 +25,11 @@ function LoginButton() {
   return (
     <>
       <IfAuthenticated>
-        <button onClick={handleSignOut}>Sign out</button>
+        <Button onClick={handleSignOut}>Sign out</Button>
         {user && <p>Signed in as: {user?.nickname}</p>}
       </IfAuthenticated>
       <IfNotAuthenticated>
-        <button onClick={handleSignIn}>Sign in</button>
+        <Button onClick={handleSignIn}>Sign in</Button>
       </IfNotAuthenticated>
     </>
   )
