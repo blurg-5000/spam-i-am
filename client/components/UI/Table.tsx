@@ -5,8 +5,8 @@ interface Props {
 }
 
 function Table({ selectedCell, image, whackThatSpam }: Props) {
-  const rows = 5
-  const columns = 5
+  const rows = 4
+  const columns = 4
 
   const tableData = Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: columns }, (_, colIndex) =>
@@ -36,8 +36,8 @@ function Table({ selectedCell, image, whackThatSpam }: Props) {
                 style={{
                   padding: '8px',
                   border: '1px solid #ddd',
-                  height: 100,
-                  width: 100,
+                  height: '8vh',
+                  width: '8vh',
                 }}
               >
                 {cell == image ? (

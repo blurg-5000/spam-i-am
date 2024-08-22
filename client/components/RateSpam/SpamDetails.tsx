@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSpamById } from '../apis/apiClient'
+import { getSpamById } from '../../apis/apiClient'
 import { useParams } from 'react-router-dom'
-import ErrorPage from './ErrorPage'
+import ErrorPage from '../../Pages/ErrorPage'
 import Rating from './Rating'
 import Comments from './Comments'
 
@@ -14,8 +14,6 @@ function SpamDetails() {
   })
 
   if (isError) return <ErrorPage />
-
-  console.log(data)
 
   if (data)
     return (

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import getRandomNumber from '../utils/getRandomNumber'
+import getRandomNumber from '../../utils/getRandomNumber'
 import YouWinPage from './YouWinPage'
 
 interface Platform {

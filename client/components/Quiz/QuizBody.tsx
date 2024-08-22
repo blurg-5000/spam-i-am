@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { QuizAnswers, QuizQuestions, Option } from '../../models/spam'
+import { QuizAnswers, QuizQuestions, Option } from '../../../models/spam'
 import ResultPage from './ResultPage'
-import Button from '../components/UI/Button'
+import Button from '../UI/Button'
 
 interface Props {
   questions: QuizQuestions[]
