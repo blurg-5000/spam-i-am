@@ -8,7 +8,7 @@ function Snake() {
   const gridSize = 10
   const speed = 400 // TODO make dynamic - radio buttons?
   const numOfObstacles = 3 // TODO make dynamic - radio buttons?
-  const nums = new Array(gridSize).fill(0).map((_, i) => i ) // used to generate the table programatically
+  const nums = new Array(gridSize).fill(0).map((_, i) => i) // used to generate the table programatically
 
   const tableRef = useRef<HTMLInputElement>(null) // used in auto focusing on the table
   const initialCoords = useRef(randomCoords(numOfObstacles + 1))
@@ -16,7 +16,7 @@ function Snake() {
 
   const [head, setHead] = useState(initialPosition) // where the snake's head is. Movement in the grid is based on this
   const [snake, setSnake] = useState([initialPosition]) // every segment of the snake
-  const [food, setFood] = useState([] as string[])
+  const [food, setFood] = useState(randomCoords(1, [...snake, ...obstacles])[0])
   const [direction, setDirection] = useState('none')
   const [gameState, setGameState] = useState('alive')
 
@@ -24,16 +24,20 @@ function Snake() {
     if (tableRef.current) {
       tableRef.current.focus()
     }
-    
+
     const intervalId = setInterval(() => {
       if (head) {
         const next = nextPosition() // nextPosition also checks if the snake will go out of bounds
         const [noggin, ...tail] = snake
-        if ([...tail, ...obstacles].includes(next)) { // check if snake crashes into obstacle or itself, but can't crash into it's own head
+        if ([...tail, ...obstacles].includes(next)) {
+          // check if snake crashes into obstacle or itself, but can't crash into it's own head
           setGameState('dead')
-        } else if (next) { // ignored if no direction is set yet
+        } else if (next && food === next) { //snake gets longer if it eats food
           setHead(next)
           setSnake([next, ...snake])
+        } else if(next) {
+          setHead(next)
+          setSnake([next, ...snake.slice(0, snake.length - 1)])
         }
       }
     }, speed) //snake speed
@@ -43,7 +47,7 @@ function Snake() {
       const headCol = Number(head[1])
       let nextRow = headRow
       let nextCol = headCol
-  
+
       switch (direction) {
         case 'up':
           if (headRow === 0) {
@@ -65,7 +69,8 @@ function Snake() {
             setGameState('dead')
           } else nextCol++
           break
-        default: return null
+        default:
+          return null
       }
       return `${nextRow}${nextCol}`
     }
@@ -75,22 +80,22 @@ function Snake() {
       clearInterval(intervalId)
     }
   }, [head, direction, snake, obstacles])
-  
+
   function randomCoords(num: number, toBeOmitted: string[] = []): string[] {
     const coords: string[] = []
     const omit = [...toBeOmitted]
 
-    for (let i=0; i< num; i++) {
+    for (let i = 0; i < num; i++) {
       const currentCoord = createCoord()
       coords.push(currentCoord)
       omit.push(currentCoord)
     }
-  
-    function createCoord (): string {
+
+    function createCoord(): string {
       const currentCoord = `${getRandomNumber(0, gridSize - 1)}${getRandomNumber(0, gridSize - 1)}`
       return omit.includes(currentCoord) ? createCoord() : currentCoord
     }
-    console.log({coords})
+    console.log({ coords })
     return coords
   }
 
@@ -123,7 +128,6 @@ function Snake() {
     }
   }
 
-
   return (
     <>
       <h1>Snake</h1>
@@ -135,6 +139,7 @@ function Snake() {
           ref={tableRef}
           tabIndex={0} // Make the table focusable
           onKeyDown={handleKeyDown}
+          className="border-4 border-solid border-spamYellow"
         >
           {nums.map((row) => (
             <tr key={row}>
@@ -143,7 +148,7 @@ function Snake() {
                 return (
                   <td
                     key={coord}
-                    className={`${coord} h-4 w-4 ${snake.includes(coord) ? 'bg-lime-400' : obstacles.includes(coord) ? 'bg-white' :'bg-spamBlue'}`}
+                    className={`${coord} h-4 w-4 ${snake.includes(coord) ? 'bg-lime-400' : obstacles.includes(coord) ? 'bg-white' : food === coord ? 'bg-spamPink' : 'bg-spamBlue'}`}
                   ></td>
                 )
               })}
@@ -156,4 +161,3 @@ function Snake() {
 }
 
 export default Snake
-
