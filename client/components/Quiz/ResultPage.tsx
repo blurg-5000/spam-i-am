@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
-import { QuizAnswers } from '../../models/spam'
-import { useResults } from '../hooks/useResults'
-import calculateQuiz from '../utils/calculateQuiz'
+import { QuizAnswers } from '../../../models/spam'
+import { useResults } from '../../hooks/useResults'
+import calculateQuiz from '../../utils/calculateQuiz'
 
 interface Props {
   answers: QuizAnswers

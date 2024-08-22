@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import Table from '../components/Table/Table'
-import getRandomNumber from '../utils/getRandomNumber'
-import playAudio from '../utils/playAudio'
-import useCountdownTimer from '../utils/useCountdownTimer'
-import formatTimer from '../utils/formatTimer'
-import ScoreCard from '../components/UI/ScoreCard'
+import Table from '../UI/Table'
+import getRandomNumber from '../../utils/getRandomNumber'
+import playAudio from '../../utils/playAudio'
+import useCountdownTimer from '../../utils/useCountdownTimer'
+import formatTimer from '../../utils/formatTimer'
+import ScoreCard from '../UI/ScoreCard'
 
 function WhackASpam() {
   const [selectedCell, setSelectedCell] = useState<null | number>(null)
