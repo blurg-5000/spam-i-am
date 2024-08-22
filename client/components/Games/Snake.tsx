@@ -101,7 +101,6 @@ function Snake() {
       const currentCoord = `${getRandomNumber(0, gridSize - 1)}${getRandomNumber(0, gridSize - 1)}`
       return omit.includes(currentCoord) ? createCoord() : currentCoord
     }
-    console.log({ coords })
     return coords
   }
 
@@ -135,7 +134,13 @@ function Snake() {
   }
 
   function resetGame(): void {
-    throw new Error('Function not implemented.')
+    initialCoords.current = randomCoords(numOfObstacles + 1)
+    setHead(initialPosition)
+    setSnake([initialPosition])
+    setFood(randomCoords(1, [...snake, ...obstacles])[0])
+    setScore(0)
+    setDirection('none')
+    setGameState('alive')
   }
 
   return (
@@ -144,11 +149,12 @@ function Snake() {
       {gameState === 'dead' && (
         <>
           <h1>You died!</h1>
-          {/* <Button>
+          <Button>
               <button onClick={() => resetGame()}>
               Play again
               </button>
-            </Button> */}
+            </Button> 
+
         </>
       )}
       {gameState === 'alive' && (
