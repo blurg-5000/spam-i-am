@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { QuizAnswers } from '../../models/spam'
+import { QuizAnswers, QuizQuestions } from '../../models/spam'
 import QuizStartPage from '../components/Quiz/QuizStartPage'
-import { useQuestions } from '../hooks/useQuestions'
 import QuizBody from '../components/Quiz/QuizBody'
 
 function Quiz() {
@@ -15,7 +14,139 @@ function Quiz() {
     a5: null,
   })
 
-  const { data } = useQuestions()
+  // TODO: Replace hardcoded data with real data from the backend API endpoint
+  const data = [
+    {
+      id: 1,
+      question: 'Question 1',
+      options: [
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 1',
+          category: 'a',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 2',
+          category: 'b',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 3',
+          category: 'd',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 4',
+          category: 'c',
+        },
+      ],
+    },
+    {
+      id: 2,
+      question: 'Question 2',
+      options: [
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 1',
+          category: 'a',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 2',
+          category: 'b',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 3',
+          category: 'd',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 4',
+          category: 'c',
+        },
+      ],
+    },
+    {
+      id: 3,
+      question: 'Question 3',
+      options: [
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 1',
+          category: 'a',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 2',
+          category: 'b',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 3',
+          category: 'd',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 4',
+          category: 'c',
+        },
+      ],
+    },
+    {
+      id: 4,
+      question: 'Question 4',
+      options: [
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 1',
+          category: 'a',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 2',
+          category: 'b',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 3',
+          category: 'd',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 4',
+          category: 'c',
+        },
+      ],
+    },
+    {
+      id: 5,
+      question: 'Question 5',
+      options: [
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 1',
+          category: 'a',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 2',
+          category: 'b',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 3',
+          category: 'd',
+        },
+        {
+          image: 'https://placehold.co/300x200',
+          text: 'Option 4',
+          category: 'c',
+        },
+      ],
+    },
+  ] as QuizQuestions[]
 
   if (data)
     return (

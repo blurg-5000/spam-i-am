@@ -1,6 +1,5 @@
 import { Button } from '@mui/material'
 import { QuizAnswers } from '../../../models/spam'
-import { useResults } from '../../hooks/useResults'
 import calculateQuiz from '../../utils/calculateQuiz'
 
 interface Props {
@@ -10,7 +9,13 @@ interface Props {
 function ResultPage({ answers }: Props) {
   const category = calculateQuiz(answers)
 
-  const { data: result } = useResults(category)
+  // TODO: Replace hardcoded data with real results data from backend API endpoint
+  const result = {
+    id: 1,
+    name: 'spam',
+    image: 'https://placehold.co/300x200',
+    info: 'blah blah',
+  }
 
   if (result) {
     return (

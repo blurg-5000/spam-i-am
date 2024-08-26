@@ -47,47 +47,39 @@ export async function addRating(
 }
 
 export async function getAllQuestionsAndOptions(db = connection) {
-  try {
-    const result = await db('questions')
-      .leftJoin('options', 'questions.id', 'options.question_id')
-      .select(
-        'questions.id as question_id',
-        'questions.question',
-        'options.image',
-        'options.text',
-        'options.category',
-      )
-      .orderBy('questions.id', 'asc') // Optional: order by question ID
-
-    // Transform the result into a more usable format
-    const questionsMap = result.reduce((acc, row) => {
-      const { question_id, question, image, text, category } = row
-
-      if (!acc[question_id]) {
-        acc[question_id] = {
-          id: question_id,
-          question,
-          options: [],
-        }
-      }
-
-      if (image && text && category) {
-        acc[question_id].options.push({ image, text, category })
-      }
-
-      return acc
-    }, {})
-
-    return Object.values(questionsMap)
-  } catch (error) {
-    console.error('Error fetching questions with options:', error)
-    throw error
-  }
+  // TODO: Make a db query to get data arranged in this structure:
+  // {
+  //   "id": 11,
+  //   "question": "blah blah blah",
+  //   "options": [
+  //     {
+  //       "image": "img.jpg",
+  //       "text": "blah blah",
+  //       "category": "a"
+  //     },
+  //     {
+  //       "image": "img.jpg",
+  //       "text": "blah blah",
+  //       "category": "b"
+  //     },
+  //     {
+  //       "image": "imng.jpg",
+  //       "text": "blah blah",
+  //       "category": "d"
+  //     },
+  //     {
+  //       "image": "img.jpg",
+  //       "text": "blah blah",
+  //       "category": "c"
+  //     }
+  //   ]
+  // }
+  // Think about how you can use array methods to re-organise the data into the correct data structure, once you have retrieved it from the db.
 }
 
 export async function getQuizResultByCategory(
   category: string,
   db = connection,
 ) {
-  return db('results').where({ category }).first()
+  // TODO: return db results by category
 }
