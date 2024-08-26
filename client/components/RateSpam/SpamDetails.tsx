@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getSpamById } from '../../apis/apiClient'
 import { useParams } from 'react-router-dom'
 import ErrorPage from '../../Pages/ErrorPage'
-import Rating from './Rating'
 import Comments from './Comments'
+import RatingAvg from './RatingAvg'
 
 function SpamDetails() {
   const { id } = useParams()
@@ -33,7 +33,7 @@ function SpamDetails() {
               <strong>Flavour profile:</strong> {data.flavour_profile}
             </p>
           </div>
-          <Rating spamId={data.id} />
+          <RatingAvg spamId={data.id} />
           <Comments />
         </section>
       </div>

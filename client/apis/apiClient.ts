@@ -1,10 +1,5 @@
 import request from 'superagent'
-import {
-  AvgRatingDetails,
-  QuizQuestions,
-  QuizResult,
-  SpamData,
-} from '../../models/spam'
+import { Rating, QuizQuestions, SpamData, QuizResult } from '../../models/spam'
 
 const rootUrl = '/api/v1'
 
@@ -20,10 +15,25 @@ export function getSpamById(id: number): Promise<SpamData> {
   })
 }
 
-export function getAvgRatingById(id: number) {
-  return request.get(`${rootUrl}/ratings/${id}`).then((res) => {
-    return res.body.rating as AvgRatingDetails
+export function getAllRatings() {
+  return request.get(`${rootUrl}/ratings`).then((res) => {
+    return res.body as Rating[]
   })
+}
+
+export function getAvgRatingById(spamId: number) {
+  return request.get(`${rootUrl}/ratings/${spamId}`).then((res) => {
+    return res.body.rating[0].average_rating as number
+  })
+}
+
+export function addRating(spamId: number, rating: number, userId: number) {
+  return request
+    .post(`${rootUrl}/ratings/${spamId}`)
+    .send({ rating, userId })
+    .then((res) => {
+      return res.body
+    })
 }
 
 export function getAllQuestions() {
