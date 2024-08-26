@@ -21,7 +21,7 @@ function Footer() {
       <section className="flex justify-center p-4">
         <ul className="flex items-center space-x-3">
           {footerItems.map((item, index) => (
-            <>
+            <div key={index}>
               {index > 0 && (
                 <Divider
                   orientation="vertical"
@@ -34,11 +34,12 @@ function Footer() {
                   href={item.link}
                   className="text-white hover:text-spamYellow"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {item.title}
                 </a>
               </li>
-            </>
+            </div>
           ))}
         </ul>
       </section>
