@@ -1,17 +1,12 @@
 import ErrorPage from './ErrorPage'
 import { Link } from 'react-router-dom'
 import { useSpams } from '../hooks/useSpams'
-import RatingSingle from '../components/RateSpam/RatingSingle'
-// import RatingAll from '../components/UI/RatingAll'
-import { useGetAllRatings } from '../hooks/useRatings'
+import RatingAvg from '../components/RateSpam/RatingAvg'
 
 function RateSpam() {
   const { data, isError } = useSpams()
-  const { data: ratings } = useGetAllRatings()
 
   if (isError) return <ErrorPage />
-
-  if (ratings) console.log('rate-spam-page', ratings)
 
   if (data)
     return (
@@ -21,22 +16,17 @@ function RateSpam() {
             The SPAM family
           </h1>
           <div className="grid grid-cols-3 gap-8 p-6">
-            {ratings?.map((rating) => (
-              <>
-                {data &&
-                  data.map((spam) => (
-                    <section key={spam.id} className="p-8">
-                      <Link to={`/rate-spam/${spam.id}/`}>
-                        <img
-                          src={`/images/hero_images/${spam.image}`}
-                          alt={spam.name}
-                          className="w-48"
-                        />
-                      </Link>
-                      <RatingSingle spamId={rating.spam_id} />
-                    </section>
-                  ))}
-              </>
+            {data.map((spam) => (
+              <section key={spam.id} className="p-8">
+                <Link to={`/rate-spam/${spam.id}/`}>
+                  <img
+                    src={`/images/hero_images/${spam.image}`}
+                    alt={spam.name}
+                    className="w-48"
+                  />
+                </Link>
+                <RatingAvg spamId={spam.id} />
+              </section>
             ))}
           </div>
         </div>

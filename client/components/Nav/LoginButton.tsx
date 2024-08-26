@@ -10,7 +10,6 @@ function LoginButton() {
   // const user = {
   //   nickname: 'john.doe',
   // }
-  console.log(user)
 
   const handleSignOut = () => {
     console.log('sign out')

@@ -14,7 +14,7 @@ export function useGetAllRatings() {
 
 export function useAvgRatingById(id: number) {
   const query = useQuery({
-    queryKey: ['avgRating'],
+    queryKey: ['avgRating', id],
     queryFn: () => getAvgRatingById(id),
   })
   return {
