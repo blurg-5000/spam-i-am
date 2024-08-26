@@ -2,9 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getSpamById } from '../../apis/apiClient'
 import { useParams } from 'react-router-dom'
 import ErrorPage from '../../Pages/ErrorPage'
-import Rating from './Rating'
 import Comments from './Comments'
-import RatingSingle from '../components/UI/RatingSingle'
+import RatingSingle from '../../components/RateSpam/RatingSingle'
 
 function SpamDetails() {
   const { id } = useParams()
