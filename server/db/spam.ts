@@ -48,32 +48,34 @@ export async function addRating(
 
 export async function getAllQuestionsAndOptions(db = connection) {
   // TODO: Make a db query to get data arranged in this structure:
-  // {
-  //   "id": 11,
-  //   "question": "blah blah blah",
-  //   "options": [
-  //     {
-  //       "image": "img.jpg",
-  //       "text": "blah blah",
-  //       "category": "a"
-  //     },
-  //     {
-  //       "image": "img.jpg",
-  //       "text": "blah blah",
-  //       "category": "b"
-  //     },
-  //     {
-  //       "image": "imng.jpg",
-  //       "text": "blah blah",
-  //       "category": "d"
-  //     },
-  //     {
-  //       "image": "img.jpg",
-  //       "text": "blah blah",
-  //       "category": "c"
-  //     }
-  //   ]
-  // }
+  // [
+  //   {
+  //     id: 1,
+  //     question: 'Question 1',
+  //     options: [
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  // ]
   // Think about how you can use array methods to re-organise the data into the correct data structure, once you have retrieved it from the db.
 }
 
