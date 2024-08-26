@@ -4,7 +4,8 @@ import * as db from '../db/spam.ts'
 
 const router = Router()
 
-// GET: /api/v1/spams/ratings
+// All spam ratings:
+// GET /api/v1/spams/ratings
 router.get('/', async (req, res) => {
   try {
     const ratings = await db.getAllRatings()
@@ -15,7 +16,8 @@ router.get('/', async (req, res) => {
   }
 })
 
-// GET: /api/v1/spams/ratings/:spamId
+// Single spam rating:
+// GET /api/v1/spams/ratings/:spamId
 router.get('/:spamId', async (req, res) => {
   try {
     const { spamId } = req.params
@@ -27,13 +29,11 @@ router.get('/:spamId', async (req, res) => {
   }
 })
 
-// Get rating by ID WORKS! :)
-
-// POST: /api/v1/spams/ratings/:spamId
-router.post('/:spamId', async (req, res) => {
+// Add new spam rating:
+// POST /api/v1/spams/ratings/
+router.post('/', async (req, res) => {
   try {
-    const { rating, userId } = req.body
-    const spamId = req.params.spamId
+    const { rating, userId, spamId } = req.body
     const ratingResponse = await db.addRating(
       Number(spamId),
       Number(rating),
@@ -46,12 +46,17 @@ router.post('/:spamId', async (req, res) => {
   }
 })
 
-// Add rating works! But can only add once....
-// hit url: http://localhost:3000/api/v1/spams/ratings/1 (this is the spamId)
+// How to test in Thunderclient:
+// POST http://localhost:3000/api/v1/spams/ratings/
 // Send JSON Body:
 // {
 //   "userId": 2,
-//   "rating": 5
+//   "rating": 5,
+//   "spamId": 1
 // }
+
+// TODO: At the moment, a user can only rate a spam once.
+// Find a way to allow users to rate spams more than once?
+// Do they update their original rating? So that it doesn't add more records and mess with the average.
 
 export default router
