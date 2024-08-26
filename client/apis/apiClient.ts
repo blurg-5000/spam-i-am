@@ -1,11 +1,5 @@
 import request from 'superagent'
-import {
-  AvgRatingDetails,
-  AvgRating,
-  Rating,
-  QuizQuestions,
-  SpamData,
-} from '../../models/spam'
+import { Rating, QuizQuestions, SpamData, QuizResult } from '../../models/spam'
 
 const rootUrl = '/api/v1'
 

@@ -1,3 +1,4 @@
+// --SPAM DATA--
 export interface Spam {
   name: string
   image: string
@@ -9,6 +10,7 @@ export interface SpamData extends Spam {
   id: number
 }
 
+// --RATINGS--
 export interface Rating {
   id: number
   user_id: number
@@ -24,6 +26,7 @@ export interface AvgRatingDetails {
   average_rating: number
 }
 
+// --QUIZ--
 export interface QuizAnswers {
   a1: null | string
   a2: null | string
@@ -35,10 +38,10 @@ export interface QuizAnswers {
 export interface QuizQuestions {
   id: number
   question: string
-  options: Option[]
+  options: QuizOption[]
 }
 
-export interface Option {
+export interface QuizOption {
   image: string
   text: string
   category: string
@@ -52,6 +55,7 @@ export interface QuizResult {
   info: string
 }
 
+// --ABOUT PAGE--
 export interface AboutText {
   id: number
   title: string
