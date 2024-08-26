@@ -51,3 +51,16 @@ export interface QuizResult {
   image: string
   info: string
 }
+
+export interface AboutText {
+  id: number
+  title: string
+  body: string
+}
+
+export interface AboutImages {
+  id: number
+  link: string
+  alt: string
+  caption: string
+}
