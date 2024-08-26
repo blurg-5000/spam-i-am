@@ -40,12 +40,20 @@ Table results {
   info string 
 }
 
-
+Table comments {
+  id integer [primary key]
+  user_id string 
+  spam_id integer 
+  comment_text string 
+  created_date integer 
+}
 
 Ref: ratings.user_id > users.auth0_id
 
-Ref: ratings.spam_id < spam.id
+Ref: ratings.spam_id > spam.id
 
-Ref: options.question_id < questions.id
+Ref: options.question_id > questions.id
 
+Ref: spam.id < comments.spam_id
 
+Ref: users.auth0_id < comments.user_id
