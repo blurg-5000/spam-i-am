@@ -91,3 +91,11 @@ export async function getQuizResultByCategory(
 ) {
   return db('results').where({ category }).first()
 }
+
+export function getAllAboutText(db = connection) {
+  return db('about_text').select()
+}
+
+export function getAllAboutImages(db = connection) {
+  return db('about_images').select()
+}
