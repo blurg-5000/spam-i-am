@@ -1,4 +1,3 @@
-import { Button } from '@mui/material'
 import { QuizAnswers } from '../../../models/spam'
 import calculateQuiz from '../../utils/calculateQuiz'
 
