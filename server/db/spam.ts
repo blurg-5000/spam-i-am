@@ -1,6 +1,7 @@
 import connection from './connection.ts'
 import { Rating, Spam } from '../../models/spam.ts'
 
+// SPAM
 export async function getAllSpams(db = connection): Promise<Spam[]> {
   return db('spam').select()
 }
@@ -21,6 +22,7 @@ export async function updateSpam(id: number, spam: Spam, db = connection) {
   return db('spam').where({ id }).update(spam)
 }
 
+// RATINGS
 export async function getAllRatings(db = connection): Promise<Rating[]> {
   return db('ratings').select()
 }
@@ -46,6 +48,7 @@ export async function addRating(
   })
 }
 
+// QUIZ
 export async function getAllQuestionsAndOptions(db = connection) {
   try {
     const result = await db('questions')
@@ -91,3 +94,16 @@ export async function getQuizResultByCategory(
 ) {
   return db('results').where({ category }).first()
 }
+
+// COMMENTS
+
+// TODO: Get All Comments by SpamId
+export async function getCommentsBySpamId(spamId: number, db = connection) {
+  return db('comments').where({ spam_id: spamId })
+}
+
+// TODO: Add Comment
+
+// TODO: Update Comment
+
+// TODO: Delete Comment
