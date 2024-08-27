@@ -31,7 +31,7 @@ function Snake() {
       if (head) {
         const next = nextPosition() // nextPosition also checks if the snake will go out of bounds
         const [_noggin, ...tail] = snake
-        if ([...tail, ...obstacles].includes(next)) {
+        if (next != null && [...tail, ...obstacles].includes(next)) {
           // check if snake crashes into obstacle or itself, but can't crash into it's own head
           setGameState('dead')
         } else if (next && food === next) {
