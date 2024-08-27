@@ -51,3 +51,14 @@ export interface QuizResult {
   image: string
   info: string
 }
+
+export interface Comment {
+  user_id: string
+  spam_id: number
+  comment_text: string
+}
+
+export interface CommentData extends Comment {
+  id: number
+  created_date: number
+}

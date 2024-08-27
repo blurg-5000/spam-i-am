@@ -100,12 +100,7 @@ function Snake() {
       {gameState === 'dead' && (
         <>
           <h1>You died!</h1>
-          <Button>
-              <button onClick={() => resetGame()}>
-              Play again
-              </button>
-            </Button> 
-
+          <Button onClick={() => resetGame()}>Play again</Button>
         </>
       )}
       {gameState === 'alive' && (

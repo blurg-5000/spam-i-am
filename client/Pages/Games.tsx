@@ -15,9 +15,7 @@ function Games() {
         <h1>Choose a game!</h1>
         <nav>
           {games.map((game) => (
-            <Button key={game} onClick={() => setActiveGame(game)}>
-              <button onClick={() => setActiveGame(game)}>{game}</button>
-            </Button>
+            <Button onClick={() => setActiveGame(game)}>{game}</Button>
           ))}
         </nav>
 

@@ -1,11 +1,10 @@
-
 export async function up(knex) {
   return knex.schema.createTable('ratings', (table) => {
     table.increments('id').primary()
-    table.integer('user_id').references('users.id').onDelete('CASCADE')
+    table.string('user_id').references('users.auth0_id').onDelete('CASCADE')
     table.integer('spam_id').references('spam.id').onDelete('CASCADE')
     table.integer('rating')
-    // Each user can only rate spam once: 
+    // Each user can only rate spam once:
     // table.unique(['user_id', 'spam_id'])
   })
 }

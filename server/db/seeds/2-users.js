@@ -4,8 +4,25 @@ export async function seed(knex) {
 
   // Inserts seed entries
   await knex('users').insert([
-    {id: 1, user_name: 'Roger'},
-    {id: 2, user_name: 'Coolio'},
-    {id: 3, user_name: 'Stacy'}
-  ]);
+    {
+      auth0_id: 'auth0|xxx123',
+      user_name: 'Roger',
+      email: 'roger@example.org',
+    },
+    {
+      auth0_id: 'auth0|xxx456',
+      user_name: 'Coolio',
+      email: 'coolio@example.org',
+    },
+    {
+      auth0_id: 'auth0|xxx789',
+      user_name: 'Stacy',
+      email: 'stacy@example.org',
+    },
+    {
+      auth0_id: 'auth0|66cbc884e7c0bdb35a8b976a', // A "real" auth0_id for testing purposes if needed:
+      user_name: 'fake-user',
+      email: 'fake-user@example.org',
+    },
+  ])
 }

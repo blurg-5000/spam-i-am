@@ -1,5 +1,5 @@
 function CommentDetails() {
-  return <p> this is the commet details</p>
+  return <p> this is the comment details</p>
 }
 
 export default CommentDetails
