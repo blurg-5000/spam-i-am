@@ -1,8 +1,15 @@
 import request from 'superagent'
-import { Rating, QuizQuestions, SpamData, QuizResult } from '../../models/spam'
+import {
+  Rating,
+  QuizQuestions,
+  SpamData,
+  QuizResult,
+  CommentData,
+} from '../../models/spam'
 
 const rootUrl = '/api/v1'
 
+// SPAMS
 export function getAllSpams(): Promise<SpamData[]> {
   return request.get(`${rootUrl}/spams`).then((res) => {
     return res.body.spams as SpamData[]
@@ -15,6 +22,7 @@ export function getSpamById(id: number): Promise<SpamData> {
   })
 }
 
+// RATINGS
 export function getAllRatings() {
   return request.get(`${rootUrl}/ratings`).then((res) => {
     return res.body as Rating[]
@@ -36,6 +44,7 @@ export function addRating(spamId: number, rating: number, userId: number) {
     })
 }
 
+// QUIZ
 export function getAllQuestions() {
   return request.get(`${rootUrl}/quiz`).then((res) => {
     return res.body as QuizQuestions[]
@@ -45,5 +54,12 @@ export function getAllQuestions() {
 export function getQuizResult(category: string) {
   return request.get(`${rootUrl}/quiz/${category}`).then((res) => {
     return res.body as QuizResult
+  })
+}
+
+// COMMENTS
+export function getAllCommentsBySpamId(spamId: number) {
+  return request.get(`${rootUrl}/comments/${spamId}`).then((res) => {
+    return res.body.comments as CommentData[]
   })
 }
