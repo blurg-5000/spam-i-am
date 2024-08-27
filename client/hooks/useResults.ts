@@ -8,6 +8,5 @@ export function useResults(category: string) {
   })
   return {
     ...query,
-    // Extra queries go here
   }
 }

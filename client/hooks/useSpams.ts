@@ -10,7 +10,6 @@ export function useSpams() {
   const query = useQuery({ queryKey: ['spams'], queryFn: getAllSpams })
   return {
     ...query,
-    // Extra queries go here
   }
 }
 
@@ -27,8 +26,3 @@ export function useSpamsMutation<TData = unknown, TVariables = unknown>(
 
   return mutation
 }
-
-// Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return useFruitsMutation(addFruit)
-} */

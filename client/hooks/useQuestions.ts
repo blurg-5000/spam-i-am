@@ -8,6 +8,5 @@ export function useQuestions() {
   })
   return {
     ...query,
-    // Extra queries go here
   }
 }

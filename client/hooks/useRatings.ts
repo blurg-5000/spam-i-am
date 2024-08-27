@@ -8,7 +8,6 @@ export function useGetAllRatings() {
   })
   return {
     ...query,
-    // Extra queries go here
   }
 }
 
@@ -19,7 +18,6 @@ export function useAvgRatingById(id: number) {
   })
   return {
     ...query,
-    // Extra queries go here
   }
 }
 
