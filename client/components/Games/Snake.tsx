@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useEffect, useRef, useState } from 'react'
-import getRandomNumber from '../../utils/getRandomNumber'
+import { randomCoords, nextPosition } from '../../utils/snakeUtils'
 import Button from '../UI/Button'
 
 function Snake() {
@@ -12,12 +12,12 @@ function Snake() {
   const nums = new Array(gridSize).fill(0).map((_, i) => i) // used to generate the table programatically
 
   const tableRef = useRef<HTMLInputElement>(null) // used in auto focusing on the table
-  const initialCoords = useRef(randomCoords(numOfObstacles + 1))
+  const initialCoords = useRef(randomCoords(gridSize, numOfObstacles + 1))
   const [initialPosition, ...obstacles] = initialCoords.current
 
   const [head, setHead] = useState(initialPosition) // where the snake's head is. Movement in the grid is based on this
   const [snake, setSnake] = useState([initialPosition]) // every segment of the snake
-  const [food, setFood] = useState(randomCoords(1, [...snake, ...obstacles])[0])
+  const [food, setFood] = useState(randomCoords(gridSize, 1, [...snake, ...obstacles])[0])
   const [score, setScore] = useState(0)
   const [direction, setDirection] = useState('none')
   const [gameState, setGameState] = useState('alive')
@@ -29,7 +29,7 @@ function Snake() {
 
     const intervalId = setInterval(() => {
       if (head) {
-        const next = nextPosition() // nextPosition also checks if the snake will go out of bounds
+        const next = nextPosition(head, direction, gridSize, setGameState) // nextPosition also checks if the snake will go out of bounds
         const [_noggin, ...tail] = snake
         if (next != null && [...tail, ...obstacles].includes(next)) {
           // check if snake crashes into obstacle or itself, but can't crash into it's own head
@@ -38,7 +38,7 @@ function Snake() {
           //snake gets longer if it eats food (expands into new square, and doesn't short the tail)
           setHead(next)
           setSnake([next, ...snake])
-          setFood(randomCoords(1, [...snake, ...obstacles])[0])
+          setFood(randomCoords(gridSize, 1, [...snake, ...obstacles])[0])
           setScore(score + 1)
         } else if (next) {
           // doesn't collide with anything, moves into new square and removes last quare of tail
@@ -48,62 +48,13 @@ function Snake() {
       }
     }, speed) //snake speed
 
-    function nextPosition(): string | null {
-      const headRow = Number(head[0])
-      const headCol = Number(head[1])
-      let nextRow = headRow
-      let nextCol = headCol
-
-      switch (direction) {
-        case 'up':
-          if (headRow === 0) {
-            setGameState('dead')
-          } else nextRow--
-          break
-        case 'down':
-          if (headRow === gridSize - 1) {
-            setGameState('dead')
-          } else nextRow++
-          break
-        case 'left':
-          if (headCol === 0) {
-            setGameState('dead')
-          } else nextCol--
-          break
-        case 'right':
-          if (headCol === gridSize - 1) {
-            setGameState('dead')
-          } else nextCol++
-          break
-        default:
-          return null
-      }
-      return `${nextRow}${nextCol}`
-    }
-
     // Clean up the interval on component unmount
     return () => {
       clearInterval(intervalId)
     }
   }, [head, direction, snake, obstacles, food, score])
 
-  function randomCoords(num: number, toBeOmitted: string[] = []): string[] {
-    const coords: string[] = []
-    const omit = [...toBeOmitted]
-
-    for (let i = 0; i < num; i++) {
-      const currentCoord = createCoord()
-      coords.push(currentCoord)
-      omit.push(currentCoord)
-    }
-
-    function createCoord(): string {
-      const currentCoord = `${getRandomNumber(0, gridSize - 1)}${getRandomNumber(0, gridSize - 1)}`
-      return omit.includes(currentCoord) ? createCoord() : currentCoord
-    }
-    return coords
-  }
-
+  
   function handleKeyDown(e: React.KeyboardEvent<HTMLTableElement>): void {
     if (
       ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)
@@ -134,10 +85,10 @@ function Snake() {
   }
 
   function resetGame(): void {
-    initialCoords.current = randomCoords(numOfObstacles + 1)
+    initialCoords.current = randomCoords(gridSize, numOfObstacles + 1)
     setHead(initialPosition)
     setSnake([initialPosition])
-    setFood(randomCoords(1, [...snake, ...obstacles])[0])
+    setFood(randomCoords(gridSize, 1, [...snake, ...obstacles])[0])
     setScore(0)
     setDirection('none')
     setGameState('alive')
