@@ -24,7 +24,7 @@ router.get('/:spamId', async (req, res) => {
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
   const { spamId, comment } = req.body
   const userId = req.auth?.sub // this is coming from the header we set in the apiClient
-  console.log('userId route', userId)
+  console.log({ spamId, comment }, 'userId route', userId)
 
   if (!userId) {
     console.error('No auth0Id')
@@ -32,7 +32,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
   try {
     const newComment = await db.createComment(Number(spamId), comment, userId)
-    res.status(201).json({ newComment })
+    res.status(201).json(newComment[0])
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Oops could not create comment' })

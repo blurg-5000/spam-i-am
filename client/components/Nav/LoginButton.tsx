@@ -5,15 +5,11 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 function LoginButton() {
   // TODO: call the useAuth0 hook and destructure user, logout, and loginWithRedirect
-  const { user, logout, loginWithRedirect, getAccessTokenSilently } = useAuth0()
+  const { user, logout, loginWithRedirect } = useAuth0()
   // TODO: replace placeholder user object with the one from auth0
   // const user = {
   //   nickname: 'john.doe',
   // }
-  const token = getAccessTokenSilently()
-  console.log('token', token)
-
-  // console.log(user)
 
   const handleSignOut = () => {
     console.log('sign out')

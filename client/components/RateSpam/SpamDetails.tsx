@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import ErrorPage from '../../Pages/ErrorPage'
 import RatingAvg from './RatingAvg'
 import ListComments from './ListComments'
+import AddComment from './AddComment'
 
 function SpamDetails() {
   const { id } = useParams()
@@ -35,6 +36,7 @@ function SpamDetails() {
           </div>
           <RatingAvg spamId={data.id} />
           <ListComments />
+          <AddComment />
         </section>
       </div>
     )

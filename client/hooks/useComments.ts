@@ -1,12 +1,25 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllCommentsBySpamId } from '../apis/apiClient'
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
+import { getAllCommentsBySpamId, addComment } from '../apis/apiClient'
 
 export function useCommentsById(id: number) {
   const query = useQuery({
-    queryKey: ['comments', id],
+    queryKey: ['comments'],
     queryFn: () => getAllCommentsBySpamId(id),
   })
   return {
     ...query,
   }
+}
+
+export function useAddComment() {
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: addComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments'] })
+    },
+  })
+
+  return mutation
 }

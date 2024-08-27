@@ -11,7 +11,7 @@ function ListComments() {
       {/* <p>A list of comments for this SPAM flavour</p> */}
       <ul>
         {data?.map((comment) => (
-          <>
+          <div key={comment.id}>
             <li>{comment.comment_text}</li>
             <li>
               {/* Created on: */}
@@ -20,7 +20,7 @@ function ListComments() {
             {/* By:  */}
             <li>{comment.user_id}</li>
             <br></br>
-          </>
+          </div>
         ))}
       </ul>
     </>
