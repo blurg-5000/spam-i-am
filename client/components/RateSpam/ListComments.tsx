@@ -1,8 +1,11 @@
+import { useParams } from 'react-router-dom'
 import { useCommentsById } from '../../hooks/useComments'
 
 function ListComments() {
   // TODO: call a custom hook (that uses useQuery) to get all comments for this specific spam.
-  const { data } = useCommentsById(2)
+  // TODO: useParams to get the unique spamId
+  const { id } = useParams()
+  const { data } = useCommentsById(Number(id))
   return (
     <>
       {/* <p>A list of comments for this SPAM flavour</p> */}
@@ -16,6 +19,7 @@ function ListComments() {
             </li>
             {/* By:  */}
             <li>{comment.user_id}</li>
+            <br></br>
           </>
         ))}
       </ul>
