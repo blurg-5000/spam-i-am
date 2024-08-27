@@ -1,6 +1,7 @@
 import connection from './connection.ts'
 import { Rating, Spam } from '../../models/spam.ts'
 
+// SPAMS
 export async function getAllSpams(db = connection): Promise<Spam[]> {
   return db('spam').select()
 }
@@ -21,6 +22,9 @@ export async function updateSpam(id: number, spam: Spam, db = connection) {
   return db('spam').where({ id }).update(spam)
 }
 
+// -------------------------------------
+
+// RATINGS
 export async function getAllRatings(db = connection): Promise<Rating[]> {
   return db('ratings').select()
 }
@@ -38,7 +42,6 @@ export async function addRating(
   userId: number,
   db = connection,
 ) {
-  // return db('ratings').insert({ 'spam_id': spamId, rating, 'user_id': userId })
   return db('ratings').insert({
     user_id: userId,
     spam_id: spamId,
@@ -46,6 +49,9 @@ export async function addRating(
   })
 }
 
+// -------------------------------------
+
+// QUIZ
 export async function getAllQuestionsAndOptions(db = connection) {
   // TODO: Make a db query to get data arranged in this structure:
   // [
@@ -85,3 +91,34 @@ export async function getQuizResultByCategory(
 ) {
   // TODO: return db results by category
 }
+
+// -------------------------------------
+
+// COMMENTS
+
+// TODO: Get All Comments by SpamId
+export async function getCommentsBySpamId(spamId: number, db = connection) {
+  return db('comments').where({ spam_id: spamId })
+}
+
+// TODO: Create a Comment:
+
+export async function createComment(
+  spamId: number,
+  comment: string,
+  userId: string,
+  db = connection,
+) {
+  return db('comments')
+    .insert({
+      user_id: userId,
+      spam_id: spamId,
+      comment_text: comment,
+      created_date: Date.now(),
+    })
+    .returning('*')
+}
+
+// TODO: Update Comment
+
+// TODO: Delete Comment
