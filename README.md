@@ -83,8 +83,9 @@ Suppose, you've created a new user called hello@example.com and the password is 
 | audience      | https://spam/api                                |
 | grant_type    | password                                        |
 | client_id     | Wq4NM9ebbHVPGT6KHd3nq5EVeWwWHT5c                |
-| username      | the email of the user (e.g `hello@example.com`) |
-| password      | and the password for that user (e.g `abc_123`)  |
+| client_secret | qVm4XnE1vIwHrmYLhjnNc1ujQb-YNa1XDd4WuxfMtJAyN9uftsIge3eVYoNDA_dK |
+| username      | username for that user (e.g. `fake-user@example.org`) |
+| password      | and the password for that user (e.g `fakeUser5000!`)  |
 
 **NOTE**: access tokens expire after 24 hours, and you will need to generate a new token by using the same endpoint with the values from above.
 It's a good idea to keep the HTTP request in Thunderclient because you'll need it for later.
