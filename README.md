@@ -13,7 +13,7 @@ Welcome to the wonderful world of SPAM! This spam-packed multidays project is de
 ### External documentation 
 
 - [Figma wireframes](https://www.figma.com/design/vuRQXZ9V8QIMZPrJ3oKrpf/SPAM?node-id=0-1)
-- [ERD Diagram](https://github.com/dev-academy-challenges/spam-i-am/blob/main/resources/ERD-diagram.png) 
+- [ERD Diagram](./resources/ERD-diagram.png) 
 
 ---
 
@@ -22,13 +22,28 @@ Welcome to the wonderful world of SPAM! This spam-packed multidays project is de
 Assign roles 
 <details>
 
-  - Git Lead (at least two people sharing this role)
-  - Vibes Lead
-  - Scrum master (will organise and lead a standup on Friday, and the retro at the end of Friday)
-  - Frontend Lead (can help to make overarching decisions on the FE)
-  - Backend Lead (can help to make overarching decisions on the BE)
+#### 2x Git Leads 
+- Have a pair as Git Leads. These leads will review and approve any merges to main.
+- Perhaps use that template that Logan shared last week?
+- Top tip, all devs should pull changes from main into their own local branch and deal with any merge conflicts BEFORE they make a Pull        Request, this will make the whole process smoother. Make sure you commit and push any existing changes in your local branch up to          Github, BEFORE you pull from main into your local branch.
+- All other devs need to communicate with the gitleads pair if they have made a pull request.
+- Once a pull request has been merged, ring the bell to celebrate! And also to inform the rest of the team to pull any changes from main     into their branch. 
 
-For any Product Owner decisions, please speak to a facilitator and consult the Figma wireframes. 
+#### 2x Vibes Leads
+- Play some sweet tunes
+- Make sure folks take regular breaks, drink water, eat snacks
+- Come up with a plan for communal lunch?
+- If there are any stresses or conflicts of opinion, listen to folks, and try to figure out a solution together - get support from facilitators if needed. 
+
+#### 4x Presentation Folks (2 pairs) 
+
+- This group will organise the presentation, which will be a  slightly different format to your FGP presentations.
+- 1 person per topic, each person responsible for getting info from the rest of the group about their topic, and summarising it for the presentation.
+- Person 1: Intro and Demo the App
+- Person 2: Go through Project Board and recognise the work everyone did.
+- Person 3: Roles - who did what and how
+- Person 4: Talk about Challenges and Learnings
+- Tip - have some basic slides for talking points, and maybe some screenshots/photos if applicable
     
 </details>
 
@@ -58,10 +73,10 @@ How to contribute to this project
   <p>The main branch will be protected, which means you can't just push to main! Here's what we recommend for your workflow:</p>
   
   - Make changes to your own branch, and commit and push to Github 
-  - Commit frequently 
-  - When you've finished your ticket and are ready to merge your branch into main, ensure all your latest changes are pushed up to Github and raise a pull request. Go and ask a Git Lead to take a look at your PR and help you merge it into main. We strongly recommend you all sit down together to do this.
+  - Commit frequently, and write [good quality commit messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) 
+  - When you've finished your ticket and are ready to merge your branch into main, ensure all your latest changes are pushed up to Github and raise a pull request. Go and ask the Git Leads to take a look at your PR and merge it into main. If there are merge conflicts to resolve, it may be helpful to sit down with the Git Leads and mob code the merge. 
   - Remember to close the issue associated with your ticket, and drag your ticket to 'Done' on the project board!
-  - Let everyone know they need to pull from main in their branches after they finish saving and committing their own work. 
+  - Once the ticket is merged, the Git Leads should ring the bell and let everyone know to pull from main into their branches.  
 </details>
 
 ---
