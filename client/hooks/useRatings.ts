@@ -19,7 +19,6 @@ export function useAvgRatingById(id: number) {
   })
   return {
     ...query,
-    // Extra queries go here
   }
 }
 
@@ -30,7 +29,7 @@ export function useRatingMutation(
 ) {
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: () => addRating(spamId, rating, userId),
+    mutationFn: () => addRating({ spamId, rating, userId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['spams'] })
     },
