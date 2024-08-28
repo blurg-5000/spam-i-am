@@ -72,7 +72,6 @@ How to contribute to this project
 
 Suppose, you've created a new user called hello@example.com and the password is abc_123 and you want to generate an access token for this user so that you can test your server-side routes.
 
-- In Auth0, under **Settings**, scroll down to **API Authorization Settings**, and set **Default Directory** to `Username-Password-Authentication`. If you don't have access to Auth0, ask one of the facilitators to confirm that the value is set.
 - Open Thunderclient and fill in the following information:
 
 - URL: **POST** `https://spam-matai-2024.au.auth0.com/oauth/token`
