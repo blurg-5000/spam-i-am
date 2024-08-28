@@ -50,7 +50,7 @@ export default function SnakeGameBoard({
           setFood(randomCoords(gridSize, 1, [...snake, ...obstacles])[0])
           setScore(score + 1)
         } else if (next) {
-          // doesn't collide with anything, moves into new square and removes last quare of tail
+          // doesn't collide with anything, moves into new square and removes last square of tail
           setHead(next)
           setSnake([next, ...snake.slice(0, snake.length - 1)])
         }
