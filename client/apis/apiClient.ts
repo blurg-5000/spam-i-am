@@ -5,6 +5,7 @@ import {
   SpamData,
   QuizResult,
   CommentData,
+  AddComment,
 } from '../../models/spam'
 
 const rootUrl = '/api/v1'
@@ -64,11 +65,13 @@ export function getAllCommentsBySpamId(spamId: number) {
   })
 }
 
-export function addComment(newComment, token): Promise<CommentData> {
+export function addComment(commentObj: AddComment): Promise<CommentData> {
+  const { comment, spamId, token } = commentObj
+
   return request
     .post(`${rootUrl}/comments/`)
     .set('Authorization', `Bearer ${token}`)
-    .send(newComment)
+    .send({ comment: comment, spamId: spamId })
     .then((res) => res.body)
     .catch(logError)
 }

@@ -62,3 +62,9 @@ export interface CommentData extends Comment {
   id: number
   created_date: number
 }
+
+export interface AddComment {
+  spamId: number
+  comment: string
+  token: string
+}
