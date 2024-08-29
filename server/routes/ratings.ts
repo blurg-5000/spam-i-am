@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as db from '../db/spam.ts'
+import checkJwt, { JwtRequest } from '../auth0.ts'
 
 const router = Router()
 
@@ -43,6 +44,26 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Oops no spam' })
+  }
+})
+
+// Add a rating for authorized users
+// POST /api/v1/spams/ratings/
+router.post('/', checkJwt, async (req: JwtRequest, res) => {
+  const { spamId, rating } = req.body
+  const userId = req.auth?.sub
+  console.log('userId route', userId)
+
+  if (!userId) {
+    console.error('No auth0Id')
+    return res.status(401).send('Unauthorized')
+  }
+  try {
+    const newRating = await db.rateSpam(rating, userId, Number(spamId))
+    res.status(200).json({ newRating })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Oops could not create rating' })
   }
 })
 
