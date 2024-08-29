@@ -1,7 +1,5 @@
 // TODO: Create custom hook for querying the comments by spamId
 
-// TODO: Create custom hook for adding a new comment
-
 import {
   useQuery,
   useMutation,
@@ -9,3 +7,15 @@ import {
   MutationFunction,
 } from '@tanstack/react-query'
 import { fetchCommentsBySpamId } from '../apis/apiClient'
+
+export function useFetchCommentsBySpamId(spamId: number) {
+  const query = useQuery({
+    queryKey: ['comments', spamId],
+    queryFn: () => fetchCommentsBySpamId(spamId),
+  })
+  return {
+    ...query,
+  }
+}
+
+// TODO: Create custom hook for adding a new comment
