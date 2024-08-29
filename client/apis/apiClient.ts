@@ -95,7 +95,7 @@ function logError(err: Error) {
 }
 
 // TODO: Create a fetchCommentsBySpamId function.
-function fetchCommentsBySpamId(spamId: number): Promise<Comment[]> {
+export function fetchCommentsBySpamId(spamId: number): Promise<Comment[]> {
   return request.get(`${rootUrl}/spams/${spamId}`).then((res) => {
     return res.body as Comment[]
   })
