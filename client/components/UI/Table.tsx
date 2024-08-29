@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 interface Props {
   selectedCell: null | number
   image: string
@@ -15,7 +17,7 @@ function Table({ selectedCell, image, whackThatSpam }: Props) {
         : '',
     ),
   )
-
+console.log({selectedCell})
   return (
     <table
       style={{
@@ -42,8 +44,9 @@ function Table({ selectedCell, image, whackThatSpam }: Props) {
               >
                 {cell == image ? (
                   <img
+                    draggable={false}
                     src={`${image}`}
-                    alt={'picture of a spam'}
+                    alt={'a can of spam'}
                     onClick={whackThatSpam}
                     role="button"
                   />
