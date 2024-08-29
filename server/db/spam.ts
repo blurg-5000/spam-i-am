@@ -49,16 +49,14 @@ export async function addRating(
   })
 }
 
-export async function rateSpam(
-  rating: Rating,
-  auth0_id: string,
-  spamId: number,
-) {
+export async function rateSpam(rating: number, userId: string, spamId: number) {
   return connection('ratings')
-    .join('users', 'users.auth0_id', 'ratings.user_id')
-    .where('users.auth0_id', auth0_id)
-    .where('spam_id', spamId)
-    .insert(rating)
+    .join('users', 'ratings.id', 'users.auth0_id')
+    .insert({
+      user_id: userId,
+      spam_id: spamId,
+      rating: rating,
+    })
 }
 
 // -------------------------------------
