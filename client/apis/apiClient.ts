@@ -56,10 +56,9 @@ export function addRating({
 
 // QUIZ
 
-export function getAllQuestions() {
-  return request.get(`${rootUrl}/quiz`).then((res) => {
-    return res.body as QuizQuestions[]
-  })
+export async function getAllQuestions() {
+  const res = await request.get(`${rootUrl}/quiz`)
+  return res.body as QuizQuestions[]
 }
 
 export function getQuizResult(category: string) {

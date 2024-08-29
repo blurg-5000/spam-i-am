@@ -1,12 +1,12 @@
 import { QuizAnswers } from '../../../models/spam'
-
+import calculateQuiz from '../../utils/calculateQuiz'
 interface Props {
   answers: QuizAnswers
 }
 
 function ResultPage({ answers }: Props) {
   // TODO: Find and use some middleware from the 'utils' folder which will help you calculate the user's quiz result
-
+  //calculateQuiz()
   // TODO: Replace hardcoded data with real results data from backend API endpoint
   const result = {
     id: 1,
