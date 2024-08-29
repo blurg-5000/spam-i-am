@@ -28,11 +28,14 @@ function ListComments(props: Props) {
         <h4>Comments</h4>
         <ul>
           {data.map((commentSpamObj) => (
-            <li key={commentSpamObj.id}>{commentSpamObj.comment_text}</li>
+            <div key={commentSpamObj.id}>
+              <li>{commentSpamObj.comment_text}</li>
+              <li>
+                {new Date(commentSpamObj.created_date).toLocaleDateString()}
+              </li>
+              <br></br>
+            </div>
           ))}
-
-          <li>{/* Created on: */}</li>
-          <br></br>
         </ul>
       </>
     )
