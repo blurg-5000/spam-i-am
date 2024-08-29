@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { QuizAnswers, QuizQuestions } from '../../models/spam'
 import QuizStartPage from '../components/Quiz/QuizStartPage'
 import QuizBody from '../components/Quiz/QuizBody'
+import { useQuery } from '@tanstack/react-query'
+import { getAllQuestions } from '../apis/apiClient'
 
 function Quiz() {
   const [start, setStart] = useState(true)
@@ -15,140 +17,147 @@ function Quiz() {
   })
 
   // TODO: Replace hardcoded data with real data from the backend API endpoint
-  const data = [
-    {
-      id: 1,
-      question: 'Question 1',
-      options: [
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 1',
-          category: 'a',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 2',
-          category: 'b',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 3',
-          category: 'd',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 4',
-          category: 'c',
-        },
-      ],
-    },
-    {
-      id: 2,
-      question: 'Question 2',
-      options: [
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 1',
-          category: 'a',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 2',
-          category: 'b',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 3',
-          category: 'd',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 4',
-          category: 'c',
-        },
-      ],
-    },
-    {
-      id: 3,
-      question: 'Question 3',
-      options: [
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 1',
-          category: 'a',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 2',
-          category: 'b',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 3',
-          category: 'd',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 4',
-          category: 'c',
-        },
-      ],
-    },
-    {
-      id: 4,
-      question: 'Question 4',
-      options: [
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 1',
-          category: 'a',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 2',
-          category: 'b',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 3',
-          category: 'd',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 4',
-          category: 'c',
-        },
-      ],
-    },
-    {
-      id: 5,
-      question: 'Question 5',
-      options: [
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 1',
-          category: 'a',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 2',
-          category: 'b',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 3',
-          category: 'd',
-        },
-        {
-          image: 'https://placehold.co/300x200',
-          text: 'Option 4',
-          category: 'c',
-        },
-      ],
-    },
-  ] as QuizQuestions[]
 
-  if (data)
+  const { data } = useQuery({
+    queryKey: ['questions'],
+    queryFn: getAllQuestions,
+  })
+
+  // const data = [
+  //   {
+  //     id: 1,
+  //     question: 'Question 1',
+  //     options: [
+  //       {
+  //         image: 'full_english.jpeg',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'pancakes.webp',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'handful_chillis.avif',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     question: 'Question 2',
+  //     options: [
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     question: 'Question 3',
+  //     options: [
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 4,
+  //     question: 'Question 4',
+  //     options: [
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 5,
+  //     question: 'Question 5',
+  //     options: [
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 1',
+  //         category: 'a',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 2',
+  //         category: 'b',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 3',
+  //         category: 'd',
+  //       },
+  //       {
+  //         image: 'https://placehold.co/300x200',
+  //         text: 'Option 4',
+  //         category: 'c',
+  //       },
+  //     ],
+  //   },
+  // ] as QuizQuestions[]
+
+  if (data) {
+    console.log(data)
     return (
       <>
         {start && <QuizStartPage setStart={setStart} setQuizzes={setQuizzes} />}
@@ -161,6 +170,7 @@ function Quiz() {
         )}
       </>
     )
+  }
 }
 
 export default Quiz
