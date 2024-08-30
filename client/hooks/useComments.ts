@@ -1,5 +1,5 @@
 // TODO: Create custom hook for querying the comments by spamId
-
+import { addComment } from '../apis/apiClient'
 import {
   useQuery,
   useMutation,
@@ -19,3 +19,13 @@ export function useFetchCommentsBySpamId(spamId: number) {
 }
 
 // TODO: Create custom hook for adding a new comment
+export function useAddComment() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: addComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments'] })
+    },
+  })
+  return mutation
+}
