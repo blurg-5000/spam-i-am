@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { QuizAnswers, QuizQuestions } from '../../models/spam'
+import { QuizAnswers } from '../../models/spam'
 import QuizStartPage from '../components/Quiz/QuizStartPage'
 import QuizBody from '../components/Quiz/QuizBody'
 import { useQuery } from '@tanstack/react-query'
@@ -18,10 +18,15 @@ function Quiz() {
 
   // TODO: Replace hardcoded data with real data from the backend API endpoint
 
-  const { data } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ['questions'],
     queryFn: getAllQuestions,
   })
+
+  if (isError) {
+    console.error(error)
+    return <p>ERROR</p>
+  }
 
   if (data) {
     return (

@@ -16,9 +16,61 @@ expect.extend(matchers)
 
 describe('<Quiz>', async () => {
   //ARRANGE
-  nock('http://localhost:3000/api/v1/').get('quiz').reply(200, [])
+  nock('http://localhost:3000/api/v1')
+    .get('/quiz/')
+    .reply(200, [
+      {
+        id: 1,
+        question: 'Pick your dream breakfast!',
+        options: [
+          {
+            image: 'full_english.jpeg',
+            text: 'Half English',
+            category: 'a',
+          },
+          {
+            image: 'handful_chillis.avif',
+            text: 'A mouthful of chillis',
+            category: 'b',
+          },
+          {
+            image: 'pancakes.webp',
+            text: 'Waffles',
+            category: 'c',
+          },
+          {
+            image: 'leftover_pizza.jpg',
+            text: 'Fresh pizza',
+            category: 'd',
+          },
+        ],
+      },
+    ])
   //ACT
   renderApp('/')
-  await waitForElementToBeRemoved(() => screen.getByText('loading'))
+  await waitForElementToBeRemoved(() => screen.getByAltText('loading'))
+
+  let quiz
+
+  waitFor(() => screen.getByText('breakfast!'))
+    .then((res) => {
+      quiz = res
+      expect(quiz).toBeInTheDocument()
+    })
+    .catch((e) => console.log(e))
   //ASSERT
+  expect(quiz).toBeInTheDocument()
+})
+
+//SAD PATH
+it('should render an error messgage when thingsgo wrong', async () => {
+  //ARRANGE
+  nock('http://localhost:3000/api/v1').get('/quiz/').reply(500)
+  //ACT
+  renderApp('/')
+  await waitForElementToBeRemoved(() => screen.getByAltText('loading'))
+
+  const errMsg = screen.getByText('ERROR')
+
+  expect(errMsg).toBeInTheDocument()
 })

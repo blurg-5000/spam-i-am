@@ -1,5 +1,14 @@
 import connection from './connection.ts'
-import { Rating, Spam } from '../../models/spam.ts'
+import {
+  DBQuestion,
+  QuizOption,
+  QuizQuestions,
+  QuizResult,
+  Rating,
+  Spam,
+  CommentUserData
+} from '../../models/spam.ts'
+
 
 // SPAMS
 export async function getAllSpams(db = connection): Promise<Spam[]> {
@@ -63,36 +72,43 @@ export async function rateSpam(rating: number, userId: string, spamId: number) {
 
 // QUIZ
 export async function getAllQuestionsAndOptions(db = connection) {
-  // TODO: Make a db query to get data arranged in this structure:
-  // [
-  //   {
-  //     id: 1,
-  //     question: 'Question 1',
-  //     options: [
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 1',
-  //         category: 'a',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 2',
-  //         category: 'b',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 3',
-  //         category: 'd',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 4',
-  //         category: 'c',
-  //       },
-  //     ],
-  //   },
-  // ]
-  // Think about how you can use array methods to re-organise the data into the correct data structure, once you have retrieved it from the db.
+  const getQuestions: DBQuestion[] = await db('options')
+    .join('questions', 'options.question_id', '=', 'questions.id')
+    .select('*')
+
+  const rfcQuestions = getQuestions.map((el) => {
+    return {
+      id: el.id,
+      question: el.question,
+      options: [
+        {
+          image: el.image,
+          text: el.text,
+          category: el.category,
+        },
+      ],
+    }
+  })
+  const resArr: QuizQuestions[] = []
+  rfcQuestions.forEach((curr) => {
+    if (curr.id > resArr.length) {
+      const options: QuizOption[] = [] as QuizOption[]
+
+      rfcQuestions.forEach((ele) => {
+        if (ele.id === curr.id) {
+          options.push(ele.options[0])
+        }
+      })
+
+      resArr[resArr.length] = {
+        id: curr.id,
+        question: curr.question,
+        options: options,
+      }
+    }
+  })
+
+  return resArr
 }
 
 export async function getQuizResultByCategory(
@@ -100,6 +116,9 @@ export async function getQuizResultByCategory(
   db = connection,
 ) {
   // TODO: return db results by category
+  const getQuestionsById = await db('results').select('*').where({ category })
+
+  return getQuestionsById
 }
 
 // -------------------------------------
@@ -108,7 +127,26 @@ export async function getQuizResultByCategory(
 
 // TODO: Get All Comments by SpamId
 export async function getCommentsBySpamId(spamId: number, db = connection) {
-  return db('comments').where({ spam_id: spamId })
+  return db('comments').where({ spam_id: spamId }).select()
+}
+
+// TODO: Ticket 8 Stretch
+export async function getCommentsUsersBySpamId(
+  spamId: number,
+  db = connection,
+): Promise<CommentUserData[]> {
+  return (await db('comments')
+    .join('users', 'comments.user_id', 'users.auth0_id')
+    .where('comments.spam_id', spamId)
+    .select(
+      'comments.id as id',
+      'comments.created_date as created_date',
+      'comments.user_id as user_id',
+      'comments.spam_id as spam_id',
+      'comments.comment_text as comment_text',
+      'users.user_name as userName',
+      'users.email as email',
+    )) as CommentUserData[]
 }
 
 // TODO: Create a Comment:

@@ -55,6 +55,15 @@ export interface QuizResult {
   info: string
 }
 
+export interface DBQuestion {
+  id: number
+  question_id: number
+  image: string
+  text: string
+  category: string
+  question: string
+}
+
 // --ABOUT PAGE--
 export interface AboutText {
   id: number
@@ -78,6 +87,11 @@ export interface Comment {
 export interface CommentData extends Comment {
   id: number
   created_date: number
+}
+
+export interface CommentUserData extends CommentData {
+  userName: string
+  email: string
 }
 
 export interface AddComment {
