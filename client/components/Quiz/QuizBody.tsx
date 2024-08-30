@@ -12,8 +12,6 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   const [counter, setCounter] = useState(0)
   const [showResult, setShowResult] = useState(false)
 
-  console.log('question', questions[0].options[0])
-
   function handleAnswerChange(option: QuizOption) {
     // we want to record the category the answer is associated with,
     // so that we can determine the correct personality type for the user (i.e. mostly a's, mostly b's)

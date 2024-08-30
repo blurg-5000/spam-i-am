@@ -63,9 +63,9 @@ export async function getAllQuestions() {
   return res.body as QuizQuestions[]
 }
 
-export function getQuizResult(category: string) {
-  return request.get(`${rootUrl}/quiz/${category}`).then((res) => {
-    return res.body as QuizResult
+export async function getQuizResult(category: string) {
+  return await request.get(`${rootUrl}/quiz/${category}`).then((res) => {
+    return res.body as QuizResult[]
   })
 }
 
