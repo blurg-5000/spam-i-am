@@ -28,9 +28,9 @@ export default {
     seeds: {
       directory: Path.join(__dirname, 'seeds'),
     },
-    pool: {
-      afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb),
-    },
+    // pool: {
+    //   afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb),
+    // },
   },
 
   production: {
