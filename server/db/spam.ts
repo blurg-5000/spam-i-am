@@ -1,5 +1,12 @@
 import connection from './connection.ts'
-import { Rating, Spam } from '../../models/spam.ts'
+import {
+  DBQuestion,
+  QuizOption,
+  QuizQuestions,
+  QuizResult,
+  Rating,
+  Spam,
+} from '../../models/spam.ts'
 
 // SPAMS
 export async function getAllSpams(db = connection): Promise<Spam[]> {
@@ -53,36 +60,43 @@ export async function addRating(
 
 // QUIZ
 export async function getAllQuestionsAndOptions(db = connection) {
-  // TODO: Make a db query to get data arranged in this structure:
-  // [
-  //   {
-  //     id: 1,
-  //     question: 'Question 1',
-  //     options: [
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 1',
-  //         category: 'a',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 2',
-  //         category: 'b',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 3',
-  //         category: 'd',
-  //       },
-  //       {
-  //         image: 'https://placehold.co/300x200',
-  //         text: 'Option 4',
-  //         category: 'c',
-  //       },
-  //     ],
-  //   },
-  // ]
-  // Think about how you can use array methods to re-organise the data into the correct data structure, once you have retrieved it from the db.
+  const getQuestions: DBQuestion[] = await db('options')
+    .join('questions', 'options.question_id', '=', 'questions.id')
+    .select('*')
+
+  const rfcQuestions = getQuestions.map((el) => {
+    return {
+      id: el.id,
+      question: el.question,
+      options: [
+        {
+          image: el.image,
+          text: el.text,
+          category: el.category,
+        },
+      ],
+    }
+  })
+  const resArr: QuizQuestions[] = []
+  rfcQuestions.forEach((curr) => {
+    if (curr.id > resArr.length) {
+      const options: QuizOption[] = [] as QuizOption[]
+
+      rfcQuestions.forEach((ele) => {
+        if (ele.id === curr.id) {
+          options.push(ele.options[0])
+        }
+      })
+
+      resArr[resArr.length] = {
+        id: curr.id,
+        question: curr.question,
+        options: options,
+      }
+    }
+  })
+
+  return resArr
 }
 
 export async function getQuizResultByCategory(
@@ -90,6 +104,9 @@ export async function getQuizResultByCategory(
   db = connection,
 ) {
   // TODO: return db results by category
+  const getQuestionsById = await db('results').select('*').where({ category })
+
+  return getQuestionsById
 }
 
 // -------------------------------------

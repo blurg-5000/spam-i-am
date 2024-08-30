@@ -1,13 +1,14 @@
 import { Router } from 'express'
-
 import * as db from '../db/spam.ts'
+import { QuizQuestions } from '../../models/spam.ts'
 
 const router = Router()
 
-// GET: /api/v1/questions/
+// GET: /api/v1/quiz/
 router.get('/', async (req, res) => {
   try {
     const questions = await db.getAllQuestionsAndOptions()
+    console.log('hi', questions)
 
     res.json(questions)
   } catch (error) {
