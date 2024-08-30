@@ -11,7 +11,7 @@ const router = Router()
 router.get('/:spamId', async (req, res) => {
   try {
     const { spamId } = req.params
-    const comments = await db.getCommentsBySpamId(Number(spamId))
+    const comments = await db.getCommentsUsersBySpamId(Number(spamId))
     res.json({ comments })
   } catch (error) {
     console.error(error)

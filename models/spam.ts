@@ -89,6 +89,11 @@ export interface CommentData extends Comment {
   created_date: number
 }
 
+export interface CommentUserData extends CommentData {
+  userName: string
+  email: string
+}
+
 export interface AddComment {
   spamId: number
   comment: string

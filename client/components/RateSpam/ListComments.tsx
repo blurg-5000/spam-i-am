@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom'
 import { useFetchCommentsBySpamId } from '../../hooks/useComments'
 
 interface Props {
@@ -22,7 +21,7 @@ function ListComments(props: Props) {
     return <p>error</p>
   }
 
-  if (data)
+  if (data) {
     return (
       <>
         <h4>Comments</h4>
@@ -31,7 +30,7 @@ function ListComments(props: Props) {
             <div key={commentSpamObj.id}>
               <li>{commentSpamObj.comment_text}</li>
               <li>
-                {new Date(commentSpamObj.created_date).toLocaleDateString()}
+                {`Created on ${new Date(commentSpamObj.created_date).toLocaleDateString()} by ${commentSpamObj.userName}`}
               </li>
               <br></br>
             </div>
@@ -39,6 +38,7 @@ function ListComments(props: Props) {
         </ul>
       </>
     )
+  }
 }
 
 export default ListComments

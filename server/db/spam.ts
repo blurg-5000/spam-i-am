@@ -6,6 +6,7 @@ import {
   QuizResult,
   Rating,
   Spam,
+  CommentUserData,
 } from '../../models/spam.ts'
 
 // SPAMS
@@ -125,7 +126,26 @@ export async function getQuizResultByCategory(
 
 // TODO: Get All Comments by SpamId
 export async function getCommentsBySpamId(spamId: number, db = connection) {
-  return db('comments').where({ spam_id: spamId })
+  return db('comments').where({ spam_id: spamId }).select()
+}
+
+// TODO: Ticket 8 Stretch
+export async function getCommentsUsersBySpamId(
+  spamId: number,
+  db = connection,
+): Promise<CommentUserData[]> {
+  return (await db('comments')
+    .join('users', 'comments.user_id', 'users.auth0_id')
+    .where('comments.spam_id', spamId)
+    .select(
+      'comments.id as id',
+      'comments.created_date as created_date',
+      'comments.user_id as user_id',
+      'comments.spam_id as spam_id',
+      'comments.comment_text as comment_text',
+      'users.user_name as userName',
+      'users.email as email',
+    )) as CommentUserData[]
 }
 
 // TODO: Create a Comment:
@@ -144,6 +164,14 @@ export async function createComment(
       created_date: Date.now(),
     })
     .returning('*')
+}
+
+export function getAllAboutText(db = connection) {
+  return db('about_text').select()
+}
+
+export function getAllAboutImages(db = connection) {
+  return db('about_images').select()
 }
 
 // TODO: Update Comment
