@@ -1,5 +1,5 @@
 import connection from './connection.ts'
-import { Rating, Spam } from '../../models/spam.ts'
+import { Rating, Spam, CommentUserData } from '../../models/spam.ts'
 
 // SPAMS
 export async function getAllSpams(db = connection): Promise<Spam[]> {
@@ -98,7 +98,26 @@ export async function getQuizResultByCategory(
 
 // TODO: Get All Comments by SpamId
 export async function getCommentsBySpamId(spamId: number, db = connection) {
-  return db('comments').where({ spam_id: spamId })
+  return db('comments').where({ spam_id: spamId }).select()
+}
+
+// TODO: Ticket 8 Stretch
+export async function getCommentsUsersBySpamId(
+  spamId: number,
+  db = connection,
+): Promise<CommentUserData[]> {
+  return (await db('comments')
+    .join('users', 'comments.user_id', 'users.auth0_id')
+    .where('comments.spam_id', spamId)
+    .select(
+      'comments.id as id',
+      'comments.created_date as created_date',
+      'comments.user_id as user_id',
+      'comments.spam_id as spam_id',
+      'comments.comment_text as comment_text',
+      'users.user_name as userName',
+      'users.email as email',
+    )) as CommentUserData[]
 }
 
 // TODO: Create a Comment:
