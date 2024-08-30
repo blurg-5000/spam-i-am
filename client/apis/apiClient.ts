@@ -7,6 +7,8 @@ import {
   AddComment,
   CommentData,
   CommentUserData,
+  AboutText,
+  AboutImages,
 } from '../../models/spam'
 
 const rootUrl = '/api/v1'
@@ -100,4 +102,28 @@ export function fetchCommentsBySpamId(
   return request.get(`${rootUrl}/comments/${spamId}`).then((res) => {
     return res.body.comments as CommentUserData[]
   })
+}
+
+// ABOUT
+
+export async function fetchAllAboutText(): Promise<AboutText[]> {
+  return await request
+    .get(`${rootUrl}/about/text`)
+    .then((res) => {
+      return res.body as AboutText[]
+    })
+    .catch((e) => {
+      console.error(e)
+    })
+}
+
+export async function fetchAllAboutImages(): Promise<AboutImages[]> {
+  return await request
+    .get(`${rootUrl}/about/images`)
+    .then((res) => {
+      return res.body as AboutImages[]
+    })
+    .catch((e) => {
+      console.error(e)
+    })
 }
