@@ -1,5 +1,4 @@
 import { useAvgRatingById } from '../../hooks/useRatings'
-import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Rating from '@mui/material/Rating'
@@ -17,22 +16,24 @@ const StyledRating = styled(Rating)({
 })
 
 export default function RatingAvg({ spamId }: { spamId: number }) {
-  // TODO: Display the Rating:
-  // using the spamId parameter, call `useAvgRatingById` from
-  // the custom `useRatings` hook to get data.
+  const { data, isPending, isError, error } = useAvgRatingById(spamId)
 
-  function handleChange(event: any) {
-    // TODO: Adding a Rating:
-    // Some logic to call the useRatings mutation and add a new rating.
-  }
+  if (isPending) return <p>Spam ratings loading!</p>
+
+  if (isError) return <p>No spam ratings!{String(error)}</p>
+
+  // function handleChange(event: any) {
+  //   // TODO: Adding a Rating:
+  //   // Some logic to call the useRatings mutation and add a new rating.
+  // }
 
   return (
     <>
       <Box sx={{ '& > legend': { mt: 2 } }}>
-        <Typography component="legend">Custom icon and color</Typography>
+        <Typography component="legend">Rating:</Typography>
         <StyledRating
           name="customized-color"
-          defaultValue={2}
+          defaultValue={data}
           getLabelText={(value: number) =>
             `${value} Heart${value !== 1 ? 's' : ''}`
           }
