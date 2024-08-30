@@ -6,7 +6,6 @@ import {
   QuizResult,
   AddComment,
   CommentData,
-  Comment,
   CommentUserData,
 } from '../../models/spam'
 
@@ -95,7 +94,6 @@ function logError(err: Error) {
   }
 }
 
-// TODO: Create a fetchCommentsBySpamId function.
 export function fetchCommentsBySpamId(
   spamId: number,
 ): Promise<CommentUserData[]> {
