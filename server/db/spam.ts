@@ -56,6 +56,16 @@ export async function addRating(
   })
 }
 
+export async function rateSpam(rating: number, userId: string, spamId: number) {
+  return connection('ratings')
+    .join('users', 'ratings.id', 'users.auth0_id')
+    .insert({
+      user_id: userId,
+      spam_id: spamId,
+      rating: rating,
+    })
+}
+
 // -------------------------------------
 
 // QUIZ

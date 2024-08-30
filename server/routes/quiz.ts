@@ -8,8 +8,6 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const questions = await db.getAllQuestionsAndOptions()
-    console.log('hi', questions)
-
     res.json(questions)
   } catch (error) {
     console.error(error)

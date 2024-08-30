@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { QuizAnswers, QuizQuestions, QuizOption } from '../../../models/spam'
 import ResultPage from './ResultPage'
 import Button from '../UI/Button'
-
 interface Props {
   questions: QuizQuestions[]
   answers: QuizAnswers
@@ -12,6 +11,8 @@ interface Props {
 function QuizBody({ questions, answers, setAnswers }: Props) {
   const [counter, setCounter] = useState(0)
   const [showResult, setShowResult] = useState(false)
+
+  console.log('question', questions[0].options[0])
 
   function handleAnswerChange(option: QuizOption) {
     // we want to record the category the answer is associated with,
