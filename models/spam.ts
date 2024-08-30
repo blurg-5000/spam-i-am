@@ -55,6 +55,15 @@ export interface QuizResult {
   info: string
 }
 
+export interface DBQuestion {
+  id: number
+  question_id: number
+  image: string
+  text: string
+  category: string
+  question: string
+}
+
 // --ABOUT PAGE--
 export interface AboutText {
   id: number
