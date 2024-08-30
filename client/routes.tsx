@@ -17,7 +17,7 @@ export const routes = createRoutesFromElements(
     <Route path="about" element={<About />} />
     <Route path="games" element={<Games />} />
     <Route path="quiz" element={<Quiz />} />
-    <Route path="ratespam" element={<RateSpam />} />
+    <Route path="rate-spam" element={<RateSpam />} />
     <Route path="rate-spam/:id" element={<SpamDetails />} />
   </Route>,
 )
