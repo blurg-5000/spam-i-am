@@ -47,7 +47,7 @@ function About() {
           <h1>The images of SPAM</h1>
           {aboutImagesQuery.data.map((image) => (
             <div key={image.id}>
-              <img src={image.link} alt={image.alt} />
+              <img src={`images/${image.link}`} alt={image.alt} />
               <p>
                 <em>{image.caption}</em>
               </p>
