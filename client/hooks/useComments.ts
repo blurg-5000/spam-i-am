@@ -24,7 +24,7 @@ export function useAddComment() {
   const mutation = useMutation({
     mutationFn: addComment,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['new comment'] })
+      queryClient.invalidateQueries({ queryKey: ['comments'] })
     },
   })
   return mutation

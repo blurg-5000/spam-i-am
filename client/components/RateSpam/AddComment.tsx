@@ -45,6 +45,7 @@ export default function AddComment() {
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
+          data-testid="commentbox"
           className="rounded border  border-spamBlue"
           aria-label="Add a comment"
           id="add-comment"
