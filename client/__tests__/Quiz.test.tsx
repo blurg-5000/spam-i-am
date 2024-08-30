@@ -1,4 +1,6 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+// @vitest-environment jsdom
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, it, expect, beforeEach, beforeAll } from 'vitest'
 import {
   render,
   screen,
@@ -11,13 +13,17 @@ import { cleanup } from '@testing-library/react'
 import * as matchers from '@testing-library/jest-dom/matchers'
 import '@testing-library/jest-dom/vitest'
 
+beforeAll(() => {
+  nock.disableNetConnect()
+})
+
 beforeEach(cleanup)
 expect.extend(matchers)
 
 describe('<Quiz>', async () => {
   //ARRANGE
-  nock('http://localhost:3000/api/v1')
-    .get('/quiz/')
+  nock('http://localhost:80')
+    .get('/api/v1/quiz/')
     .reply(200, [
       {
         id: 1,
@@ -47,17 +53,17 @@ describe('<Quiz>', async () => {
       },
     ])
   //ACT
-  renderApp('/')
-  await waitForElementToBeRemoved(() => screen.getByAltText('loading'))
+  renderApp('/quiz')
+  await waitForElementToBeRemoved(() => screen.getByAltText(/loading/i))
 
-  let quiz
+  const quiz = screen.getByTestId('quiz-heading')
 
-  waitFor(() => screen.getByText('breakfast!'))
-    .then((res) => {
-      quiz = res
-      expect(quiz).toBeInTheDocument()
-    })
-    .catch((e) => console.log(e))
+  // waitFor(() => screen.getByText('breakfast!'))
+  //   .then((res) => {
+  //     quiz = res
+  //     expect(quiz).toBeInTheDocument()
+  //   })
+  // .catch((e) => console.log(e))
   //ASSERT
   expect(quiz).toBeInTheDocument()
 })

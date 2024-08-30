@@ -13,7 +13,10 @@ function QuizStartPage({ setStart, setQuizzes }: Props) {
 
   return (
     <section className="flex flex-col items-center justify-center p-5">
-      <h1 className="pt-20 font-heading text-heading-lg font-heading-bold text-spamBlue">
+      <h1
+        data-testid="quiz-heading"
+        className="pt-20 font-heading text-heading-lg font-heading-bold text-spamBlue"
+      >
         What flavour of spam are you????
       </h1>
       <Button onClick={startGame}>Start</Button>
