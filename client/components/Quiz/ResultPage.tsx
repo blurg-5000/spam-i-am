@@ -1,19 +1,20 @@
+import { useQuery } from '@tanstack/react-query'
 import { QuizAnswers } from '../../../models/spam'
-import calculateQuiz from '../../utils/calculateQuiz'
+import { getQuizResult } from '../../apis/apiClient'
+
 interface Props {
   answers: QuizAnswers
 }
 
 function ResultPage({ answers }: Props) {
   // TODO: Find and use some middleware from the 'utils' folder which will help you calculate the user's quiz result
-  //calculateQuiz()
+
   // TODO: Replace hardcoded data with real results data from backend API endpoint
-  const result = {
-    id: 1,
-    name: 'spam',
-    image: 'https://placehold.co/300x200',
-    info: 'blah blah',
-  }
+
+  const { data: result } = useQuery({
+    queryKey: ['result'],
+    queryFn: () => getQuizResult(String(answers)),
+  })
 
   if (result) {
     return (

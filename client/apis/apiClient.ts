@@ -6,7 +6,6 @@ import {
   QuizResult,
   AddComment,
   CommentData,
-  Comment,
 } from '../../models/spam'
 
 const rootUrl = '/api/v1'
