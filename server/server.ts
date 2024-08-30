@@ -5,6 +5,7 @@ import spamRoutes from './routes/spams.ts'
 import ratings from './routes/ratings.ts'
 import quiz from './routes/quiz.ts'
 import comments from './routes/comments.ts'
+import about from './routes/about.ts'
 
 const server = express()
 
@@ -14,6 +15,7 @@ server.use('/api/v1/spams', spamRoutes)
 server.use('/api/v1/ratings', ratings)
 server.use('/api/v1/quiz', quiz)
 server.use('/api/v1/comments', comments)
+server.use('/api/v1/about', about)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

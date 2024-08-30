@@ -6,9 +6,8 @@ import {
   QuizResult,
   Rating,
   Spam,
-  CommentUserData
+  CommentUserData,
 } from '../../models/spam.ts'
-
 
 // SPAMS
 export async function getAllSpams(db = connection): Promise<Spam[]> {
@@ -165,6 +164,14 @@ export async function createComment(
       created_date: Date.now(),
     })
     .returning('*')
+}
+
+export function getAllAboutText(db = connection) {
+  return db('about_text').select()
+}
+
+export function getAllAboutImages(db = connection) {
+  return db('about_images').select()
 }
 
 // TODO: Update Comment

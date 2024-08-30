@@ -6,8 +6,9 @@ import {
   QuizResult,
   AddComment,
   CommentData,
-  Comment,
   CommentUserData,
+  AboutText,
+  AboutImages,
 } from '../../models/spam'
 
 const rootUrl = '/api/v1'
@@ -95,11 +96,34 @@ function logError(err: Error) {
   }
 }
 
-// TODO: Create a fetchCommentsBySpamId function.
 export function fetchCommentsBySpamId(
   spamId: number,
 ): Promise<CommentUserData[]> {
   return request.get(`${rootUrl}/comments/${spamId}`).then((res) => {
     return res.body.comments as CommentUserData[]
   })
+}
+
+// ABOUT
+
+export async function fetchAllAboutText(): Promise<AboutText[]> {
+  return await request
+    .get(`${rootUrl}/about/text`)
+    .then((res) => {
+      return res.body as AboutText[]
+    })
+    .catch((e) => {
+      console.error(e)
+    })
+}
+
+export async function fetchAllAboutImages(): Promise<AboutImages[]> {
+  return await request
+    .get(`${rootUrl}/about/images`)
+    .then((res) => {
+      return res.body as AboutImages[]
+    })
+    .catch((e) => {
+      console.error(e)
+    })
 }
