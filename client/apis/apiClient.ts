@@ -106,7 +106,7 @@ export function fetchCommentsBySpamId(
 
 // ABOUT
 
-export async function fetchAllAboutText(): Promise<AboutText[]> {
+export async function fetchAllAboutText(): Promise<void | AboutText[]> {
   return await request
     .get(`${rootUrl}/about/text`)
     .then((res) => {
@@ -117,7 +117,7 @@ export async function fetchAllAboutText(): Promise<AboutText[]> {
     })
 }
 
-export async function fetchAllAboutImages(): Promise<AboutImages[]> {
+export async function fetchAllAboutImages(): Promise<void | AboutImages[]> {
   return await request
     .get(`${rootUrl}/about/images`)
     .then((res) => {

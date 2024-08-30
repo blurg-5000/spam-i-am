@@ -32,8 +32,8 @@ function About() {
         <section>
           <article>
             <h1>The history of SPAM</h1>
-            {aboutHistoryQuery.data.map((section) => (
-              <div key={section.id}>
+            {aboutHistoryQuery.data?.map((section) => (
+              <div key={section.id} data-testid={`testid-about-text`}>
                 <section>
                   <h2>{section.title}</h2>
                   <p>{section.body}</p>
@@ -45,8 +45,8 @@ function About() {
         <br />
         <section>
           <h1>The images of SPAM</h1>
-          {aboutImagesQuery.data.map((image) => (
-            <div key={image.id}>
+          {aboutImagesQuery.data?.map((image) => (
+            <div key={image.id} data-testid={`testid-about-image`}>
               <img src={`images/${image.link}`} alt={image.alt} />
               <p>
                 <em>{image.caption}</em>
