@@ -40,7 +40,6 @@ export async function addRating(
   userId: string,
   db = connection,
 ) {
-  // return db('ratings').insert({ 'spam_id': spamId, rating, 'user_id': userId })
   return db('ratings').insert({
     user_id: userId,
     spam_id: spamId,
