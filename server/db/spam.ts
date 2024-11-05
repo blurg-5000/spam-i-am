@@ -37,7 +37,7 @@ export async function getAvgRatingBySpamId(spamId: number, db = connection) {
 export async function addRating(
   spamId: number,
   rating: number,
-  userId: number,
+  userId: string,
   db = connection,
 ) {
   // return db('ratings').insert({ 'spam_id': spamId, rating, 'user_id': userId })
