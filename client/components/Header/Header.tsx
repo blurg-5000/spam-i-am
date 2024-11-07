@@ -1,7 +1,13 @@
 import { NavLink } from 'react-router-dom'
 import LoginButton from '../Nav/LoginButton'
+import ToggleButton from '../UI/ToggleButton'
 
-function Header() {
+interface Props {
+  isTofu: boolean
+  setIsTofu: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function Header({ isTofu, setIsTofu }: Props) {
   const menuItems = [
     { title: 'About', link: './about' },
     { title: 'Games', link: './games' },
@@ -29,6 +35,8 @@ function Header() {
             </li>
           ))}
           <LoginButton />
+
+          <ToggleButton isTofu={isTofu} setIsTofu={setIsTofu} />
         </ul>
       </nav>
     </header>
