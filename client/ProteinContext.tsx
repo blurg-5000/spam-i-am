@@ -1,26 +1,31 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
 type ProteinContextType = {
   isTofu: boolean
-  setIsTofu: (value: boolean) => void
+  toggleProtein: () => void
 }
 
-// Create a context with a default value that will be replaced by the provider
 const ProteinContext = createContext<ProteinContextType | undefined>(undefined)
 
-export function ProteinProvider({ children }: { children: ReactNode }) {
-  const [isTofu, setIsTofu] = useState<boolean>(false)
+export const ProteinProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [isTofu, setIsTofu] = useState(false)
+
+  const toggleProtein = () => {
+    setIsTofu((prev) => !prev)
+  }
 
   return (
-    <ProteinContext.Provider value={{ isTofu, setIsTofu }}>
+    <ProteinContext.Provider value={{ isTofu, toggleProtein }}>
       {children}
     </ProteinContext.Provider>
   )
 }
 
-export function useProtein(): ProteinContextType {
+export const useProtein = () => {
   const context = useContext(ProteinContext)
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useProtein must be used within a ProteinProvider')
   }
   return context

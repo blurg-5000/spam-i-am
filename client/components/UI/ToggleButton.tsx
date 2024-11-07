@@ -1,11 +1,7 @@
 import { useProtein } from '../../ProteinContext'
 
 function ToggleButton() {
-  const { isTofu, setIsTofu } = useProtein()
-
-  function handleToggle() {
-    setIsTofu(!isTofu)
-  }
+  const { isTofu, toggleProtein } = useProtein()
 
   return (
     <div className="flex items-center">
@@ -13,7 +9,7 @@ function ToggleButton() {
         <input
           type="checkbox"
           checked={isTofu}
-          onChange={handleToggle}
+          onChange={toggleProtein} // Call `toggleProtein` directly
           className="peer sr-only"
         />
         <div className="h-6 w-11 rounded-full bg-gray-300 transition-colors peer-checked:bg-blue-600"></div>

@@ -7,9 +7,7 @@ interface Props {
 
 function InfiniteBanner({ isReversed }: Props) {
   const { data } = useProteins()
-  const isTofu = useProtein()
-
-  console.log(data)
+  const { isTofu, toggleProtein } = useProtein()
 
   if (data)
     return (
