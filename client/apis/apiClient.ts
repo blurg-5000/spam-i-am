@@ -11,7 +11,6 @@ import {
   AboutImages,
   Spam,
 } from '../../models/spam'
-import { useProtein } from '../ProteinContext'
 
 const rootUrl = '/api/v1'
 
