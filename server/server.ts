@@ -1,6 +1,6 @@
 import express from 'express'
 import * as Path from 'node:path'
-
+import tofuRoutes from './routes/tofu.ts'
 import spamRoutes from './routes/spams.ts'
 import ratings from './routes/ratings.ts'
 import quiz from './routes/quiz.ts'
@@ -12,6 +12,7 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/v1/spams', spamRoutes)
+server.use('/api/v1/tofu', tofuRoutes)
 server.use('/api/v1/ratings', ratings)
 server.use('/api/v1/quiz', quiz)
 server.use('/api/v1/comments', comments)
