@@ -1,17 +1,22 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSpamById } from '../../apis/apiClient'
+import { getProteinById } from '../../apis/apiClient'
 import { useParams } from 'react-router-dom'
 import ErrorPage from '../../Pages/ErrorPage'
 import RatingAvg from './RatingAvg'
 import ListComments from './ListComments'
 import AddComment from './AddComment'
+import { useProtein } from '../../ProteinContext'
 
 function SpamDetails() {
   const { id } = useParams()
 
+  const { isTofu, toggleProtein } = useProtein()
+
+  const protein = isTofu ? 'tofu' : 'spams'
+
   const { data, isError } = useQuery({
-    queryKey: ['spam'],
-    queryFn: () => getSpamById(Number(id)),
+    queryKey: ['protein', protein],
+    queryFn: () => getProteinById(protein, Number(id)),
   })
 
   if (isError) return <ErrorPage />
@@ -21,7 +26,7 @@ function SpamDetails() {
       <div className="flex flex-col items-center justify-center p-8">
         <section className="p-8" key={data.id}>
           <img
-            src={`/images/hero_images/${data.image}`}
+            src={`/images/${isTofu ? 'tofu_images' : 'hero_images'}/${data.image}`}
             alt={data.name}
             className="w-48"
           />

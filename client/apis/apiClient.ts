@@ -9,7 +9,9 @@ import {
   CommentUserData,
   AboutText,
   AboutImages,
+  Spam,
 } from '../../models/spam'
+import { useProtein } from '../ProteinContext'
 
 const rootUrl = '/api/v1'
 
@@ -17,14 +19,16 @@ const rootUrl = '/api/v1'
 export function getAllProteins(protein: string): Promise<SpamData[]> {
   console.log(`${rootUrl}/${protein}`)
   return request.get(`${rootUrl}/${protein}`).then((res) => {
-    console.log(res.body[protein])
+    //console.log(res.body[protein])
     return res.body[protein] as SpamData[]
   })
 }
 
-export function getSpamById(protein: string, id: number): Promise<SpamData> {
+export function getProteinById(protein: string, id: number): Promise<SpamData> {
   return request.get(`${rootUrl}/${protein}/${id}`).then((res) => {
-    return res.body.protein as SpamData
+    if (protein == 'tofu') {
+      return res.body.tofu as SpamData
+    } else return res.body.spam as SpamData
   })
 }
 
