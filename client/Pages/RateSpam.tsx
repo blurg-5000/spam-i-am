@@ -7,7 +7,7 @@ import { useProtein } from '../ProteinContext'
 function RateSpam() {
   const { data, isError } = useProteins()
 
-  const isTofu = useProtein()
+  const { isTofu, toggleProtein } = useProtein()
 
   if (isError) return <ErrorPage />
 
@@ -23,10 +23,13 @@ function RateSpam() {
               <section key={spam.id} className="p-8">
                 <Link to={`/rate-spam/${spam.id}/`}>
                   <img
-                    src={`/images/hero_images/${spam.image}`}
+                    src={`/images/${isTofu ? 'tofu_images' : 'hero_images'}/${spam.image}`}
                     alt={spam.name}
                     className="w-48"
                   />
+                  <h2 className="pb-4 font-body text-body-md font-body-bold">
+                    {spam.name}
+                  </h2>
                 </Link>
                 <RatingAvg spamId={spam.id} />
               </section>
