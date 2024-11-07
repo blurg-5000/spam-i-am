@@ -1,11 +1,15 @@
-import { useSpams } from '../../hooks/useSpams'
+import { useProteins } from '../../hooks/useProteins'
+import { useProtein } from '../../ProteinContext'
 
 interface Props {
   isReversed: React.SetStateAction<boolean>
 }
 
 function InfiniteBanner({ isReversed }: Props) {
-  const { data } = useSpams()
+  const { data } = useProteins()
+  const isTofu = useProtein()
+
+  console.log(data)
 
   if (data)
     return (
@@ -18,7 +22,7 @@ function InfiniteBanner({ isReversed }: Props) {
             {[...data, ...data, ...data].map((spam, index) => (
               <li key={index}>
                 <img
-                  src={`/images/hero_images/${spam.image}`}
+                  src={`/images/${isTofu ? 'tofu_images' : 'hero_images'}/${spam.image}`}
                   alt={spam.name}
                   className="cover w-28"
                 />

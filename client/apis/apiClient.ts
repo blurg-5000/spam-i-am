@@ -10,22 +10,19 @@ import {
   AboutText,
   AboutImages,
 } from '../../models/spam'
-import { useProtein } from '../ProteinContext'
 
 const rootUrl = '/api/v1'
 
-const isTofu = useProtein()
-
-const protein = isTofu ? 'tofu' : 'spams'
-
 // PROTEINS
-export function getAllProteins(): Promise<SpamData[]> {
+export function getAllProteins(protein: string): Promise<SpamData[]> {
+  console.log(`${rootUrl}/${protein}`)
   return request.get(`${rootUrl}/${protein}`).then((res) => {
-    return res.body.protein as SpamData[]
+    console.log(res.body[protein])
+    return res.body[protein] as SpamData[]
   })
 }
 
-export function getSpamById(id: number): Promise<SpamData> {
+export function getSpamById(protein: string, id: number): Promise<SpamData> {
   return request.get(`${rootUrl}/${protein}/${id}`).then((res) => {
     return res.body.protein as SpamData
   })
