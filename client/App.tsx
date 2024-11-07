@@ -1,9 +1,12 @@
 import Layout from './components/Layout'
+import { ProteinProvider } from './ProteinContext'
 
 function App() {
   return (
     <>
-      <Layout />
+      <ProteinProvider>
+        <Layout />
+      </ProteinProvider>
     </>
   )
 }

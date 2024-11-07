@@ -1,9 +1,8 @@
-interface Props {
-  isTofu: boolean
-  setIsTofu: React.Dispatch<React.SetStateAction<boolean>>
-}
+import { useProtein } from '../../ProteinContext'
 
-function ToggleButton({ isTofu, setIsTofu }: Props) {
+function ToggleButton() {
+  const { isTofu, setIsTofu } = useProtein()
+
   function handleToggle() {
     setIsTofu(!isTofu)
   }
