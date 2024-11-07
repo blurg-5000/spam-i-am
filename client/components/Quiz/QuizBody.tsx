@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { QuizAnswers, QuizQuestions, QuizOption } from '../../../models/spam'
+import { QuizAnswers, QuizQuestions, Option } from '../../../models/spam'
 import ResultPage from './ResultPage'
 import Button from '../UI/Button'
+
 interface Props {
   questions: QuizQuestions[]
   answers: QuizAnswers
@@ -12,7 +13,7 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   const [counter, setCounter] = useState(0)
   const [showResult, setShowResult] = useState(false)
 
-  function handleAnswerChange(option: QuizOption) {
+  function handleAnswerChange(option: Option) {
     // we want to record the category the answer is associated with,
     // so that we can determine the correct personality type for the user (i.e. mostly a's, mostly b's)
     const optionCategory = option.category
@@ -36,13 +37,13 @@ function QuizBody({ questions, answers, setAnswers }: Props) {
   }
 
   // Function to handle click and keydown events for accessibility
-  function handleClick(option: QuizOption) {
+  function handleClick(option: Option) {
     handleAnswerChange(option)
   }
 
   function handleKeyDown(
     event: React.KeyboardEvent<HTMLElement>,
-    option: QuizOption,
+    option: Option,
   ) {
     if (event.key === 'Enter' || event.key === ' ') {
       handleClick(option)

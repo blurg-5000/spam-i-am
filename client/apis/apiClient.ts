@@ -45,15 +45,7 @@ export function getAvgRatingById(spamId: number) {
   })
 }
 
-export function addRating({
-  spamId,
-  rating,
-  userId,
-}: {
-  spamId: number
-  rating: number
-  userId: number
-}) {
+export function addRating(spamId: number, rating: number, userId: number) {
   return request
     .post(`${rootUrl}/ratings/${spamId}`)
     .send({ rating, userId })
@@ -63,19 +55,24 @@ export function addRating({
 }
 
 // QUIZ
-
-export async function getAllQuestions() {
-  const res = await request.get(`${rootUrl}/quiz`)
-  return res.body as QuizQuestions[]
+export function getAllQuestions() {
+  return request.get(`${rootUrl}/quiz`).then((res) => {
+    return res.body as QuizQuestions[]
+  })
 }
 
-export async function getQuizResult(category: string) {
-  return await request.get(`${rootUrl}/quiz/${category}`).then((res) => {
-    return res.body as QuizResult[]
+export function getQuizResult(category: string) {
+  return request.get(`${rootUrl}/quiz/${category}`).then((res) => {
+    return res.body as QuizResult
   })
 }
 
 // COMMENTS
+export function getAllCommentsBySpamId(spamId: number) {
+  return request.get(`${rootUrl}/comments/${spamId}`).then((res) => {
+    return res.body.comments as CommentData[]
+  })
+}
 
 export function addComment(commentObj: AddComment): Promise<CommentData> {
   const { comment, spamId, token } = commentObj
@@ -94,42 +91,10 @@ function logError(err: Error) {
     throw new Error('Username already taken - please choose another')
   } else if (err.message === 'Forbidden') {
     throw new Error(
-      'Only the user who added the fruit may update and delete it',
+      'Only the user who added the fruit may update and delete it'
     )
   } else {
     console.error('Error consuming the API (in client/api.js):', err.message)
     throw err
   }
-}
-
-export function fetchCommentsBySpamId(
-  spamId: number,
-): Promise<CommentUserData[]> {
-  return request.get(`${rootUrl}/comments/${spamId}`).then((res) => {
-    return res.body.comments as CommentUserData[]
-  })
-}
-
-// ABOUT
-
-export async function fetchAllAboutText(): Promise<void | AboutText[]> {
-  return await request
-    .get(`${rootUrl}/about/text`)
-    .then((res) => {
-      return res.body as AboutText[]
-    })
-    .catch((e) => {
-      console.error(e)
-    })
-}
-
-export async function fetchAllAboutImages(): Promise<void | AboutImages[]> {
-  return await request
-    .get(`${rootUrl}/about/images`)
-    .then((res) => {
-      return res.body as AboutImages[]
-    })
-    .catch((e) => {
-      console.error(e)
-    })
 }

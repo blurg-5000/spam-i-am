@@ -1,10 +1,10 @@
-import { useAvgRatingById } from '../../hooks/useRatings'
+// import React from 'react'
 import { styled } from '@mui/material/styles'
-import Box from '@mui/material/Box'
 import Rating from '@mui/material/Rating'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import Typography from '@mui/material/Typography'
+import { useState } from 'react'
+import { useAvgRatingById } from '../../hooks/useRatings'
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -14,26 +14,30 @@ const StyledRating = styled(Rating)({
     color: '#ff3d47',
   },
 })
-
 export default function RatingAvg({ spamId }: { spamId: number }) {
-  const { data, isPending, isError, error } = useAvgRatingById(spamId)
+  // TODO: Display the Rating:
+  // using the spamId parameter, call `useAvgRatingById` from
+  // the custom `useRatings` hook to get data.
+  const { data } = useAvgRatingById(spamId)
+  const [value, setValue] = useState<number | null>(4)
 
-  if (isPending) return <p>Spam ratings loading!</p>
+  function handleChange(event: any) {
+    // TODO: Adding a Rating:
+    // Some logic to call the useRatings mutation and add a new rating.
+  }
 
-  if (isError) return <p>No spam ratings!{String(error)}</p>
-
-  // function handleChange(event: any) {
-  //   // TODO: Adding a Rating:
-  //   // Some logic to call the useRatings mutation and add a new rating.
-  // }
-
-  return (
-    <>
-      <Box sx={{ '& > legend': { mt: 2 } }}>
-        <Typography component="legend">Rating:</Typography>
+  if (data)
+    return (
+      <>
+        {/* TODO: Display a Rating: 
+        // use the data from avgRating to display 
+        // the data using a customisable <Rating/> from the MUI library */}
         <StyledRating
           name="customized-color"
-          defaultValue={data}
+          value={data}
+          onChange={(event) => {
+            handleChange(event)
+          }}
           getLabelText={(value: number) =>
             `${value} Heart${value !== 1 ? 's' : ''}`
           }
@@ -41,7 +45,6 @@ export default function RatingAvg({ spamId }: { spamId: number }) {
           icon={<FavoriteIcon fontSize="inherit" />}
           emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
         />
-      </Box>
-    </>
-  )
+      </>
+    )
 }

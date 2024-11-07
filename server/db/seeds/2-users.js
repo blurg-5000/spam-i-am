@@ -19,9 +19,8 @@ export async function seed(knex) {
       user_name: 'Stacy',
       email: 'stacy@example.org',
     },
-    // A "real" auth0_id for testing purposes if needed:
     {
-      auth0_id: 'auth0|66cbc884e7c0bdb35a8b976a',
+      auth0_id: 'auth0|66cbc884e7c0bdb35a8b976a', // A "real" auth0_id for testing purposes if needed:
       user_name: 'fake-user',
       email: 'fake-user@example.org',
     },

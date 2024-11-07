@@ -1,44 +1,31 @@
-import { useFetchCommentsBySpamId } from '../../hooks/useComments'
+import { useParams } from 'react-router-dom'
+import { useCommentsById } from '../../hooks/useComments'
 
-interface Props {
-  spamId: number
-}
-
-function ListComments(props: Props) {
+function ListComments() {
   // TODO: call a custom hook (that uses useQuery) to get all comments for this specific spam.
   // TODO: useParams to get the unique spamId
-  const { spamId } = props
-
-  const { data, isLoading, isError, error } = useFetchCommentsBySpamId(
-    Number(spamId),
+  const { id } = useParams()
+  const { data } = useCommentsById(Number(id))
+  return (
+    <>
+      {/* <p>A list of comments for this SPAM flavour</p> */}
+      <h4>Comments</h4>
+      <ul>
+        {data?.map((comment) => (
+          <div key={comment.id} className="text-sm">
+            <li>{comment.comment_text}</li>
+            <li>
+              {/* Created on: */}
+              {new Date(Number(comment.created_date)).toLocaleString()}
+            </li>
+            {/* By:  */}
+            <li>{comment.user_id}</li>
+            <br></br>
+          </div>
+        ))}
+      </ul>
+    </>
   )
-  if (isLoading) {
-    return <p>Loading</p>
-  }
-
-  if (isError) {
-    console.error(error.message)
-    return <p>error</p>
-  }
-
-  if (data) {
-    return (
-      <>
-        <h4>Comments</h4>
-        <ul>
-          {data.map((commentSpamObj) => (
-            <div key={commentSpamObj.id}>
-              <li>{commentSpamObj.comment_text}</li>
-              <li>
-                {`Created on ${new Date(commentSpamObj.created_date).toLocaleDateString()} by ${commentSpamObj.userName}`}
-              </li>
-              <br></br>
-            </div>
-          ))}
-        </ul>
-      </>
-    )
-  }
 }
 
 export default ListComments

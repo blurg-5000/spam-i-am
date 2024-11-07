@@ -1,6 +1,10 @@
-import getRandomNumber from "./getRandomNumber"
+import getRandomNumber from './getRandomNumber'
 
-export function randomCoords(gridSize: number, num: number, toBeOmitted: string[] = []): string[] {
+export function randomCoords(
+  gridSize: number,
+  num: number,
+  toBeOmitted: string[] = [],
+): string[] {
   const coords: string[] = []
   const omit = [...toBeOmitted]
 
@@ -17,7 +21,12 @@ export function randomCoords(gridSize: number, num: number, toBeOmitted: string[
   return coords
 }
 
-export function nextPosition(head: string, direction: string, gridSize: number, setGameState: React.Dispatch<React.SetStateAction<string>>): string | null {
+export function nextPosition(
+  head: string,
+  direction: string,
+  gridSize: number,
+  setGameState: React.Dispatch<React.SetStateAction<string>>,
+): string | null {
   const headRow = Number(head[0])
   const headCol = Number(head[1])
   let nextRow = headRow

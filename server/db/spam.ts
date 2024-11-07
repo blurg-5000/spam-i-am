@@ -1,15 +1,7 @@
 import connection from './connection.ts'
-import {
-  DBQuestion,
-  QuizOption,
-  QuizQuestions,
-  QuizResult,
-  Rating,
-  Spam,
-  CommentUserData,
-} from '../../models/spam.ts'
+import { Rating, Spam } from '../../models/spam.ts'
 
-// SPAMS
+// SPAM
 export async function getAllSpams(db = connection): Promise<Spam[]> {
   return db('spam').select()
 }
@@ -30,8 +22,6 @@ export async function updateSpam(id: number, spam: Spam, db = connection) {
   return db('spam').where({ id }).update(spam)
 }
 
-// -------------------------------------
-
 // RATINGS
 export async function getAllRatings(db = connection): Promise<Rating[]> {
   return db('ratings').select()
@@ -50,6 +40,7 @@ export async function addRating(
   userId: number,
   db = connection,
 ) {
+  // return db('ratings').insert({ 'spam_id': spamId, rating, 'user_id': userId })
   return db('ratings').insert({
     user_id: userId,
     spam_id: spamId,
@@ -57,95 +48,58 @@ export async function addRating(
   })
 }
 
-export async function rateSpam(rating: number, userId: string, spamId: number) {
-  return connection('ratings')
-    .join('users', 'ratings.id', 'users.auth0_id')
-    .insert({
-      user_id: userId,
-      spam_id: spamId,
-      rating: rating,
-    })
-}
-
-// -------------------------------------
-
 // QUIZ
 export async function getAllQuestionsAndOptions(db = connection) {
-  const getQuestions: DBQuestion[] = await db('options')
-    .join('questions', 'options.question_id', '=', 'questions.id')
-    .select('*')
+  try {
+    const result = await db('questions')
+      .leftJoin('options', 'questions.id', 'options.question_id')
+      .select(
+        'questions.id as question_id',
+        'questions.question',
+        'options.image',
+        'options.text',
+        'options.category',
+      )
+      .orderBy('questions.id', 'asc') // Optional: order by question ID
 
-  const rfcQuestions = getQuestions.map((el) => {
-    return {
-      id: el.id,
-      question: el.question,
-      options: [
-        {
-          image: el.image,
-          text: el.text,
-          category: el.category,
-        },
-      ],
-    }
-  })
-  const resArr: QuizQuestions[] = []
-  rfcQuestions.forEach((curr) => {
-    if (curr.id > resArr.length) {
-      const options: QuizOption[] = [] as QuizOption[]
+    // Transform the result into a more usable format
+    const questionsMap = result.reduce((acc, row) => {
+      const { question_id, question, image, text, category } = row
 
-      rfcQuestions.forEach((ele) => {
-        if (ele.id === curr.id) {
-          options.push(ele.options[0])
+      if (!acc[question_id]) {
+        acc[question_id] = {
+          id: question_id,
+          question,
+          options: [],
         }
-      })
-
-      resArr[resArr.length] = {
-        id: curr.id,
-        question: curr.question,
-        options: options,
       }
-    }
-  })
 
-  return resArr
+      if (image && text && category) {
+        acc[question_id].options.push({ image, text, category })
+      }
+
+      return acc
+    }, {})
+
+    return Object.values(questionsMap)
+  } catch (error) {
+    console.error('Error fetching questions with options:', error)
+    throw error
+  }
 }
 
 export async function getQuizResultByCategory(
   category: string,
   db = connection,
 ) {
-  // TODO: return db results by category
-  const getQuestionsById = await db('results').select('*').where({ category })
-
-  return getQuestionsById
+  return db('results').where({ category }).first()
 }
-
-// -------------------------------------
 
 // COMMENTS
 
 // TODO: Get All Comments by SpamId
 export async function getCommentsBySpamId(spamId: number, db = connection) {
-  return db('comments').where({ spam_id: spamId }).select()
-}
-
-// TODO: Ticket 8 Stretch
-export async function getCommentsUsersBySpamId(
-  spamId: number,
-  db = connection,
-): Promise<CommentUserData[]> {
-  return (await db('comments')
-    .join('users', 'comments.user_id', 'users.auth0_id')
-    .where('comments.spam_id', spamId)
-    .select(
-      'comments.id as id',
-      'comments.created_date as created_date',
-      'comments.user_id as user_id',
-      'comments.spam_id as spam_id',
-      'comments.comment_text as comment_text',
-      'users.user_name as userName',
-      'users.email as email',
-    )) as CommentUserData[]
+  return db('comments').where({ spam_id: spamId })
 }
 
 // TODO: Create a Comment:
@@ -164,14 +118,6 @@ export async function createComment(
       created_date: Date.now(),
     })
     .returning('*')
-}
-
-export function getAllAboutText(db = connection) {
-  return db('about_text').select()
-}
-
-export function getAllAboutImages(db = connection) {
-  return db('about_images').select()
 }
 
 // TODO: Update Comment

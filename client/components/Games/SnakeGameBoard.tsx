@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useEffect, useRef, useState } from 'react'
-import { nextPosition, randomCoords } from '../../utils/snakeUtils.ts'
+import { nextPosition, randomCoords } from '../../utils/snakeUtils'
 import Button from '../UI/Button'
 
 interface Props {
@@ -113,8 +113,7 @@ export default function SnakeGameBoard({
       )}
       {gameState === 'alive' && (
         <table
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ref={tableRef as any}
+          ref={tableRef}
           tabIndex={0} // Make the table focusable
           onKeyDown={handleKeyDown}
           className="border-4 border-solid border-spamYellow"

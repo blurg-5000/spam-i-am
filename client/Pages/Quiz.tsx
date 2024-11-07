@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { QuizAnswers } from '../../models/spam'
 import QuizStartPage from '../components/Quiz/QuizStartPage'
+import { useQuestions } from '../hooks/useQuestions'
 import QuizBody from '../components/Quiz/QuizBody'
-import { useQuery } from '@tanstack/react-query'
-import { getAllQuestions } from '../apis/apiClient'
 
 function Quiz() {
   const [start, setStart] = useState(true)
@@ -16,19 +15,9 @@ function Quiz() {
     a5: null,
   })
 
-  // TODO: Replace hardcoded data with real data from the backend API endpoint
+  const { data } = useQuestions()
 
-  const { data, isError, error } = useQuery({
-    queryKey: ['questions'],
-    queryFn: getAllQuestions,
-  })
-
-  if (isError) {
-    console.error(error)
-    return <p>ERROR</p>
-  }
-
-  if (data) {
+  if (data)
     return (
       <>
         {start && <QuizStartPage setStart={setStart} setQuizzes={setQuizzes} />}
@@ -41,7 +30,6 @@ function Quiz() {
         )}
       </>
     )
-  }
 }
 
 export default Quiz

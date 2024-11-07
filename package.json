@@ -26,21 +26,18 @@
     ]
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
+    "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.4",
     "@mui/icons-material": "^5.16.7",
-    "@mui/material": "^5.16.7",
-    "@mui/styled-engine-sc": "^6.0.1",
     "express": "^4.17.2",
-    "express-jwt": "^7.7.5",
-    "express-jwt-authz": "^2.4.1",
-    "jwks-rsa": "^2.1.5",
     "knex": "^2.5.1",
-    "nock": "^13.5.5",
     "react-confetti": "^6.1.0",
     "sqlite3": "^5.1.6",
-    "styled-components": "^6.1.12",
-    "superagent": "^8.1.2"
+    "superagent": "^8.1.2",
+    "express-jwt": "^7.7.5",
+    "express-jwt-authz": "^2.4.1",
+    "jwks-rsa": "^2.1.5"
   },
   "devDependencies": {
     "@auth0/auth0-react": "^2.2.4",

@@ -3,7 +3,6 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
 import { useIsFetching } from '@tanstack/react-query'
-import { createContext, useState } from 'react'
 
 export default function Layout() {
   const isFetching = useIsFetching()
