@@ -123,3 +123,11 @@ export async function createComment(
 // TODO: Update Comment
 
 // TODO: Delete Comment
+
+export function getAllAboutTextByProtein(protein: string, db = connection) {
+  return db('about_text').where('protein_type', protein).select()
+}
+
+export function getAllAboutImagesByProtein(protein: string, db = connection) {
+  return db('about_images').where('protein_type', protein).select()
+}

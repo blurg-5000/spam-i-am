@@ -1,6 +1,7 @@
 export async function up(knex) {
   return knex.schema.createTable('about_images', (table) => {
     table.increments('id').primary()
+    table.string('protein_type')
     table.string('link')
     table.string('alt')
     table.string('caption')

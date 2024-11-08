@@ -1,6 +1,7 @@
 export async function up(knex) {
   return knex.schema.createTable('about_text', (table) => {
     table.increments('id').primary()
+    table.string('protein_type')
     table.string('title')
     table.string('body')
   })
