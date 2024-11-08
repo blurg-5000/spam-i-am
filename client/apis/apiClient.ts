@@ -84,13 +84,25 @@ export function addComment(commentObj: AddComment): Promise<CommentData> {
     .catch(logError)
 }
 
+export function getAboutTextByProtein(protein: string) {
+  return request.get(`${rootUrl}/about/text/${protein}`).then((res) => {
+    return res.body.about as AboutText[]
+  })
+}
+
+export function getAboutImagesByProtein(protein: string) {
+  return request.get(`${rootUrl}/about/images/${protein}`).then((res) => {
+    return res.body.about as AboutText[]
+  })
+}
+
 function logError(err: Error) {
   console.log(err)
   if (err.message === 'Username Taken') {
     throw new Error('Username already taken - please choose another')
   } else if (err.message === 'Forbidden') {
     throw new Error(
-      'Only the user who added the fruit may update and delete it'
+      'Only the user who added the fruit may update and delete it',
     )
   } else {
     console.error('Error consuming the API (in client/api.js):', err.message)

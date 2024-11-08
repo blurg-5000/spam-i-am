@@ -5,9 +5,11 @@ import * as db from '../db/spam.ts'
 const router = Router()
 
 // GET: /api/v1/about/text
-router.get('/text', async (req, res) => {
+router.get('/text/:protein', async (req, res) => {
   try {
-    const text = await db.getAllAboutText()
+    const protein = req.body.protein
+    console.log(protein)
+    const text = await db.getAllAboutTextByProtein(protein)
     res.json(text)
   } catch (error) {
     console.error(error)
@@ -16,9 +18,11 @@ router.get('/text', async (req, res) => {
 })
 
 // GET: /api/v1/about/images
-router.get('/images', async (req, res) => {
+router.get('/images/:protein', async (req, res) => {
   try {
-    const images = await db.getAllAboutImages()
+    const protein = req.body.protein
+    console.log(protein)
+    const images = await db.getAllAboutImagesByProtein(protein)
     res.json(images)
   } catch (error) {
     console.error(error)
