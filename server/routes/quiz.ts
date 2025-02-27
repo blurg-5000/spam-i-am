@@ -8,7 +8,6 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const questions = await db.getAllQuestionsAndOptions()
-
     res.json(questions)
   } catch (error) {
     console.error(error)
@@ -20,7 +19,12 @@ router.get('/', async (req, res) => {
 router.get('/:category', async (req, res) => {
   try {
     const category = req.params.category
+    // TODO: make this gaurd better, not just for all the seed data lol
+    if (category !== 'a' && category !== 'b' && category !== 'c') {
+      res.sendStatus(404)
+    }
     const result = await db.getQuizResultByCategory(category)
+
     res.json(result)
   } catch (error) {
     console.error(error)

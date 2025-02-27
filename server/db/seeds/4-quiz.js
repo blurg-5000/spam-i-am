@@ -157,24 +157,28 @@ export async function seed(knex) {
 
   await knex('results').insert([
     {
+      id: 1,
       category: 'a',
       name: 'SPAM Classic',
       image: 'spam_classic_text.png',
       info: `Just like the original SPAM, you're reliable, timeless, and beloved by many. You have a strong sense of tradition and a knack for keeping things simple and straightforward. People know they can count on you, and your steady nature makes you a comforting presence in any situation. You value consistency and aren't afraid to embrace the tried and true.`,
     },
     {
+      id: 2,
       category: 'b',
       name: 'SPAM Hot & Spicy',
       image: 'spam_hot_n_spicy_text.png',
       info: `Bold, adventurous, and full of zest, you bring energy and excitement wherever you go. Your fiery personality lights up a room, and you’re always ready to try something new. You thrive on challenges and have a passion that inspires those around you. You’re not one to shy away from the spotlight, and your enthusiasm is truly contagious.`,
     },
     {
+      id: 3,
       category: 'c',
       name: 'SPAM Maple',
       image: 'spam_maple_text.png',
       info: `Sweet, warm, and irresistibly charming, you have a personality that draws people in. You're thoughtful, caring, and always there to brighten someone’s day. Your kindness leaves a lasting impression, and your gentle nature makes you a trusted friend. You believe in the power of small gestures and have a way of making everyone feel special.`,
     },
     {
+      id: 4,
       category: 'd',
       name: 'SPAM Turkey',
       image: 'spam_turkey_text.png',
