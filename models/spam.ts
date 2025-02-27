@@ -9,13 +9,18 @@ export interface SpamData extends Spam {
   id: number
 }
 
+// RATINGS MODELS
 export interface Rating {
   id: number
-  user_id: number
   spam_id: number
   rating: number
 }
 
+export interface AddRating {
+  spamId: number
+  rating: number
+  token: string
+}
 export interface AvgRating {
   rating: AvgRatingDetails[]
 }
@@ -24,6 +29,7 @@ export interface AvgRatingDetails {
   average_rating: number
 }
 
+//  QUIZ MODELS
 export interface QuizAnswers {
   a1: null | string
   a2: null | string
@@ -52,6 +58,7 @@ export interface QuizResult {
   info: string
 }
 
+// COMMENTS MODELS
 export interface Comment {
   user_id: string
   spam_id: number

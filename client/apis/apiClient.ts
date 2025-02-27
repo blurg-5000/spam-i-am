@@ -6,6 +6,7 @@ import {
   QuizResult,
   CommentData,
   AddComment,
+  AddRating,
 } from '../../models/spam'
 
 const rootUrl = '/api/v1'
@@ -30,16 +31,18 @@ export function getAllRatings() {
   })
 }
 
-export function getAvgRatingById(spamId: number) {
+export function getAvgRatingById(spamId: number): Promise<number> {
   return request.get(`${rootUrl}/ratings/${spamId}`).then((res) => {
     return res.body.rating[0].average_rating as number
   })
 }
 
-export function addRating(spamId: number, rating: number, userId: number) {
+export function addRating(ratingObj: AddRating): Promise<Rating> {
+  const { spamId, rating, token } = ratingObj
   return request
-    .post(`${rootUrl}/ratings/${spamId}`)
-    .send({ rating, userId })
+    .post(`${rootUrl}/ratings`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ rating, spamId })
     .then((res) => {
       return res.body
     })

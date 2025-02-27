@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as db from '../db/spam.ts'
+import checkJwt, { JwtRequest } from '../auth0.ts'
 
 const router = Router()
 
@@ -31,9 +32,15 @@ router.get('/:spamId', async (req, res) => {
 
 // Add new spam rating:
 // POST /api/v1/spams/ratings/
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, async (req: JwtRequest, res) => {
+  const userId = req.auth?.sub // this is coming from the header we set in the apiClient
+
+  if (!userId) {
+    console.error('No auth0Id')
+    return res.status(401).send('Unauthorized')
+  }
   try {
-    const { rating, userId, spamId } = req.body
+    const { rating, spamId } = req.body
     const ratingResponse = await db.addRating(
       Number(spamId),
       Number(rating),

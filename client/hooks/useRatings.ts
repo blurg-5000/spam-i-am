@@ -12,23 +12,24 @@ export function useGetAllRatings() {
 }
 
 export function useAvgRatingById(id: number) {
-  const query = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['avgRating', id],
     queryFn: () => getAvgRatingById(id),
   })
+
   return {
-    ...query,
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
   }
 }
 
-export function useRatingMutation(
-  spamId: number,
-  rating: number,
-  userId: number,
-) {
+export function useRatingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: () => addRating(spamId, rating, userId),
+    mutationFn: addRating,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['spams'] })
     },
