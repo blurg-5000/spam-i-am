@@ -200,6 +200,7 @@ function SpamJump() {
         />
       ) : (
         <canvas
+          data-testid="spam-jump-game"
           ref={canvasRef}
           height={270}
           width={500}

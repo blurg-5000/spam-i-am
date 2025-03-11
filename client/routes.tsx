@@ -7,7 +7,7 @@ import RateSpam from './Pages/RateSpam.tsx'
 import Home from './Pages/Home.tsx'
 import ErrorPage from './Pages/ErrorPage.tsx'
 import SpamDetails from './components/RateSpam/SpamDetails.tsx'
-export default createRoutesFromElements(
+export const routes = createRoutesFromElements(
   <Route path="/" element={<App />} errorElement={<ErrorPage />}>
     <Route index element={<Home />} />
     <Route path="about" element={<About />} />
