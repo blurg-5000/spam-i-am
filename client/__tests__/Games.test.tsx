@@ -31,7 +31,7 @@ describe.only('Games.tsx', () => {
 
     await user.click(button)
     // 'screen.debug()' is a useful way to see what is happening on the UI
-    screen.debug()
+    // screen.debug()
     // // ASSERT
     expect(screen.getByTestId('spam-jump-game')).toBeVisible()
   })
