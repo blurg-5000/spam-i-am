@@ -7,7 +7,7 @@
 import { renderApp } from '../test-setup.tsx'
 import { describe, it, expect } from 'vitest'
 
-describe.only('Games.tsx', () => {
+describe('Games.tsx', () => {
   it('Games heading renders correctly', async () => {
     // ARRANGE
     const { ...screen } = renderApp('/games')
