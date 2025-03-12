@@ -11,36 +11,36 @@ import nock from 'nock'
 beforeAll(() => {
   nock.disableNetConnect()
 })
-
-describe.only('<Quiz>', async () => {
+const TEST_QUIZ_DATA = [
+  {
+    id: 1,
+    question: 'Pick your dream breakfast!',
+    options: [
+      {
+        image: 'full_english.jpeg',
+        text: 'Half English',
+        category: 'a',
+      },
+      {
+        image: 'handful_chillis.avif',
+        text: 'A handful of chillis',
+        category: 'b',
+      },
+      {
+        image: 'pancakes.webp',
+        text: 'Waffles',
+        category: 'c',
+      },
+    ],
+  },
+]
+describe('<Quiz>', async () => {
   // HAPPY PATH
   it('Quiz heading renders correctly', async () => {
     //ARRANGE
     const scope = nock('http://localhost')
       .get('/api/v1/quiz')
-      .reply(200, [
-        {
-          id: 1,
-          question: 'Pick your dream breakfast!',
-          options: [
-            {
-              image: 'full_english.jpeg',
-              text: 'Half English',
-              category: 'a',
-            },
-            {
-              image: 'handful_chillis.avif',
-              text: 'A mouthful of chillis',
-              category: 'b',
-            },
-            {
-              image: 'pancakes.webp',
-              text: 'Waffles',
-              category: 'c',
-            },
-          ],
-        },
-      ])
+      .reply(200, TEST_QUIZ_DATA)
     const { ...screen } = renderApp('/quiz')
     //ACT
     const heading = await screen.findByRole('heading', {
@@ -55,32 +55,16 @@ describe.only('<Quiz>', async () => {
     //ARRANGE
     const scope = nock('http://localhost')
       .get('/api/v1/quiz')
-      .reply(200, [
-        {
-          id: 1,
-          question: 'Pick your dream breakfast!',
-          options: [
-            {
-              image: 'full_english.jpeg',
-              text: 'Half English',
-              category: 'a',
-            },
-            {
-              image: 'handful_chillis.avif',
-              text: 'A mouthful of chillis',
-              category: 'b',
-            },
-            {
-              image: 'pancakes.webp',
-              text: 'Waffles',
-              category: 'c',
-            },
-          ],
-        },
-      ])
+      .reply(200, TEST_QUIZ_DATA)
     // ACT
-    const { ...screen } = renderApp('/quiz')
+    const { user, ...screen } = renderApp('/quiz')
     // TODO: access quiz question data and see if it matches the nocked data response
+    const startBtn = await screen.findByRole('button', { name: 'Start' })
+    await user.click(startBtn)
+    const res = await screen.findByText('Waffles')
+
+    expect(res).toBeVisible()
+    expect(scope.isDone()).toBe(true)
   })
   // SAD PATH
   it('should render an error message when things go wrong', async () => {
@@ -91,8 +75,8 @@ describe.only('<Quiz>', async () => {
 
     const errMsg = await screen.findByText(/Something went wrong/i)
     // ASSERT
-    screen.debug()
-    // expect(errMsg).toBeInTheDocument()
+
+    expect(errMsg).toBeInTheDocument()
     expect(errorScope.isDone()).toBe(true)
   })
 })
