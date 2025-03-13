@@ -40,7 +40,8 @@
     "pg": "^8.14.0",
     "react-confetti": "^6.1.0",
     "sqlite3": "^5.1.6",
-    "superagent": "^8.1.2"
+    "superagent": "^8.1.2",
+    "esbuild": "^0.18.19"
   },
   "devDependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -59,7 +60,6 @@
     "@types/supertest": "^6.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
-    "esbuild": "^0.18.19",
     "eslint": "^8.10.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
