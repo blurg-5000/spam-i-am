@@ -37,8 +37,8 @@ export default {
     client: 'pg',
     useNullAsDefault: true,
     connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
+      connectionString: process.env.DATABASE_URL, // gets connected in railway
+      // ssl: { rejectUnauthorized: false },
     },
     migrations: {
       directory: Path.join(__dirname, 'migrations'),
