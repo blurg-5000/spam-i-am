@@ -3,16 +3,18 @@ dotenv.config()
 import * as Path from 'node:path'
 import * as URL from 'node:url'
 
-console.log(
-  'DATABASE_PUBLIC_URL exists:',
-  Boolean(process.env.DATABASE_PUBLIC_URL),
-)
-console.log(
-  'DATABASE_PUBLIC_URL starts with:',
-  process.env.DATABASE_PUBLIC_URL
-    ? process.env.DATABASE_PUBLIC_URL.substring(0, 15) + '...'
-    : 'undefined',
-)
+if (process.env.NODE_ENV === 'production') {
+  console.log(
+    'DATABASE_PUBLIC_URL exists:',
+    Boolean(process.env.DATABASE_PUBLIC_URL),
+  )
+  console.log(
+    'DATABASE_PUBLIC_URL starts with:',
+    process.env.DATABASE_PUBLIC_URL
+      ? process.env.DATABASE_PUBLIC_URL.substring(0, 15) + '...'
+      : 'undefined',
+  )
+}
 const __filename = URL.fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
 
@@ -48,7 +50,7 @@ export default {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: process.env.DATABASE_PUBLIC_URL,
+    connection: { connectionString: process.env.DATABASE_PUBLIC_URL },
     migrations: {
       directory: Path.join(__dirname, 'migrations'),
     },
