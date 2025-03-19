@@ -4,7 +4,7 @@ export async function up(knex) {
     table.string('category')
     table.string('name')
     table.string('image')
-    table.string('info')
+    table.text('info')
   })
 }
 

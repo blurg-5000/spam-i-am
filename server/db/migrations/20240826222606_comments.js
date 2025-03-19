@@ -4,7 +4,7 @@ export const up = function (knex) {
     table.string('user_id').references('users.auth0_id').onDelete('CASCADE')
     table.integer('spam_id').references('spam.id').onDelete('CASCADE')
     table.string('comment_text')
-    table.integer('created_date').defaultTo(knex.fn.now()) // Returns the current timestamp with a precision (optional)
+    table.timestamp('created_date', { useTz: true })
   })
 }
 
