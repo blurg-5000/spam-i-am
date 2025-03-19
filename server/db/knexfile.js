@@ -45,7 +45,7 @@ export default {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_PUBLIC_URL,
     migrations: {
       directory: Path.join(__dirname, 'migrations'),
     },

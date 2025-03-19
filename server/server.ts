@@ -1,4 +1,4 @@
-import 'dotenv/config' // Add this at the very top
+import 'dotenv/config'
 import express from 'express'
 import * as Path from 'node:path'
 

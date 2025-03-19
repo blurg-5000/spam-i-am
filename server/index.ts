@@ -5,6 +5,6 @@ const db = process.env.DATABASE_URL
 
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(db)
+  console.log('server db url:', db)
   console.log('Server listening on port', PORT)
 })
