@@ -46,7 +46,6 @@ export default {
       afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb),
     },
   },
-
   production: {
     client: 'pg',
     useNullAsDefault: true,
