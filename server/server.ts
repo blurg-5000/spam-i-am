@@ -1,3 +1,4 @@
+import 'dotenv/config' // Add this at the very top
 import express from 'express'
 import * as Path from 'node:path'
 
