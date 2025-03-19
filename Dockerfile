@@ -8,4 +8,5 @@ COPY . .
 
 ENV NODE_ENV=production
 RUN npm run build --if-present
+RUN npm run knex migrate:latest
 RUN npm prune --omit=dev
