@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import * as Path from 'node:path'
 import * as URL from 'node:url'
 
