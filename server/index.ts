@@ -1,7 +1,7 @@
 import server from './server.ts'
 
 const PORT = process.env.PORT || 3000
-const db = process.env.DATABASE_URL
+const db = process.env.DATABASE_PUBLIC_URL
 
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console
