@@ -1,6 +1,6 @@
 export async function up(knex) {
   return knex.schema.createTable('ratings', (table) => {
-    table.integer('id').primary()
+    table.increments('id').primary()
     table.string('user_id').references('users.auth0_id').onDelete('CASCADE')
     table.integer('spam_id').references('spam.id').onDelete('CASCADE')
     table.integer('rating')

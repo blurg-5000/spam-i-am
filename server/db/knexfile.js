@@ -49,7 +49,10 @@ export default {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: { connectionString: process.env.DATABASE_PUBLIC_URL },
+    connection: {
+      connectionString:
+        'postgresql://postgres:NHtIypsFivBnqiIhppTqwTHNNypMIuTm@interchange.proxy.rlwy.net:51462/railway',
+    },
     migrations: {
       directory: Path.join(__dirname, 'migrations'),
     },
