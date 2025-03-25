@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as db from '../db/spam.ts'
+import * as db from '../db/queries/ratings.ts'
 import checkJwt, { JwtRequest } from '../auth0.ts'
 
 const router = Router()

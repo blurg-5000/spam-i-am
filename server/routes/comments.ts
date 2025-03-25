@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as db from '../db/spam.ts'
+import * as db from '../db/queries/comments.ts'
 import checkJwt from '../auth0.ts'
 import { JwtRequest } from '../auth0.ts'
 
