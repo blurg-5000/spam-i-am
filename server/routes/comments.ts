@@ -23,7 +23,7 @@ router.get('/:spamId', async (req, res) => {
 // POST: /api/v1/comments
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
   const { spamId, comment } = req.body
-  const userId = req.auth?.sub // this is coming from the header we set in the apiClient
+  const userId = req.auth?.sub // this is coming from the header we set in the apis/comments.ts request
 
   if (!userId) {
     console.error('No auth0Id')

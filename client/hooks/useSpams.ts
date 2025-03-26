@@ -4,7 +4,7 @@ import {
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getAllSpams } from '../apis/apiClient'
+import { getAllSpams } from '../apis/spams'
 
 export function useSpams() {
   const query = useQuery({ queryKey: ['spams'], queryFn: getAllSpams })

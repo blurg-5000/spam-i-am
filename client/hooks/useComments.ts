@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
-import { getAllCommentsBySpamId, addComment } from '../apis/apiClient'
+import { getAllCommentsBySpamId, addComment } from '../apis/comments'
 
 export function useCommentsById(id: number) {
   const query = useQuery({

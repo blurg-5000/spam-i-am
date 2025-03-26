@@ -33,7 +33,7 @@ router.get('/:spamId', async (req, res) => {
 // Add new spam rating:
 // POST /api/v1/spams/ratings/
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
-  const userId = req.auth?.sub // this is coming from the header we set in the apiClient
+  const userId = req.auth?.sub // this is coming from the header we set in the apis/ratings.ts requests
 
   if (!userId) {
     console.error('No auth0Id')

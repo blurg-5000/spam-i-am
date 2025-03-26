@@ -17,7 +17,7 @@ function ResultPage({ answers }: Props) {
       <>
         <section className="flex flex-col items-center justify-center p-5">
           <h1 className="pt-20 font-heading text-heading-lg font-heading-bold text-spamBlue">
-            You're just like: {result.name}!
+            You are just like: {result.name}!
           </h1>
           <img src={`/images/hero_images/${result.image}`} alt="" />
           <p className="m-4 mx-60 pb-20  font-body text-body-md">

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getQuizResult } from '../apis/apiClient'
+import { getQuizResult } from '../apis/quiz'
 
 export function useResults(category: string) {
   const query = useQuery({

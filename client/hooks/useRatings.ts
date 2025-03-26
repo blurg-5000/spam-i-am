@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
-import { addRating, getAllRatings, getAvgRatingById } from '../apis/apiClient'
+import { addRating, getAllRatings, getAvgRatingById } from '../apis/ratings'
 
 export function useGetAllRatings() {
   const query = useQuery({

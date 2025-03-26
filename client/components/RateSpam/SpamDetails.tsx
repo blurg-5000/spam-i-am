@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSpamById } from '../../apis/apiClient'
+import { getSpamById } from '../../apis/spams'
 import { useParams } from 'react-router-dom'
 import ErrorPage from '../../Pages/ErrorPage'
 import RatingAvg from './RatingAvg'
